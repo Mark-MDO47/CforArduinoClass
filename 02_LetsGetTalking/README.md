@@ -124,4 +124,4 @@ One of the oldest and still commonly used methods of specifying strings is in **
 
 There are other systems such as **UniCode** which will not be used in our Arduino Class.
 
-That shows how to represent many familiar characters; how do we represent "Hello World!"? Since we are using zero-terminated ASCII strings, each ASCII character will be placed on after another in consecutive bytes in memory. The end of the string is when one of the bytes contains the value zero, which is the ASCII code "NUL".
+That shows how to represent many familiar characters; how do we represent "Hello World!"? Since we are using zero-terminated ASCII strings, each ASCII character will be placed one after another in consecutive bytes in memory. The end of the string is when one of the bytes contains the value zero, which is the ASCII code "NUL".

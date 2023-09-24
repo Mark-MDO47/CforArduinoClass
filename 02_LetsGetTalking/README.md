@@ -92,11 +92,11 @@ It creates an **int** **variable** named **loop_count**, which means **memory** 
 The compiler will assign some memory at a particular address. We usually don't care what the address is; when we say **loop_count** the compiler will use the memory address that is assigned for that purpose.
 
 There are different types and sizes of integers.
-- A signed integer, such as we just created for loop_count, can be positive or negative - for example, +1 or -1.
+- A signed integer, such as we just created for loop_count, can be zero, positive, or negative - for example, 0 or +1 or -1.
 - An unsigned integer can only be zero or positive.
   - If a negative number is assigned to an unsigned integer, it will probably give results that were not wanted. However, there can be reasons to do this if you know exactly what you are doing.
 
-A common practice in C and C++ is to specify the size when defining integers. The size of **int** can vary depending on what computer processor the code is running. To get consistent results it is best to specify a size that handles anything that will be stored in it.
+A common practice in C and C++ is to specify the size when defining integers. The size of **int** can vary depending on what computer processor the code is running. To get consistent results it is best to specify a size that handles anything that will be stored in it. However, the Arduino Nano is very constrained for its RAM memory, so we want to make each variable big enough but not too big.
 
 Because the size of **int** (and its cousins such as **unsigned int**, **long int**, and **unsigned long int**) is not the same for every processor, there is a method to specify the size in units of how many **binary bits** the variable will have. We will discuss binary and other numbering systems later. For now just remember that the more bits there are in an integer, the bigger the numbers that can be stored.
 

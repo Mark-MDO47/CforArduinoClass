@@ -21,15 +21,21 @@ The Arduino IDE uses C and C++ languages (except for some of the I/O libraries, 
 - https://github.com/Mark-MDO47/ArduinoClass/blob/master/README.md
 
 One factor to consider: Arduino does not implement the standard "printing" etc. functions - not for C (printf and scanf) and not for C++ (IO Streams). Arduino uses relatively simple "Serial" methods such as Serial.begin, Serial.print and Serial.println for output; Serial.available, Serial.read and Serial.readln for input.
+- If you want to get started by doing some fun Arduino projects from this class you can skim (or temporarily skip) the standard C and C++ methods, knowing that they are not used for these projects. You can return to the standard methods later.
 - If you want to learn the full languages to further your career, you will probably want to learn the standard C and C++ methods at the same time as learning enough C and C++ for this class. There is a lot to learn about C and C++!
-- If you want to get started by doing some fun Arduino projects from this class you can skim the standard C and C++ methods, knowing that they are not used for these projects. You can return to the standard methods later.
 
-For this class we will take an even more slimmed down approach: we will learn in the Arduino environment and leave the standard C and C++ methods out. So here are the paths. You can do them in either order or just do one or the other.
+For this class we will take the more slimmed down approach: we will learn in the Arduino environment and leave the standard C and C++ methods out. So here are the paths. You can do them in either order or just do one or the other.
 * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
 * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
 ## Start C for Arduino Class
+[Top](#c-for-arduino-class "Top")<br>
+I will bring some Arduino Nanos for the class, along with a few USB cables to connect them to laptops or PCs or Macs. Please bring your personal or work laptop to the class if possible. If you have a USB cable that can connect your laptop to a USB Mini-B, please bring that. You will find some pointers to USB Mini-B in the 00_InstallArduinoIDE section below.
 
+| Lesson | Description | Image |
+| --- | --- | --- |
+| [00_InstallArduinoIDE](https://github.com/Mark-MDO47/ArduinoClass/tree/master/00_InstallArduinoIDE "00_InstallArduinoIDE") | Install the Arduino IDE<br>Brief discussion of the venerable C/C++ language<br>Quick introduction to schematics and Fritzing<br>**If possible, please read this lesson and install the Arduino IDE before class!** | <img src="https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/Images/IDE_Blink.png" width="142" alt="Image of Arduino IDE"> |
+| [01_BlinkingLED](https://github.com/Mark-MDO47/ArduinoClass/tree/master/01_BlinkingLED "01_BlinkingLED") | Blink some simple LEDs<br>Control blinking using a button<br>Display diagnostic messages using USB serial port<br>YouTube: https://youtu.be/c5UH3J40uWE<br>YouTube: https://youtube.com/shorts/qGxECSMQtAQ<br>Discusses ways to power Arduino, program persistence through power-cycling, and use of PROGMEM to lower usage of RAM.<br><br>External Image of Arduino Nano from CircuitsToday.com | <img src="https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/Images/Arduino-Nano-Pinout_from_circuitstoday.com.png" width="142" alt="CircuitsToday.com picture of Arduino Nano"><br><img src="https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/Images/01_BlinkingLED_part_B_setup.png" width="150" alt="Image of Blinking LED part B"> |
 
 ## Some resources on the Web
 [Top](#c-for-arduino-class "Top")<br>

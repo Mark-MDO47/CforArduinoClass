@@ -22,5 +22,5 @@ It is possible to use the "Arduino Cloud". This method is not used in this class
 
 ## C and Cplusplus Languages used in Arduino IDE
 [Top](#notes "Top")<br>
-The Arduino IDE uses a variant of the C++ language. You can program in a C++ style or a C style. The code that we will use in this course will be quite straighforward and should be understandable if you know any computer language. One thing to note about C/C++: array indices start with zero.
+The Arduino IDE uses a variant of the C++ language. You can program in a C++ style or a C style. The code that we will use in this course will be quite straighforward; we will go through it step by step.
 - https://reference.arduino.cc/reference/en/

@@ -109,3 +109,19 @@ The following type definitions show the pattern of a common methodology for doin
 | uint16_t | unsigned | 16 | 0 through +65,535 |
 | int32_t | signed | 32 | -2,147,483,648 through +2,147,483,647 |
 | uint32_t | unsigned | 32 | 0 through +4,294,967,295 |
+
+### ASCII Characters and Strings
+[Back to Top](#notes "Back to Top")<br>
+
+What if you want to print "Hello World!" to the terminal? Computers only understand bits and bytes; how do we specify text strings?
+
+One of the oldest and still commonly used methods of specifying strings is in **zero-terminated** **ASCII**.
+- ASCII stands for American Standard Code for Information Interchange.
+- https://www.asciitable.com/ shows a table with the ASCII code for each character. Note that there are **printable**, **non-printable**, and **extended** character codes in ASCII. Here are some examples:
+- A printable code is "A" represented by the number 65 (decimal).
+- A non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound to come out of the system.
+- An extended code is the character "PI" represented by the number 227 (decimal). Extended codes are often as shown but some systems may not display them as expected.
+
+There are other systems such as **UniCode** which will not be used in our Arduino Class.
+
+That shows how to represent many familiar characters; how do we represent "Hello World!"? Since we are using zero-terminated ASCII strings, each ASCII character will be placed on after another in consecutive bytes in memory. The end of the string is when one of the bytes contains the value zero, which is the ASCII code "NUL".

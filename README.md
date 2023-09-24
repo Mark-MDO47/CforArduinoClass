@@ -8,6 +8,7 @@ To all who attended the first Arduino Class at FabLab: thanks and I hope you had
 **Table of Contents**
 * [Top](#c-for-arduino-class "Top")
 * [Learning C and Cplusplus](#learning-c-and-cplusplus "Learning C and Cplusplus")
+* [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
 ## Learning C and Cplusplus
 [Top](#c-for-arduino-class "Top")<br>
@@ -16,11 +17,15 @@ One thing I learned when teaching the first class is that things will move much 
 The Arduino IDE uses C and C++ languages (except for some of the I/O libraries, as explained later).
 - If you have experience in any text-based programming language - Python, Java, or other programming languages - you will probably be able to catch on to the parts of C and C++ used in this class quickly.
 - If you have never programmed before, I suggest you learn the basics of C before attending this class. You can easily pick up on the few parts of C++ used in this class if you have some knowledge of C (or even Python or Java or other languages)
+- This **C for Arduino Class** is intended to provide enough experience with the C and C++ programming languages in the Arduino environment to bring a non-programmer to the stage that they can start the Arduino Class and learn the rest on the way through that class.
+- https://github.com/Mark-MDO47/ArduinoClass/blob/master/README.md
 
 One factor to consider: Arduino does not implement the standard "printing" etc. functions - not for C (printf and scanf) and not for C++ (IO Streams). Arduino uses relatively simple "Serial" methods such as Serial.begin, Serial.print and Serial.println for output; Serial.available, Serial.read and Serial.readln for input.
 - If you want to learn the full languages to further your career, you will probably want to learn the standard C and C++ methods at the same time as learning enough C and C++ for this class. There is a lot to learn about C and C++!
 - If you want to get started by doing some fun Arduino projects from this class you can skim the standard C and C++ methods, knowing that they are not used for these projects. You can return to the standard methods later.
 
+## Some resources on the Web
+[Top](#c-for-arduino-class "Top")<br>
 Here are some web resources for learning the C language:
 - https://www.java67.com/2020/07/5-free-courses-to-learn-c-programming.html
 - https://medium.com/javarevisited/10-best-c-programming-courses-for-beginners-2c2c1f6bcb12

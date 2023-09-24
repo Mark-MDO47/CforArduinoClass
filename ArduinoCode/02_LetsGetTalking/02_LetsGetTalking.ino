@@ -1,6 +1,5 @@
-/*
-  02_LetsGetTalking
-
+/* 02_LetsGetTalking
+ *
  * Mark Olson for his "C for Arduino Class" https://github.com/Mark-MDO47/CforArduinoClass
  * 
  * We are using an Arduino Nano with a USB mini-B connector
@@ -19,7 +18,7 @@
 
 // loop_count is a "variable" that can store "int" (integers)
 //   because it is defined up front and not inside {} brackets, it can be "seen" by everything below
-static int loop_count = 0;
+int loop_count = 0;
 
 // the setup function runs once when you press reset or power the board
 void setup() {

@@ -7,7 +7,8 @@ Author: Mark Olson<br>
 **Table of Contents**
 * [Top](#c-for-arduino-class "Top")
 * [Learning C and Cplusplus](#learning-c-and-cplusplus "Learning C and Cplusplus")
-* [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
+  * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
+  * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
 ## Learning C and Cplusplus
 [Top](#c-for-arduino-class "Top")<br>
@@ -27,7 +28,7 @@ For this class we will take the more slimmed down approach: we will learn in the
 * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
 * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
-## Start C for Arduino Class
+### Start C for Arduino Class
 [Top](#c-for-arduino-class "Top")<br>
 I will bring some Arduino Nanos for the class, along with a few USB cables to connect them to laptops or PCs or Macs. Please bring your personal or work laptop to the class if possible. If you have a USB cable that can connect your laptop to a USB Mini-B, please bring that. You will find some pointers to USB Mini-B in the 00_InstallArduinoIDE section below.
 
@@ -36,7 +37,7 @@ I will bring some Arduino Nanos for the class, along with a few USB cables to co
 | [00_InstallArduinoIDE](https://github.com/Mark-MDO47/CforArduinoClass/tree/master/00_InstallArduinoIDE "00_InstallArduinoIDE") | Install the Arduino IDE<br>Brief discussion of the venerable C/C++ language<br>Quick introduction to schematics and Fritzing<br>**If possible, please read this lesson and install the Arduino IDE before class!** | <img src="https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/IDE_Blink.png" width="142" alt="Image of Arduino IDE"> |
 | [01_BlinkingLED](https://github.com/Mark-MDO47/CforArduinoClass/tree/master/01_BlinkingLED "01_BlinkingLED") | Blink some simple LEDs<br>YouTube: https://youtu.be/c5UH3J40uWE<br>Discusses ways to power Arduino and program persistence through power-cycling.<br><br>External Image of Arduino Nano from CircuitsToday.com | <img src="https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/Arduino-Nano-Pinout_from_circuitstoday.com.png" width="142" alt="CircuitsToday.com picture of Arduino Nano"><br><img src="https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/01_BlinkingLED_part_A_setup.png" width="150" alt="Image of Blinking LED part B"> |
 
-## Some resources on the Web
+### Some resources on the Web
 [Top](#c-for-arduino-class "Top")<br>
 Here are some web resources for learning the C language:
 - https://www.java67.com/2020/07/5-free-courses-to-learn-c-programming.html

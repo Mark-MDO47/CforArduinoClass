@@ -1,7 +1,7 @@
 # NOTES
 
 ## Back to Root of Class
-Click this link to back to go back to the root of the Arduino class
+Click this link to back to go back to the root of the **C for Arduino Class**
 - https://github.com/Mark-MDO47/CforArduinoClass
 
 

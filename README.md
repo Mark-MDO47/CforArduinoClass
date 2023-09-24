@@ -24,6 +24,13 @@ One factor to consider: Arduino does not implement the standard "printing" etc. 
 - If you want to learn the full languages to further your career, you will probably want to learn the standard C and C++ methods at the same time as learning enough C and C++ for this class. There is a lot to learn about C and C++!
 - If you want to get started by doing some fun Arduino projects from this class you can skim the standard C and C++ methods, knowing that they are not used for these projects. You can return to the standard methods later.
 
+For this class we will take an even more slimmed down approach: we will learn in the Arduino environment and leave the standard C and C++ methods out. So here are the paths. You can do them in either order or just do one or the other.
+* [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
+* [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
+
+## Start C for Arduino Class
+
+
 ## Some resources on the Web
 [Top](#c-for-arduino-class "Top")<br>
 Here are some web resources for learning the C language:

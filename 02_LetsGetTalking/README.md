@@ -11,7 +11,7 @@ In this section we will use the USB-serial interface to enter strings to our pro
 * [The USB Serial Interface](#the-usb-serial-interface "The USB Serial Interface")
 * [The Code](#the-code "The Code")
   * [Comments and Code Statements](#comments-and-code-statements "Comments and Code Statements")
-  * [Integers](#integers "Integers")
+  * [Integers and other Strangers](#integers-and-other-strangers "Integers and other Strangers")
 
 ## The USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>
@@ -60,7 +60,8 @@ It starts with some comments:<br>
  */
 ```
 
-Anything between **/*** and ***/** is a comment, whether it spans multiple lines or is in the middle of a code statement.
+Anything between **/*** and ***/** is a comment, whether it spans multiple lines or is in the middle of a code statement.<br>
+This means the entire code snippet above is a comment and is ignored by the compiler.
 
 Also anything after **//** is a comment, as seen below. Note also that blank lines are ignored.<br>
 ```C
@@ -81,6 +82,30 @@ int loop_count = 0; int my_state = 1;
 // one or the other may be more readable but the compiler doesn't care
 ```
 
-
-### Integers
+### Integers and other Strangers
 [Back to Top](#notes "Back to Top")<br>
+
+So what does that statement **int loop_count = 0;** mean?
+
+It creates an **int** **variable** named **loop_count**, which means **memory** location in the Arduino RAM (Random Access Memory) in which an integer value (**int**) is stored; the **= 0;** part means that it is initially set to zero. In general, if you do not initialize your variables they could have any value, even a ridiculous value.
+
+The compiler will assign some memory at a particular address. We usually don't care what the address is; when we say **loop_count** the compiler will use the memory address that is assigned for that purpose.
+
+There are different types and sizes of integers.
+- A signed integer, such as we just created for loop_count, can be positive or negative - for example, +1 or -1.
+- An unsigned integer can only be zero or positive.
+  - If a negative number is assigned to an unsigned integer, it will probably give results that were not wanted. However, there can be reasons to do this if you know exactly what you are doing.
+
+A common practice in C and C++ is to specify the size when defining integers. The size of **int** can vary depending on what computer processor the code is running. To get consistent results it is best to specify a size that handles anything that will be stored in it.
+
+Because the size of **int** (and its cousins such as **unsigned int**, **long int**, and **unsigned long int**) is not the same for every processor, there is a method to specify the size in units of how many **binary bits** the variable will have. We will discuss binary and other numbering systems later. For now just remember that the more bits there are in an integer, the bigger the numbers that can be stored.
+
+The following type definitions show the pattern of a common methodology for doing this. Because almost all modern processors are *2's complement** (don't worry for now), I show the ranges in terms of 2's complement numbers.
+| Type Definition | Signed/Unsigned | # of bits | Range |
+| --- | --- | --- | --- |
+| int8_t | signed | 8 | -128 through +127 |
+| uint8_t | unsigned | 8 | 0 through 255 |
+| int16_t | signed | 16 | -32,768 through +32,767 |
+| uint16_t | unsigned | 16 | 0 through +65,535 |
+| int32_t | signed | 32 | -2,147,483,648 through +2,147,483,647 |
+| uint32_t | unsigned | 32 | 0 through +4,294,967,295 |

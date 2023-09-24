@@ -100,7 +100,7 @@ A common practice in C and C++ is to specify the size when defining integers. Th
 
 Because the size of **int** (and its cousins such as **unsigned int**, **long int**, and **unsigned long int**) is not the same for every processor, there is a method to specify the size in units of how many **binary bits** the variable will have. We will discuss binary and other numbering systems later. For now just remember that the more bits there are in an integer, the bigger the numbers that can be stored.
 
-The following type definitions show the pattern of a common methodology for doing this. Because almost all modern processors are *2's complement** (don't worry for now), I show the ranges in terms of 2's complement numbers.
+The following type definitions show the pattern of a common methodology for doing this. Because almost all modern processors including Arduinos are **2's complement** (don't worry about that for now), I show the ranges in terms of 2's complement numbers.
 | Type Definition | Signed/Unsigned | # of bits | Range |
 | --- | --- | --- | --- |
 | int8_t | signed | 8 | -128 through +127 |

@@ -2,7 +2,7 @@
 
 ## Back to Root of Class
 Click this link to back to go back to the root of the Arduino class
-- https://github.com/Mark-MDO47/ArduinoClass/tree/master
+- https://github.com/Mark-MDO47/CforArduinoClass/tree/master
 
 
 **Table of Contents**
@@ -14,7 +14,7 @@ Click this link to back to go back to the root of the Arduino class
 
 ## Introducing the Arduino Nano
 [Back to Top](#notes "Back to Top")<br>
-![alt text](https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/Images/Arduino-Nano-Pinout_from_circuitstoday.com.png "CircuitsToday.com picture of Arduino Nano")
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/Arduino-Nano-Pinout_from_circuitstoday.com.png "CircuitsToday.com picture of Arduino Nano")
 
 The Student Kit includes an Arduino Nano clone. The above image is from CircuitsToday.com.
 
@@ -42,7 +42,7 @@ The Student Kit boards are built from relatively old Arduino Nano designs.
 - In the Arduino IDE menu **Tools** -> **Processor** -> **ATmega328P** select **Old Bootloader**.
 - **Programmer** should then automatically be selected as **AVRISP mkll**.
 
-![alt text](https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/Images/ConfigUSB.png "Configure USB port for old Arduino Nano")
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/ConfigUSB.png "Configure USB port for old Arduino Nano")
 
 ## View an Empty Sketch (Arduino program)
 [Back to Top](#notes "Back to Top")<br>
@@ -65,10 +65,10 @@ void loop() {
 [Back to Top](#notes "Back to Top")<br>
 In the Arduino IDE, choose menu **File** -> **Examples** -> **01.Basics** -> **Blink**. This will bring up the starting point for our Blink exercise.
 
-![alt text](https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/Images/IDE_LoadBlink.png "Arduino IDE loading Blink example program")
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/IDE_LoadBlink.png "Arduino IDE loading Blink example program")
 
 If for some reason you do not have access to that you can find a copy (from 2023-08) in this area under _Examples_ArduinoIDE/Blink:
-- https://github.com/Mark-MDO47/ArduinoClass/tree/master/ArduinoCode
+- https://github.com/Mark-MDO47/CforArduinoClass/tree/master/ArduinoCode
 
 In the **setup()** function you will find a "pinMode" call; this sets the internal "pin" to OUTPUT mode so we can turn the internal LED on and off.
 - LED_BUILTIN is a symbol for the "pin" number that controls the built-in LED on the Arduino. This LED_BUILTIN symbol will automatically be correct when compiling for any Arduino.
@@ -81,7 +81,7 @@ Because the **loop()** function is called over and over, this will continue unti
 
 With the Arduino connected to the USB port on your computer, use the button circled in red in the image below to compile, load, and run the Blink example program. The on-board LED should blink.
 
-![alt text](https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/Images/IDE_CompileAndRun.png "Arduino IDE compile-load-run button")
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/IDE_CompileAndRun.png "Arduino IDE compile-load-run button")
 
 **CONGRATULATIONS!** You have executed your first Arduino program!
 

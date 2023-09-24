@@ -3,7 +3,6 @@ Enough C/C++ to start the Arduino Class
 
 For an Arduino class 2023; FabLab will be first<br>
 Author: Mark Olson<br>
-To all who attended the first Arduino Class at FabLab: thanks and I hope you had fun while learning a few things!
 
 **Table of Contents**
 * [Top](#c-for-arduino-class "Top")
@@ -12,13 +11,13 @@ To all who attended the first Arduino Class at FabLab: thanks and I hope you had
 
 ## Learning C and Cplusplus
 [Top](#c-for-arduino-class "Top")<br>
-One thing I learned when teaching the first class is that things will move much faster if everyone has some basic experience with a text-based programming language.
+One thing I learned when teaching the first Arduino Class is that things will move much faster if everyone has some basic experience with a text-based programming language or especially C and C++.
 
-The Arduino IDE uses C and C++ languages (except for some of the I/O libraries, as explained later).
+The Arduino IDE uses C and C++ languages for general programming.
 - If you have experience in any text-based programming language - Python, Java, or other programming languages - you will probably be able to catch on to the parts of C and C++ used in this class quickly.
 - If you have never programmed before, I suggest you learn the basics of C before attending this class. You can easily pick up on the few parts of C++ used in this class if you have some knowledge of C (or even Python or Java or other languages)
 - This **C for Arduino Class** is intended to provide enough experience with the C and C++ programming languages in the Arduino environment to bring a non-programmer to the stage that they can start the **Arduino Class** and learn the rest on the way through that class.
-- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/README.md
+- https://github.com/Mark-MDO47/ArduinoClass/blob/master/README.md
 
 One factor to consider: Arduino does not implement the standard "printing" etc. functions - not for C (printf and scanf) and not for C++ (IO Streams). Arduino uses relatively simple "Serial" methods such as Serial.begin, Serial.print and Serial.println for output; Serial.available, Serial.read and Serial.readln for input.
 - If you want to get started by doing some fun Arduino projects from this class you can skim (or temporarily skip) the standard C and C++ methods, knowing that they are not used for these projects. You can return to the standard methods later.
@@ -59,7 +58,7 @@ If you are going to get a copy, I suggest you try to get the latest edition. Sin
 As an aside: some of the projects will use **binary** arithmetic and **Boolean** logic to implement simple data compression. We will do a quick discussion on how this code works when the time comes. This is another one of those topics that is important but could be skimmed if you just want to enjoy the project and study it later.
 
 There is a quick discussion of binary and other numbering systems in the resources page:
-- https://github.com/Mark-MDO47/CforArduinoClass/tree/master/99_Resources#tldr-decimal-and-binary-and-hexadecimal
+- https://github.com/Mark-MDO47/ArduinoClass/tree/master/99_Resources#tldr-decimal-and-binary-and-hexadecimal
 
 Binary and Boolean are discussed more fully in Wikipedia:
 - https://en.wikipedia.org/wiki/Binary_number

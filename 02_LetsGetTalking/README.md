@@ -124,4 +124,19 @@ One of the oldest and still commonly used methods of specifying strings is in **
 
 There are other systems such as **UniCode** which will not be used in our Arduino Class.
 
-That shows how to represent many familiar characters; how do we represent "Hello World!"? Since we are using zero-terminated ASCII strings, each ASCII character will be placed one after another in consecutive bytes in memory. The end of the string is when one of the bytes contains the value zero, which is the ASCII code "NUL".
+The type of a variable that is an ASCII code is **char**. This is usually the same as a **uint8_t**.
+
+That is how to represent many familiar characters; how do we represent "Hello World!"? Since we are using zero-terminated ASCII strings, each ASCII character will be placed one after another in consecutive bytes in memory. The end of the string is when one of the bytes contains the value zero, which is the ASCII code "NUL".
+
+We could define this as follows:<br>
+```C
+char str_num[13] = { 72,  101,  108,  108,  111,  32,  87,  111,  114,  108,  100,  33,  0 };
+```
+This notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.
+
+Below is how the array str_num is initialized:<br>
+| type | str_num[0] | str_num[1] | str_num[2] | str_num[3] | str_num[4] | str_num[5] | str_num[6] | str_num[7] | str_num[8] | str_num[9] | str_num[10] | str_num[11] | str_num[12] |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ASCII | 'H' | 'e' | 'l' | 'l' | 'o' | ' ' | 'W' | 'o' | 'r' | 'l' | 'd' | '!' | NUL |
+| decimal | 72 | 101 | 108 | 108 | 111 | 32 | 87 | 111 | 114 | 108 | 100 | 33 | 0 |
+

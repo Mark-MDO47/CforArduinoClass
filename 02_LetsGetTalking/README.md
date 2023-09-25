@@ -147,3 +147,4 @@ Note these things about the C/C++ language and our str_num definition:
   - str_num[1] contains 'e' which has the value 101
 - our ASCII string str_num contains 13 elements, the last of which is the zero for zero-termination
   - str_num[12] contains ASCII NUL which has the value 0
+- this example is just to make the point clear; nobody initializes strings this way

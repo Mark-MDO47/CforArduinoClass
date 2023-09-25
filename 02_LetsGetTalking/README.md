@@ -140,3 +140,10 @@ Below is how the array str_num is initialized:<br>
 | ASCII | 'H' | 'e' | 'l' | 'l' | 'o' | ' ' | 'W' | 'o' | 'r' | 'l' | 'd' | '!' | NUL |
 | decimal | 72 | 101 | 108 | 108 | 111 | 32 | 87 | 111 | 114 | 108 | 100 | 33 | 0 |
 
+Note these things about the C/C++ language and our str_num definition:
+- putting a character inside of single quotes produces the ASCII character valuevalue
+  - char tmp = 'H'; // 'H' has value decimal 72
+- an array is indexed with a number inside square brackets **[]** starting at zero.
+  - str_num[1] contains 'e' which has the value 101
+- our ASCII string str_num contains 13 elements, the last of which is the zero for zero-termination
+  - str_num[12] contains ASCII NUL which has the value 0

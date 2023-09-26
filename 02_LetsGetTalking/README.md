@@ -196,8 +196,10 @@ void setup() {
   Serial.print("str_ptr: "); Serial.println(str_ptr);
   Serial.print("strlen(str_num): "); Serial.println(strlen(str_num));
   Serial.print("strlen(str_ptr): "); Serial.println(strlen(str_ptr));
+  Serial.print("strlen(\"Hello World!\"): "); Serial.println(strlen("Hello World!"));
   Serial.print("sizeof(str_num): "); Serial.println(sizeof(str_num));
   Serial.print("sizeof(str_ptr): "); Serial.println(sizeof(str_ptr));
+  Serial.print("sizeof(\"Hello World!\"): "); Serial.println(sizeof("Hello World!"));
 
   Serial.println("");
 } // end setup()
@@ -208,10 +210,17 @@ For now, just think of the **Serial.begin(115200);** and the block inside **whil
 The next thing we see is **Serial.println("");**.
 - The "" is a double-quoted string of zero characters, so it creates an address that points to a zero-terminated ASCII string. Since there are no characters inside the "", the zero-terminated ASCII string starts with the ASCII NUL (zero) character and then ends; it is of length one.
 - Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Serial.println then creates a new line. If we used Serial.print("") instead of Serial.println(""), it would not create a new line.
+- You can think of it as if the Arduino program was typing in a text editor:
+  - Serial.print("aa"); Serial.print("bb"); Serial.println("cc"); - types aabbcc then presses enter
 - The ; at the end terminates the code statement; the // means to ignore the rest of the line.
 - The result is that we print/display a blank line.
 
 The rest of the Serial.print and Serial.println statements follow the above pattern. Notice that we can put use one (or more) lines for a code statement or we can put more than one code statement on one line. The compiler does not care.
+- strlen() (see #include "string.h" above) counts the number of ASCII bytes NOT including the zero termination. This works the same in all three usages.
+- sizeof() counts the number of bytes in the actual thing within the parenthesis:
+  - str_num is an array of 13 bytes so sizeof(str_num) returns 13
+  - str_ptr is a pointer to an array of 13 bytes, but the pointer is two bytes so it returns 2
+  - "Hello World!" (at least in this C compiler's mind) is an array of 13 bytes
 
 ### Float your Boat
 [Back to Top](#notes "Back to Top")<br>

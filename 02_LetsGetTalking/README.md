@@ -8,12 +8,12 @@ In this section we will use the USB-serial interface to enter strings to our pro
 
 **Table of Contents**
 * [Top](#notes "Top")
-* [The USB Serial Interface](#the-usb-serial-interface "The USB Serial Interface")
+* [The Arduino USB Serial Interface](#the-arduino-usb-serial-interface "The Arduino USB Serial Interface")
 * [The Code](#the-code "The Code")
   * [Comments and Code Statements](#comments-and-code-statements "Comments and Code Statements")
   * [Integers and other Strangers](#integers-and-other-strangers "Integers and other Strangers")
 
-## The USB Serial Interface
+## The Arduino USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>
 Now we will start using the USB serial port for input from the keyboard and output to the screen - a fantastically useful diagnostic tool.
 

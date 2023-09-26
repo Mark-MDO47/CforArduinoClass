@@ -73,7 +73,15 @@ int loop_count = 0;
 
 ```
 
-All code statements that the compiler accepts end with **;** (semicolon). There can be more than one code statement on a line. For example, we could write:<br>
+Next we see this:<br>
+```C
+#include "string.h" // includes the standard C definitions found in string.h
+```
+This tells the compiler to find the standard C file string.h and compile as if it copied those lines in here as replacement for the #include statement. We will use the **strlen()** function that returns the length of a character string (zero-terminated ASCII string; we will discuss later) so we need to do this #include.
+
+Note that the #include statement does NOT end with a semicolon (**;**). That is in general true of the other keywords starting with **#** that we will see later. That allows these **#** statements to operate on **;** as just another part of the string.
+
+All **code statements** that the compiler accepts DO end with a semicolon (**;**). There can be more than one code statement on a line. For example, we could write:<br>
 ```C
 // we can do this either way; this:
 int loop_count = 0;
@@ -176,7 +184,7 @@ void setup() {
   Serial.begin(115200);
 
   while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
+    ; // note that ";" is a null code statement. Wait for serial port to connect.
   }
   
   Serial.println(""); // print a blank line in case there is some junk from power-on

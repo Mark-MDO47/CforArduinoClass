@@ -12,6 +12,7 @@ In this section we will use the USB-serial interface to enter strings to our pro
 * [The Code](#the-code "The Code")
   * [Comments and Code Statements](#comments-and-code-statements "Comments and Code Statements")
   * [Integers and other Strangers](#integers-and-other-strangers "Integers and other Strangers")
+  * [Expressions - Express Yourself](#expressions-\--express-yourself "Expressions - Express Yourself")
 
 ## The Arduino USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>
@@ -198,3 +199,32 @@ The next thing we see is **Serial.println("");**.
 - The result is that we print/display a blank line.
 
 The rest of the Serial.print and Serial.println statements follow the above pattern. Notice that we can put use one (or more) lines for a code statement or we can put more than one code statement on one line. The compiler does not care.
+
+### Float your Boat
+[Back to Top](#notes "Back to Top")<br>
+
+Floating point numbers allow storage and use of numbers that are not integers, such as the familiar 3.141592. Just as **int** is one **type** used for integer storage, **float** is one **type** of floating point storage. As usual, floats come in different sizes: **float**, **double**, **long double**.
+
+Be aware that these are stored in binary format and there is no finite-length binary fraction to represent 0.1 - nor most floating point numbers expressed in decimal notation. Thus if you add 0.1 to itself often enough you will start to notice that the result is not exactly what you would expect. However, it will be correct to a certain number of significant digits.
+
+### Expressions - Express Yourself
+[Back to Top](#notes "Back to Top")<br>
+
+In C/C++, an expression is something that returns a value. This is not a complete list but here are some example expressions, using i and j as integer variables:
+* i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
+* i = squared(17); // squared my be a function that returns the value of the parameter squared
+* i = i+1; // if i is 289, this will store 289+1 = 290 into i
+* i += 1; // this is a shorthand way of doing the above
+* i++; ++i; // more ways to add one to i
+* i = i / 17; // this stores the truncated integer value into i - If i is 293 then 17 gets stored into i and the remainder of 4 is discarded
+* i = 293 % 17; // the remainder or modulo - this time the remainder of 4 is stored in i and the 17 gets discarded
+* j = (i /= 4) * 3; // this is complicated. Don't worry about this one too much; it is somewhat rare
+  * (i /= 4) means the left hand side divided by the right hand side, so 17/4 is 4.25 but truncated to 4 and stored into i
+  * then the 4 is multiplied by 3 to get 12 and stored into j
+
+Terms like +, -, /, *, etc. are called **operators**. There are many other operators 
+* 
+
+There are a few operators used when doing binary or boolean operations. We will talk about these later in the Arduino class when we briefly cover those topics, but here are some of the common ones: **<<**, **>>**, **&**, **|**, **^**, and **~** for bitwise left shift, bitwise right shift, bitwise AND, bitwise OR, bitwise XOR, and bitwise NOT (one's complement).
+
+There are some comparison operators **==**, **<**, **<=**, **>**, **>=**, and **!=**, for equal to, less than, less than or equal to, greater than, greater than or equal to, and not equal to.

@@ -156,7 +156,7 @@ char *str_ptr = "Hello World!";
 ```
 The "char str_num[13] = { ... }" notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.
 The 'char *str_ptr = "Hello World!"' creates a zero-terminated **array** of type **char** somewhere and stores the address in str_ptr.
-Both str_num and str_ptr can be used in code statements with exactly the same syntax.
+Both str_num and str_ptr can **almost** always be used in code statements with exactly the same syntax.
 
 Below is how the array str_num is initialized:<br>
 | type | str_num[0] | str_num[1] | str_num[2] | str_num[3] | str_num[4] | str_num[5] | str_num[6] | str_num[7] | str_num[8] | str_num[9] | str_num[10] | str_num[11] | str_num[12] |
@@ -194,6 +194,11 @@ void setup() {
   Serial.print("str_num: ");
   Serial.println(str_num);
   Serial.print("str_ptr: "); Serial.println(str_ptr);
+  Serial.print("strlen(str_num): "); Serial.println(strlen(str_num));
+  Serial.print("strlen(str_ptr): "); Serial.println(strlen(str_ptr));
+  Serial.print("sizeof(str_num): "); Serial.println(sizeof(str_num));
+  Serial.print("sizeof(str_ptr): "); Serial.println(sizeof(str_ptr));
+
   Serial.println("");
 } // end setup()
 ```

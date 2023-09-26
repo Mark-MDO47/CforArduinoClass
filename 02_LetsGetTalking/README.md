@@ -193,6 +193,6 @@ For now, just think of the **Serial.begin(115200);** and the block inside **whil
 
 The next thing we see is **Serial.println("");**.
 - The "" is a double-quoted string of zero characters, so it creates an address that points to a zero-terminated ASCII string. Since there are no characters inside the "", the zero-terminated ASCII string starts with the ASCII NUL (zero) character and then ends; it is of length one.
-- Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Serial.println then creates a new line. If we used Serial.print() instead of Serial.println(), it would not create a new line.
+- Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Serial.println then creates a new line. If we used Serial.print("") instead of Serial.println(""), it would not create a new line.
 - The ; at the end terminates the code statement; the // means to ignore the rest of the line.
 - The result is that we print/display a blank line.

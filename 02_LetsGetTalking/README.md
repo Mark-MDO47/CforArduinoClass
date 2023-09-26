@@ -66,8 +66,8 @@ This means the entire code snippet above is a comment and is ignored by the comp
 Also anything after **//** is a comment, as seen below. Note also that blank lines are ignored.<br>
 ```C
 
-// loop_count is a "variable" that can store "int" (integers)
-//   because it is defined up front and not inside {} brackets, it can be "seen" by everything below
+// loop_count is a "variable" that can store one "int" (integer).
+// Because it is defined up front and not inside {} brackets, it can be "seen" by everything below
 int loop_count = 0;
 
 ```
@@ -130,9 +130,24 @@ That is how to represent many familiar characters; how do we represent "Hello Wo
 
 We could define this as follows:<br>
 ```C
-char str_num[13] = { 72,  101,  108,  108,  111,  32,  87,  111,  114,  108,  100,  33,  0 };
+// Two different ways to have a zero-terminated ASCII string that says "Hello World!"
+// str_num is an array of 13 "char", which happens to end in zero. Many routines exist
+//     that can do things with zero-terminated ASCII strings.
+// The "char *" in front of str_ptr indicates that str_ptr is a "pointer" and contains the address
+//     to zero or more consecutive "char". The "Hello World!" creates a zero-terminated ASCII string
+//     and stores the address into str_ptr.
+// str_num and str_ptr can be used in the same way in the code.
+//     To get the first character, refer to str_num[0] or str_ptr[0].
+//     To print a line that says "Hello World!", either use:
+//        Serial.println(str_num);
+//        Serial.println(str_ptr);
+//
+char  str_num[13] = { 72,  101,  108,  108,  111,  32,  87,  111,  114,  108,  100,  33,  0 };
+char *str_ptr = "Hello World!";
 ```
-This notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.
+The "char str_num[13] = { ... }" notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.
+The 'char *str_ptr = "Hello World!"' creates a zero-terminated **array** of type **char** somewhere and stores the address in str_ptr.
+Both str_num and str_ptr can be used in code statements with exactly the same syntax.
 
 Below is how the array str_num is initialized:<br>
 | type | str_num[0] | str_num[1] | str_num[2] | str_num[3] | str_num[4] | str_num[5] | str_num[6] | str_num[7] | str_num[8] | str_num[9] | str_num[10] | str_num[11] | str_num[12] |
@@ -140,11 +155,37 @@ Below is how the array str_num is initialized:<br>
 | ASCII | 'H' | 'e' | 'l' | 'l' | 'o' | ' ' | 'W' | 'o' | 'r' | 'l' | 'd' | '!' | NUL |
 | decimal | 72 | 101 | 108 | 108 | 111 | 32 | 87 | 111 | 114 | 108 | 100 | 33 | 0 |
 
-Note these things about the C/C++ language and our str_num definition:
-- putting a character inside of single quotes produces the ASCII character valuevalue
+Note these things about the C/C++ language and our str_num/str_ptr definition:
+- putting a character inside of single quotes produces the ASCII character value
   - char tmp = 'H'; // 'H' has value decimal 72
+- putting zero or more characters inside of double quotes produces the address of a zero-terminated ASCII string
+  - Serial.println("CforArduinoClass init...");
 - an array is indexed with a number inside square brackets **[]** starting at zero.
   - str_num[1] contains 'e' which has the value 101
 - our ASCII string str_num contains 13 elements, the last of which is the zero for zero-termination
   - str_num[12] contains ASCII NUL which has the value 0
-- this example is just to make the point clear; nobody initializes strings this way
+- the **str_num** example is just to make the point clear; nobody initializes strings as arrays of numbers
+
+Now let's look at the code inside the **setup()** block. Remember, **setup()** will be called first and only once. After that, **loop()** will be called over and over.<br>
+```C
+// the setup function runs once when you press reset or power the board
+void setup() {
+
+  // this serial communication is for general debug; set the USB serial port to 115,200 baud
+  Serial.begin(115200);
+
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
+  
+  Serial.println(""); // print a blank line in case there is some junk from power-on
+  Serial.println("CforArduinoClass init...");
+
+  Serial.println("");
+  Serial.print("str_num: ");
+  Serial.println(str_num);
+  Serial.print("str_ptr: ");
+  Serial.println(str_ptr);
+  Serial.println("");
+} // end setup()
+```

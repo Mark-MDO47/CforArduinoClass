@@ -222,6 +222,11 @@ The rest of the Serial.print and Serial.println statements follow the above patt
   - str_ptr is a pointer to an array of 13 bytes, but the pointer is two bytes so it returns 2
   - "Hello World!" (at least in this C compiler's mind) is an array of 13 bytes
 
+### Run the setup code
+[Back to Top](#notes "Back to Top")<br>
+Below shows the results on the Serial Monitor from running the **setup()** code:<br>
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
+
 ### Float your Boat
 [Back to Top](#notes "Back to Top")<br>
 

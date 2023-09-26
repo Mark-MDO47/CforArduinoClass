@@ -228,3 +228,11 @@ Terms like +, -, /, *, etc. are called **operators**. There are many other opera
 There are a few operators used when doing binary or boolean operations. We will talk about these later in the Arduino class when we briefly cover those topics, but here are some of the common ones: **<<**, **>>**, **&**, **|**, **^**, and **~** for bitwise left shift, bitwise right shift, bitwise AND, bitwise OR, bitwise XOR, and bitwise NOT (one's complement).
 
 There are some comparison operators **==**, **<**, **<=**, **>**, **>=**, and **!=**, for equal to, less than, less than or equal to, greater than, greater than or equal to, and not equal to.
+
+Logical operators return a 1 (often thought of as TRUE) or 0 (often thought of as FALSE). The comparison operators are logical operators. In addition there is **&&**, **||**, and **!** for logical AND, logical OR, and logical NOT.
+* Note that during calculations, anything that is not zero is treated as 1. For instance
+  * 1 && 1 is TRUE
+  * 1 && 2 is TRUE
+  * -1 && 999 is TRUE
+  * 0 || 2 is TRUE
+  * !(0 || 2) is FALSE

@@ -196,3 +196,5 @@ The next thing we see is **Serial.println("");**.
 - Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Serial.println then creates a new line. If we used Serial.print("") instead of Serial.println(""), it would not create a new line.
 - The ; at the end terminates the code statement; the // means to ignore the rest of the line.
 - The result is that we print/display a blank line.
+
+The rest of the Serial.print and Serial.println statements follow the above pattern. Notice that we can put use one (or more) lines for a code statement or we can put more than one code statement on one line. The compiler does not care.

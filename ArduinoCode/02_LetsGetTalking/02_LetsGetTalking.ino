@@ -50,9 +50,10 @@ void setup() {
   Serial.println("CforArduinoClass init...");
 
   Serial.println("");
-  Serial.print("str_num: ");
+  Serial.print("Serial.println(str_num): ");
   Serial.println(str_num);
-  Serial.print("str_ptr: "); Serial.println(str_ptr);
+  Serial.print("Serial.println(str_ptr): "); Serial.println(str_ptr);
+  Serial.print("Serial.println(\"Hello World!\"): "); Serial.println("Hello World!");
   Serial.print("strlen(str_num): "); Serial.println(strlen(str_num));
   Serial.print("strlen(str_ptr): "); Serial.println(strlen(str_ptr));
   Serial.print("strlen(\"Hello World!\"): "); Serial.println(strlen("Hello World!"));
@@ -61,13 +62,14 @@ void setup() {
   Serial.print("sizeof(\"Hello World!\"): "); Serial.println(sizeof("Hello World!"));
 
   Serial.println("");
+  // while (1) { ; }
 } // end setup()
 
 // the loop function runs over and over again forever
 void loop() {
   loop_count += 1;    // instead of loop_count = loop_count + 1
 
-  if (loop_count == 1) {
+  if (loop_count == 1) { // first time loop() is called
     Serial.print("1 && 1: "); Serial.println(1 && 1);
     Serial.print("1 && 2: "); Serial.println(1 && 2);
     Serial.print("-1 && 999: "); Serial.println(-1 && 999);
@@ -77,7 +79,7 @@ void loop() {
     Serial.println("");
   } // end if (loop_count == 1)
 
-  if (loop_count <= 10) {
+  if (loop_count <= 10) { // first 10 times loop() is called
     // Serial.print() does not go to a new line; Serial.println() does
     Serial.print(" loop_count: "); Serial.println(loop_count);
   } // end if (loop_count...)

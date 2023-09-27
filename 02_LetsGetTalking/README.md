@@ -279,7 +279,7 @@ Here is the loop code:
 void loop() {
   loop_count += 1;    // instead of loop_count = loop_count + 1
 
-  if (loop_count == 1) { // first time loop() is called
+  if (1 == loop_count) { // first time loop() is called
     Serial.print("1 && 1: "); Serial.println(1 && 1);
     Serial.print("1 && 2: "); Serial.println(1 && 2);
     Serial.print("-1 && 999: "); Serial.println(-1 && 999);
@@ -297,3 +297,25 @@ void loop() {
   delay(1000);                       // wait for a second
 } // end loop()
 ```
+
+The first **if** statement tests the expression inside **()** and executes the code block inside the **{}** if the expression is TRUE (1).
+- The first time the code enters loop(), loop_count is zero
+  - loop_count += 1; sets loop_count to 1
+  - if (1 == loop_count) is TRUE the first time so we execute the code block inside the **{}**
+- The second time the code enters loop(), loop_count is one
+  - loop_count += 1; sets loop_count to 2
+  - if (1 == loop_count) is FALSE the second and subsequent times so we skip the code block inside the **{}**
+- the third and subsequent times the code enters the loop
+  - if (1 == loop_count) is FALSE the second and subsequent times so we skip the code block inside the **{}**
+    - actually it is FALSE for a long time but eventually loop_count will overflow
+- The result: we only print the lines from the code block inside the **{}** one time on the first time in loop()
+
+The second **if** statement tests the expression (loop_count <= 10) and executes the code block inside the **{}** if the expression is TRUE (1).
+- This is TRUE the first 10 times loop() is called
+- After that it is FALSE until loop_count overflows (a long time)
+
+Finally we reach the delay(1000); code statement. This waits for about 1000 milliseconds each time loop() is called because it is not inside any if or other control block.
+- delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
+
+Below shows the results on the Serial Monitor from running the entire Arduino program:<br>
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")

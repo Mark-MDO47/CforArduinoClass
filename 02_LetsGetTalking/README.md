@@ -232,7 +232,10 @@ Below shows the results on the Serial Monitor from running the **setup()** code:
 
 Floating point numbers allow storage and use of numbers that are not integers, such as the familiar 3.141592. Just as **int** is one **type** used for integer storage, **float** is one **type** of floating point storage. As usual, floats come in different sizes: **float**, **double**, **long double**.
 
-Be aware that these are stored in binary format and there is no finite-length binary fraction to represent 0.1 - nor most floating point numbers expressed in decimal notation. Thus if you add 0.1 to itself often enough you will start to notice that the result is not exactly what you would expect. However, it will be correct to a certain number of significant digits.
+Be aware that floating point numbers are stored in binary format and there is no finite-length binary fraction that can exactly represent 0.1 - nor many other floating point number fractions expressed in decimal notation. Thus if you add 0.1 to itself often enough you will start to notice that the result is not exactly what you would expect if 0.1 were represented exactly. However, the result will be correct to a certain number of significant digits, within certain complicated mathematical limits we won't get into here.
+- With C/C++ integer numbers we always need to watch out for generating a number that is too big to fit in the size and type of integer we have.
+- With C/C++ floating point numbers there are maximum and minimums for what can be expressed, plus we always have to watch out for the accumulation of small errors.
+- Dividing by zero in C/C++ is always a bad idea.
 
 ### Expressions - Express Yourself
 [Back to Top](#notes "Back to Top")<br>

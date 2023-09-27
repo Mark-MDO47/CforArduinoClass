@@ -12,6 +12,8 @@ In this section we will use the USB-serial interface to enter strings to our pro
 * [The Code](#the-code "The Code")
   * [Comments and Code Statements](#comments-and-code-statements "Comments and Code Statements")
   * [Integers and other Strangers](#integers-and-other-strangers "Integers and other Strangers")
+  * [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")
+  * [Run the setup code](#run-the-setup-code "Run the setup code")
   * [Expressions - Express Yourself](#expressions-\--express-yourself "Expressions - Express Yourself")
 
 ## The Arduino USB Serial Interface
@@ -222,12 +224,7 @@ The rest of the Serial.print and Serial.println statements follow the above patt
   - str_ptr is a pointer to an array of 13 bytes, but the pointer is two bytes so it returns 2
   - "Hello World!" (at least in this C compiler's mind) is an array of 13 bytes
 
-### Run the setup code
-[Back to Top](#notes "Back to Top")<br>
-Below shows the results on the Serial Monitor from running the **setup()** code:<br>
-![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
-
-### Float your Boat
+### TLDR Float your Boat
 [Back to Top](#notes "Back to Top")<br>
 
 Floating point numbers allow storage and use of numbers that are not integers, such as the familiar 3.141592. Just as **int** is one **type** used for integer storage, **float** is one **type** of floating point storage. As usual, floats come in different sizes: **float**, **double**, **long double**.
@@ -236,6 +233,11 @@ Be aware that floating point numbers are stored in binary format and there is no
 - With C/C++ integer numbers we always need to watch out for generating a number that is too big to fit in the size and type of integer we have.
 - With C/C++ floating point numbers there are maximum and minimums for what can be expressed, plus we always have to watch out for the accumulation of small errors.
 - Dividing by zero in C/C++ is always a bad idea.
+
+### Run the setup code
+[Back to Top](#notes "Back to Top")<br>
+Below shows the results on the Serial Monitor from running the **setup()** code:<br>
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
 
 ### Expressions - Express Yourself
 [Back to Top](#notes "Back to Top")<br>
@@ -266,3 +268,6 @@ Logical operators return a 1 (often thought of as TRUE) or 0 (often thought of a
   * -1 && 999 is TRUE
   * 0 || 2 is TRUE
   * !(0 || 2) is FALSE
+
+### Run the loop code
+[Back to Top](#notes "Back to Top")<br>

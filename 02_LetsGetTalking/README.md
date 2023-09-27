@@ -15,6 +15,7 @@ In this section we will use the USB-serial interface to enter strings to our pro
   * [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")
   * [Run the setup code](#run-the-setup-code "Run the setup code")
   * [Expressions - Express Yourself](#expressions-\--express-yourself "Expressions - Express Yourself")
+  * [Run the loop code](#run-the-loop-code "Run the loop code")
 
 ## The Arduino USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>
@@ -271,3 +272,28 @@ Logical operators return a 1 (often thought of as TRUE) or 0 (often thought of a
 
 ### Run the loop code
 [Back to Top](#notes "Back to Top")<br>
+
+Here is the loop code:
+```C
+// the loop function runs over and over again forever
+void loop() {
+  loop_count += 1;    // instead of loop_count = loop_count + 1
+
+  if (loop_count == 1) { // first time loop() is called
+    Serial.print("1 && 1: "); Serial.println(1 && 1);
+    Serial.print("1 && 2: "); Serial.println(1 && 2);
+    Serial.print("-1 && 999: "); Serial.println(-1 && 999);
+    Serial.print("-1 && 0: "); Serial.println(-1 && 0);
+    Serial.print("0 || 2: "); Serial.println(0 || 2);
+    Serial.print("!(0 || 2): "); Serial.println(!(0 || 2));
+    Serial.println("");
+  } // end if (loop_count == 1)
+
+  if (loop_count <= 10) { // first 10 times loop() is called
+    // Serial.print() does not go to a new line; Serial.println() does
+    Serial.print(" loop_count: "); Serial.println(loop_count);
+  } // end if (loop_count...)
+
+  delay(1000);                       // wait for a second
+} // end loop()
+```

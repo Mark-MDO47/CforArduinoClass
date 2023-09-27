@@ -314,7 +314,7 @@ The second **if** statement tests the expression (loop_count <= 10) and executes
 - This is TRUE the first 10 times loop() is called
 - After that it is FALSE until loop_count overflows (a long time)
 
-Finally we reach the delay(1000); code statement. This waits for about 1000 milliseconds each time loop() is called because it is not inside any if or other control block.
+Finally we reach the delay(1000); code statement. This waits for about 1000 milliseconds each time loop() is called because it is not inside any control block such as **if** or **while**, etc.
 - delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
 
 Below shows the results on the Serial Monitor from running the entire Arduino program:<br>

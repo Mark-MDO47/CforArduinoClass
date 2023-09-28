@@ -44,12 +44,12 @@ This will be a gentle introduction; we won't get to far into details.
 ### Comments and Code Statements
 [Back to Top](#notes "Back to Top")<br>
 
-Load the file ArduinoCode/02_LetsGetTalking/02_LetsGetTalking.ino into the Arduino IDE.
-- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/ArduinoCode/02_LetsGetTalking/02_LetsGetTalking.ino
+Load the file ArduinoCode/98_LetsGetTalking/98_LetsGetTalking.ino into the Arduino IDE.
+- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/ArduinoCode/98_LetsGetTalking/98_LetsGetTalking.ino
 
 It starts with some comments:<br>
 ```C
-/* 02_LetsGetTalking
+/* 98_LetsGetTalking
  *
  * Mark Olson for his "C for Arduino Class" https://github.com/Mark-MDO47/CforArduinoClass
  * 
@@ -59,7 +59,7 @@ It starts with some comments:<br>
  *            http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf
  *            http://www.pighixxx.com/test/pinouts/boards/nano.pdf
  *
- * This is code for https://github.com/Mark-MDO47/CforArduinoClass/02_LetsGetTalking
+ * This is code for https://github.com/Mark-MDO47/CforArduinoClass/98_LetsGetTalking
  * 
  */
 ```
@@ -238,7 +238,7 @@ Be aware that floating point numbers are stored in binary format and there is no
 ### Run the setup code
 [Back to Top](#notes "Back to Top")<br>
 Below shows the results on the Serial Monitor from running the **setup()** code:<br>
-![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
 
 ### Expressions - Express Yourself
 [Back to Top](#notes "Back to Top")<br>
@@ -318,4 +318,4 @@ Finally we reach the delay(1000); code statement. This waits for about 1000 mill
 - delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
 
 Below shows the results on the Serial Monitor from running the entire Arduino program:<br>
-![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")

@@ -6,6 +6,13 @@ Click this link to back to go back to the root of the **C for Arduino Class**
 
 In this section we will use the USB-serial interface to enter strings to our program and print strings from our program.
 
+We will do some printing from **setup()** and from **loop()** and do some if and loop statements and some expressions.
+- The goal is to show a few examples of common ways to do things.
+- It is not the goal to show every way to do things or explore every odd case.
+
+For a more thorough exploration of the C/C++ language, see my list of a few resources I found on the web
+- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/README.md#some-resources-on-the-web
+
 **Table of Contents**
 * [Top](#notes "Top")
 * [The Arduino USB Serial Interface](#the-arduino-usb-serial-interface "The Arduino USB Serial Interface")

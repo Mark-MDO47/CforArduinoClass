@@ -10,7 +10,7 @@ We will do some printing from **setup()** and from **loop()** and do some if and
 - The goal is to show a few examples of common ways to do things.
 - It is not the goal to show every way to do things or explore every odd case.
 
-For a more thorough exploration of the C/C++ language, see my list of a few resources I found on the web
+For a more thorough exploration of the C/C++ language, I am sure you can find some excellent tutorials and classes on the web. Also, you can look at my list of a few resources I found on the web:
 - https://github.com/Mark-MDO47/CforArduinoClass/blob/master/README.md#some-resources-on-the-web
 
 **Table of Contents**

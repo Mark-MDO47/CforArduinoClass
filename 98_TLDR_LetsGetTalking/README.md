@@ -44,12 +44,12 @@ This will be a gentle introduction; we won't get to far into details.
 ### Comments and Code Statements
 [Back to Top](#notes "Back to Top")<br>
 
-Load the file ArduinoCode/98_LetsGetTalking/98_LetsGetTalking.ino into the Arduino IDE.
-- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/ArduinoCode/98_LetsGetTalking/98_LetsGetTalking.ino
+Load the file ArduinoCode/98_TLDR_LetsGetTalking/98_TLDR_LetsGetTalking.ino into the Arduino IDE.
+- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/ArduinoCode/98_TLDR_LetsGetTalking/98_TLDR_LetsGetTalking.ino
 
 It starts with some comments:<br>
 ```C
-/* 98_LetsGetTalking
+/* 98_TLDR_LetsGetTalking
  *
  * Mark Olson for his "C for Arduino Class" https://github.com/Mark-MDO47/CforArduinoClass
  * 
@@ -59,7 +59,7 @@ It starts with some comments:<br>
  *            http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf
  *            http://www.pighixxx.com/test/pinouts/boards/nano.pdf
  *
- * This is code for https://github.com/Mark-MDO47/CforArduinoClass/98_LetsGetTalking
+ * This is code for https://github.com/Mark-MDO47/CforArduinoClass/98_TLDR_LetsGetTalking
  * 
  */
 ```

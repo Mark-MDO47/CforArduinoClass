@@ -83,13 +83,15 @@ int loop_count = 0;
 
 ```
 
-Next we see this:<br>
+We also see this:<br>
 ```C
 #include "string.h" // includes the standard C definitions found in string.h
 ```
 This tells the compiler to find the standard C file string.h and compile as if it copied those lines in here as replacement for the #include statement. We will use the **strlen()** function that returns the length of a character string (zero-terminated ASCII string; we will discuss later) so we need to do this #include.
 
 Note that the #include statement does NOT end with a semicolon (**;**). That is in general true of the other keywords starting with **#** that we will see later. That allows these **#** statements to operate on **;** as just another part of the string.
+
+**TLDR** it is also possible to do **#include <string.h>**. The difference as far as we are concerned is not a big one; it just narrows down the range of places that the C compiler would look for the file string.h. Anywhere in this class or in the Arduino Class, using the **"** form is always OK.
 
 All **code statements** that the compiler accepts DO end with a semicolon (**;**). There can be more than one code statement on a line. For example, we could write:<br>
 ```C
@@ -115,6 +117,8 @@ There are different types and sizes of integers.
 - An unsigned integer can only be zero or positive.
   - If a negative number is assigned to an unsigned integer, it will probably give results that were not wanted. However, there can be reasons to do this if you know exactly what you are doing.
 
+**NOTE: I will discuss the different sizes available for integers because the Arduino Nano has very little storage available for variables.**
+
 A common practice in C and C++ is to specify the size when defining integers. The size of **int** can vary depending on what computer processor the code is running. To get consistent results it is best to specify a size that handles anything that will be stored in it. However, the Arduino Nano is very constrained for its RAM memory, so we want to make each variable big enough but not too big.
 
 Because the size of **int** (and its cousins such as **unsigned int**, **long int**, and **unsigned long int**) is not the same for every processor, there is a method to specify the size in units of how many **binary bits** the variable will have. We will discuss binary and other numbering systems later. For now just remember that the more bits there are in an integer, the bigger the numbers that can be stored.
@@ -133,6 +137,7 @@ The following type definitions show the pattern of a common methodology for doin
 [Back to Top](#notes "Back to Top")<br>
 
 What if you want to print "Hello World!" to the terminal? Computers only understand bits and bytes; how do we specify text strings?
+- Printing "Hello World!" is a common exercise ever since the first publication of **The C Programming Language** by Kernighan and Ritchie.
 
 One of the oldest and still commonly used methods of specifying strings is in **zero-terminated** **ASCII**.
 - ASCII stands for American Standard Code for Information Interchange.
@@ -141,13 +146,15 @@ One of the oldest and still commonly used methods of specifying strings is in **
 - A non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound to come out of the system.
 - An extended code is the character "PI" represented by the number 227 (decimal). Extended codes are often as shown but some systems may not display them as expected.
 
-There are other systems such as **UniCode** which will not be used in our Arduino Class.
+NOTE: There are other systems such as **UniCode** which will not be used in our Arduino Class.
 
 The type of a variable that is an ASCII code is **char**. On the Arduino and on most systems **char** the same as a **uint8_t**.
 
-That is how to represent many familiar characters; how do we represent "Hello World!"? Since we are using zero-terminated ASCII strings, each ASCII character will be placed one after another in consecutive bytes in memory. The end of the string is when one of the bytes contains the value zero, which is the ASCII code "NUL".
+That shows how to represent many familiar characters; how do we represent "Hello World!"? Since we are using zero-terminated ASCII strings, each ASCII character will be placed one after another in consecutive bytes in memory. The end of the string is when one of the bytes contains the value zero, which is the ASCII code "NUL".
 
-We could define this as follows:<br>
+**NOTE: I will go into detail on zero terminated string arrays since (1) strings are common, (2) arrays are common, (3) pointers are very useful.**
+
+We could define this string as follows:<br>
 ```C
 // Two different ways to have a zero-terminated ASCII string that says "Hello World!"
 // str_num is an array of 13 "char", which happens to end in zero. Many routines exist
@@ -215,32 +222,24 @@ void setup() {
 } // end setup()
 ```
 
-For now, just think of the **Serial.begin(115200);** and the block inside **while (!Serial)** as a way to initialize the **Serial** object. We can discuss the details of how this works at a later time.
+For now, just think of the **Serial.begin(115200);** and the block inside **while (!Serial)** as a way to initialize the **Serial** object. We can discuss the details of how this works at a later time; for now, this is just how we get it working.
 
 The next thing we see is **Serial.println("");**.
 - The "" is a double-quoted string of zero characters, so it creates an address that points to a zero-terminated ASCII string. Since there are no characters inside the "", the zero-terminated ASCII string starts with the ASCII NUL (zero) character and then ends; it is of length one.
-- Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Serial.println then creates a new line. If we used Serial.print("") instead of Serial.println(""), it would not create a new line.
+- Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Serial.print**ln** then creates a new line. If we used Serial.print("") instead of Serial.print**ln**(""), it would not create a new line.
 - You can think of it as if the Arduino program was typing in a text editor:
-  - Serial.print("aa"); Serial.print("bb"); Serial.println("cc"); - types aabbcc then presses enter
+  - Serial.print("aa"); Serial.print("bb"); Serial.println("cc"); - types aabbcc then (because the last one is print**ln**) presses enter
 - The ; at the end terminates the code statement; the // means to ignore the rest of the line.
 - The result is that we print/display a blank line.
 
-The rest of the Serial.print and Serial.println statements follow the above pattern. Notice that we can put use one (or more) lines for a code statement or we can put more than one code statement on one line. The compiler does not care.
+The rest of the Serial.print and Serial.println statements follow the above pattern. Notice that we can use one (or more) lines for a code statement or we can put more than one code statement on one line. The compiler does not care.
+
+Here are a few other capabilities we use in the **setup()** code:
 - strlen() (see #include "string.h" above) counts the number of ASCII bytes NOT including the zero termination. This works the same in all three usages.
-- sizeof() counts the number of bytes in the actual thing within the parenthesis:
+- sizeof() counts the number of bytes in the actual thing within the parentheses **()**:
   - str_num is an array of 13 bytes so sizeof(str_num) returns 13
   - str_ptr is a pointer to an array of 13 bytes, but the pointer is two bytes so it returns 2
   - "Hello World!" (at least in this C compiler's mind) is an array of 13 bytes
-
-### TLDR Float your Boat
-[Back to Top](#notes "Back to Top")<br>
-
-Floating point numbers allow storage and use of numbers that are not integers, such as the familiar 3.141592. Just as **int** is one **type** used for integer storage, **float** is one **type** of floating point storage. As usual, floats come in different sizes: **float**, **double**, **long double**.
-
-Be aware that floating point numbers are stored in binary format and there is no finite-length binary fraction that can exactly represent 0.1 - nor many other floating point number fractions expressed in decimal notation. Thus if you add 0.1 to itself often enough you will start to notice that the result is not exactly what you would expect if 0.1 were represented exactly. However, the result will be correct to a certain number of significant digits, within certain complicated mathematical limits we won't get into here.
-- With C/C++ integer numbers we always need to watch out for generating a number that is too big to fit in the size and type of integer we have.
-- With C/C++ floating point numbers there are maximum and minimums for what can be expressed, plus we always have to watch out for the accumulation of small errors.
-- Dividing by zero in C/C++ is always a bad idea.
 
 ### Run the setup code
 [Back to Top](#notes "Back to Top")<br>
@@ -262,20 +261,7 @@ In C/C++, an expression is something that returns a value. This is not a complet
   * (i /= 4) means the left hand side divided by the right hand side, so 17/4 is 4.25 but truncated to 4 and stored into i
   * then the 4 is multiplied by 3 to get 12 and stored into j
 
-Terms like +, -, /, *, etc. are called **operators**. There are many other operators 
-* 
-
-There are a few operators used when doing binary or boolean operations. We will talk about these later in the Arduino class when we briefly cover those topics, but here are some of the common ones: **<<**, **>>**, **&**, **|**, **^**, and **~** for bitwise left shift, bitwise right shift, bitwise AND, bitwise OR, bitwise XOR, and bitwise NOT (one's complement).
-
-There are some comparison operators **==**, **<**, **<=**, **>**, **>=**, and **!=**, for equal to, less than, less than or equal to, greater than, greater than or equal to, and not equal to.
-
-Logical operators return a 1 (often thought of as TRUE) or 0 (often thought of as FALSE). The comparison operators are logical operators. In addition there is **&&**, **||**, and **!** for logical AND, logical OR, and logical NOT.
-* Note that during calculations, anything that is not zero is treated as 1. For instance
-  * 1 && 1 is TRUE
-  * 1 && 2 is TRUE
-  * -1 && 999 is TRUE
-  * 0 || 2 is TRUE
-  * !(0 || 2) is FALSE
+Terms like +, -, /, *, etc. are called **operators**.
 
 ### Run the loop code
 [Back to Top](#notes "Back to Top")<br>
@@ -326,3 +312,27 @@ Finally we reach the delay(1000); code statement. This waits for about 1000 mill
 
 Below shows the results on the Serial Monitor from running the entire Arduino program:<br>
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")
+
+### TLDR Float your Boat
+[Back to Top](#notes "Back to Top")<br>
+
+Floating point numbers allow storage and use of numbers that are not integers, such as the familiar 3.141592. Just as **int** is one **type** used for integer storage, **float** is one **type** of floating point storage. As usual, floats come in different sizes: **float**, **double**, **long double**.
+
+Be aware that floating point numbers are stored in binary format and there is no finite-length binary fraction that can exactly represent 0.1 - nor many other floating point number fractions expressed in decimal notation. Thus if you add 0.1 to itself often enough you will start to notice that the result is not exactly what you would expect if 0.1 were represented exactly. However, the result will be correct to a certain number of significant digits, within certain complicated mathematical limits we won't get into here.
+- With C/C++ integer numbers we always need to watch out for generating a number that is too big to fit in the size and type of integer we have.
+- With C/C++ floating point numbers there are maximum and minimums for what can be expressed, plus we always have to watch out for the accumulation of small errors.
+- Dividing by zero in C/C++ is always a bad idea.
+
+### TLDR There are many other operators 
+
+There are a few operators used when doing binary or boolean operations. We will talk about these later in the Arduino class when we briefly cover those topics, but here are some of the common ones: **<<**, **>>**, **&**, **|**, **^**, and **~** for bitwise left shift, bitwise right shift, bitwise AND, bitwise OR, bitwise XOR, and bitwise NOT (one's complement).
+
+There are some comparison operators **==**, **<**, **<=**, **>**, **>=**, and **!=**, for equal to, less than, less than or equal to, greater than, greater than or equal to, and not equal to.
+
+Logical operators return a 1 (often thought of as TRUE) or 0 (often thought of as FALSE). The comparison operators are logical operators. In addition there is **&&**, **||**, and **!** for logical AND, logical OR, and logical NOT.
+* Note that during calculations, anything that is not zero is treated as 1. For instance
+  * 1 && 1 is TRUE
+  * 1 && 2 is TRUE
+  * -1 && 999 is TRUE
+  * 0 || 2 is TRUE
+  * !(0 || 2) is FALSE

@@ -1,4 +1,4 @@
-/* 02_LetsGetTalking
+/* 98_TLDR_LetsGetTalking
  *
  * Mark Olson for his "C for Arduino Class" https://github.com/Mark-MDO47/CforArduinoClass
  * 
@@ -8,7 +8,7 @@
  *            http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf
  *            http://www.pighixxx.com/test/pinouts/boards/nano.pdf
  *
- * This is code for https://github.com/Mark-MDO47/CforArduinoClass/02_LetsGetTalking
+ * This is code for https://github.com/Mark-MDO47/CforArduinoClass/98_TLDR_LetsGetTalking
  * 
  */
 

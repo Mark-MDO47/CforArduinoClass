@@ -4,7 +4,7 @@ Enough C/C++ to start the Arduino Class
 For an Arduino class 2023; FabLab will be first<br>
 Author: Mark Olson<br>
 
-**Table of Contents**
+**Table Of Contents**
 * [Top](#c-for-arduino-class "Top")
 * [Learning C and Cplusplus](#learning-c-and-cplusplus "Learning C and Cplusplus")
   * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")

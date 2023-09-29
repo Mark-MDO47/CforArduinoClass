@@ -271,30 +271,70 @@ Terms like +, -, /, *, etc. are called **operators**.
 ### Run the loop code
 [Back to Top](#notes "Back to Top")<br>
 
-Here is the loop code:
+Here is the loop code (plus a little extra I put in front of it):
 ```C
+#define TRUE  1 // in a LOGICAL statement, anything non-zero is true
+#define FALSE 0 // in a LOGICAL statement, only zero is false
+
+int squared(int tmp) {
+  return(tmp*tmp);
+} // end squared()
+
 // the loop function runs over and over again forever
 void loop() {
   loop_count += 1;    // instead of loop_count = loop_count + 1
+  if (loop_count <= 5) { // first "n" times loop() is called
+    // Serial.print() does not go to a new line; Serial.println() does
+    Serial.print("loop_count: "); Serial.println(loop_count);
+  } // end if (loop_count...)
 
   if (1 == loop_count) { // first time loop() is called
-    Serial.print("1 && 1: "); Serial.println(1 && 1);
-    Serial.print("1 && 2: "); Serial.println(1 && 2);
-    Serial.print("-1 && 999: "); Serial.println(-1 && 999);
-    Serial.print("-1 && 0: "); Serial.println(-1 && 0);
-    Serial.print("0 || 2: "); Serial.println(0 || 2);
-    Serial.print("!(0 || 2): "); Serial.println(!(0 || 2));
+    Serial.print(" TRUE && 1: "); Serial.println(TRUE && 1);
+    Serial.print(" TRUE && 2: "); Serial.println(1 && 2);
+    Serial.print(" FALSE || TRUE: "); Serial.println(FALSE || TRUE);
+    Serial.print(" !(FALSE || TRUE): "); Serial.println(!(FALSE || TRUE));
     Serial.println("");
-  } // end if (loop_count == 1)
+  } // end if (1 == loop_count)
 
-  if (loop_count <= 10) { // first 10 times loop() is called
-    // Serial.print() does not go to a new line; Serial.println() does
-    Serial.print(" loop_count: "); Serial.println(loop_count);
-  } // end if (loop_count...)
+  if (2 == loop_count) {
+    int i = 0; int j = 0;
+    i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
+    Serial.print(" i = 17 * 17: "); Serial.println(i);
+    i = squared(17); // squared my be a function that returns the value of the parameter squared
+    Serial.print(" i = squared(17): "); Serial.println(i);
+    i = i+1; // if i is 289, this will store 289+1 = 290 into i
+    Serial.print(" i = i+1: "); Serial.println(i);
+    i += 1; // this is a shorthand way of doing the above
+    Serial.print(" i += 1: "); Serial.println(i);
+    Serial.print(" ++i BEFORE: "); Serial.print(i); Serial.print(" DURING: "); Serial.print(++i); Serial.print(" AFTER: "); Serial.println(i);
+    Serial.print(" i++ BEFORE: "); Serial.print(i); Serial.print(" DURING: "); Serial.print(i++); Serial.print(" AFTER: "); Serial.println(i);
+    i = i / 17; // this stores the truncated integer value into i - If i is 293 then 17 gets stored into i and the remainder of 4 is discarded
+    Serial.print(" i = i / 17: "); Serial.println(i);
+    j = (i /= 4) * 3; // this is complicated. Don't worry about this one too much; it is somewhat rare
+    Serial.print(" j = (i /= 4) * 3; i, j: "); Serial.print(i); Serial.print(", "); Serial.println(j);
+    i = 293 % 17; // the remainder or modulo - this time the remainder of 4 is stored in i and the 17 gets discarded
+    Serial.print(" i = 293 % 17: "); Serial.println(i);
+    Serial.println("");
+  } // end if (2 == loop_count)
+
+  if (11 == loop_count) {
+    int f, c; // fahrenheit and centigrade
+    Serial.println("\nFahrenheit and Centigrade computed with integers");
+    for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
+      c = ((f - 32) * 5) / 9;
+      Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
+    } // end Fahrenheit and Centigrade for loop
+  } // end if (11 == loop_count)
 
   delay(1000);                       // wait for a second
 } // end loop()
 ```
+
+#### PreProcess Directives and Logical 
+[Back to Top](#notes "Back to Top")<br>
+
+#### The Actual Loop Code
+[Back to Top](#notes "Back to Top")<br>
 
 The first **if** statement tests the expression inside **()** and executes the code block inside the **{}** if the expression is TRUE (1).
 - The first time the code enters loop(), loop_count is zero
@@ -318,7 +358,9 @@ Finally we reach the delay(1000); code statement. This waits for about 1000 mill
 Below shows the results on the Serial Monitor from running the entire Arduino program:<br>
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")
 
-### TLDR Float your Boat
+#### Extra Credit
+
+## TLDR Float your Boat
 [Back to Top](#notes "Back to Top")<br>
 
 Floating point numbers allow storage and use of numbers that are not integers, such as the familiar 3.141592. Just as **int** is one **type** used for integer storage, **float** is one **type** of floating point storage. As usual, floats come in different sizes: **float**, **double**, **long double**.
@@ -328,7 +370,7 @@ Be aware that floating point numbers are stored in binary format and there is no
 - With C/C++ floating point numbers there are maximum and minimums for what can be expressed, plus we always have to watch out for the accumulation of small errors.
 - Dividing by zero in C/C++ is always a bad idea.
 
-### TLDR There are many other operators 
+## TLDR There are many other operators 
 
 There are a few operators used when doing binary or boolean operations. We will talk about these later in the Arduino class when we briefly cover those topics, but here are some of the common ones: **<<**, **>>**, **&**, **|**, **^**, and **~** for bitwise left shift, bitwise right shift, bitwise AND, bitwise OR, bitwise XOR, and bitwise NOT (one's complement).
 

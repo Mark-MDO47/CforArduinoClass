@@ -1,8 +1,8 @@
 # NOTES
 
 ## Back to Root of Class
-Click this link to back to go back to the root of the **C for Arduino Class**
-- https://github.com/Mark-MDO47/CforArduinoClass/tree/master
+Click this link to back to go back to the root of the [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
+- https://github.com/Mark-MDO47/CforArduinoClass
 
 ## Introduction
 In this section we will use the USB-serial interface to enter strings to our program and print strings from our program.
@@ -96,7 +96,7 @@ This tells the compiler to find the standard C file string.h and compile as if i
 
 Note that the #include statement does NOT end with a semicolon (**;**). That is in general true of the other keywords starting with **#** that we will see later. That allows these **#** statements to operate on **;** as just another part of the string.
 
-**TLDR** it is also possible to do **#include <string.h>**. The difference as far as we are concerned is not a big one; it just narrows down the range of places that the C compiler would look for the file string.h. Anywhere in this class or in the Arduino Class, using the **"** form is always OK.
+**TLDR** it is also possible to do **#include <string.h>**. The difference as far as we are concerned is not a big one; it just narrows down the range of places that the C compiler would look for the file string.h. Anywhere in this class or in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class"), using the **"** form is always OK.
 
 All **code statements** that the compiler accepts DO end with a semicolon (**;**). There can be more than one code statement on a line. For example, we could write:<br>
 ```C
@@ -151,7 +151,7 @@ One of the oldest and still commonly used methods of specifying strings is in **
 - A non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound to come out of the system.
 - An extended code is the character "PI" represented by the number 227 (decimal). Extended codes are often as shown but some systems may not display them as expected.
 
-NOTE: There are other systems such as **UniCode** which will not be used in our Arduino Class.
+NOTE: There are other systems such as **UniCode** which will not be used in our [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
 The type of a variable that is an ASCII code is **char**. On the Arduino and on most systems **char** the same as a **uint8_t**.
 
@@ -386,7 +386,7 @@ Be aware that floating point numbers are stored in binary format and there is no
 
 ## TLDR There are many other operators 
 
-There are a few operators used when doing binary or boolean operations. We will talk about these later in the Arduino class when we briefly cover those topics, but here are some of the common ones: **<<**, **>>**, **&**, **|**, **^**, and **~** for bitwise left shift, bitwise right shift, bitwise AND, bitwise OR, bitwise XOR, and bitwise NOT (one's complement).
+There are a few operators used when doing binary or boolean operations. We will talk about these later in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class") when we briefly cover those topics, but here are some of the common ones: **<<**, **>>**, **&**, **|**, **^**, and **~** for bitwise left shift, bitwise right shift, bitwise AND, bitwise OR, bitwise XOR, and bitwise NOT (one's complement).
 
 There are some comparison operators **==**, **<**, **<=**, **>**, **>=**, and **!=**, for equal to, less than, less than or equal to, greater than, greater than or equal to, and not equal to.
 

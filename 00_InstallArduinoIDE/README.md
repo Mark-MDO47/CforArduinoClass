@@ -6,9 +6,11 @@ Click this link to back to go back to the root of the **C for Arduino Class**
 
 
 ## Table of Contents
-* [Top](#notes "Top")
-* [Arduino IDE](#arduino-ide "Arduino IDE")
-* [C and C++ Languages used in Arduino IDE](#c-and-cplusplus-languages-used-in-arduino-ide "C and C++ Languages used in Arduino IDE")
+**Table Of Contents**
+* [Top](#c-for-arduino-class "Top")
+* [Learning C and Cplusplus](#learning-c-and-cplusplus "Learning C and Cplusplus")
+  * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
+  * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
 ## Arduino IDE
 [Top](#notes "Top")<br>

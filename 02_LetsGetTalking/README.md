@@ -259,7 +259,7 @@ In C/C++, an expression is something that returns a value. This is not a complet
 * i = squared(17); // squared my be a function that returns the value of the parameter squared
 * i = i+1; // if i is 289, this will store 289+1 = 290 into i
 * i += 1; // this is a shorthand way of doing the above
-* i++; ++i; // more ways to add one to i
+* i++; ++i; // more ways to add one to i; these are subtly different from each other
 * i = i / 17; // this stores the truncated integer value into i - If i is 293 then 17 gets stored into i and the remainder of 4 is discarded
 * i = 293 % 17; // the remainder or modulo - this time the remainder of 4 is stored in i and the 17 gets discarded
 * j = (i /= 4) * 3; // this is complicated. Don't worry about this one too much; it is somewhat rare

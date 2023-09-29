@@ -1,7 +1,7 @@
 # C for Arduino Class
-Enough C/C++ to start the Arduino Class
+Enough C/C++ to start the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class")
 
-For an Arduino class 2023; FabLab will be first<br>
+For an [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") 2023; FabLab will be first<br>
 Author: Mark Olson<br>
 
 **Table Of Contents**
@@ -12,12 +12,12 @@ Author: Mark Olson<br>
 
 ## Learning C and Cplusplus
 [Top](#c-for-arduino-class "Top")<br>
-One thing I learned when teaching the first Arduino Class is that things will move much faster if everyone has some basic experience with a text-based programming language.
+One thing I learned when teaching the first [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") is that things will move much faster if everyone has some basic experience with a text-based programming language.
 
 The Arduino IDE uses C and C++ languages for general programming.
 - If you have experience in any text-based general programming language - Python, Java, or other programming languages - you will probably be able to catch on to the parts of C and C++ used in this class quickly.
 - If you have never programmed in a text-based general programming language before, I suggest you learn the basics of C before attending the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class"). You can easily pick up on the few parts of C++ used in this class if you have some knowledge of C (or even Python or Java or other languages). 
-- This **C for Arduino Class** is intended to provide enough experience with the C and C++ programming languages in the Arduino environment to bring a non-programmer to the stage that they can start the **Arduino Class** and then learn the enough to enjoy that class on the way.
+- This [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass/tree/master "C for Arduino Class") is intended to provide enough experience with the C and C++ programming languages in the Arduino environment to bring a non-programmer to the stage that they can start the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") and then learn the enough to enjoy that class on the way.
 - https://github.com/Mark-MDO47/ArduinoClass/blob/master/README.md
 
 One factor to consider: Arduino does not implement the standard "printing" etc. functions - not for C (printf and scanf) and not for C++ (IO Streams). Arduino uses relatively simple "Serial" methods such as Serial.begin, Serial.print and Serial.println for output; Serial.available, Serial.read and Serial.readln for input.

@@ -2,7 +2,7 @@
 
 ## Back to Root of Class
 Click this link to back to go back to the root of the [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
-- https://github.com/Mark-MDO47/CforArduinoClass
+- [https://github.com/Mark-MDO47/CforArduinoClass](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
 
 ## Introduction
 In this section we will use the USB-serial interface to enter strings to our program and print strings from our program.
@@ -12,7 +12,7 @@ We will do some printing from **setup()** and from **loop()** and do some if and
 - It is not the goal to show every way to do things or explore every odd case.
 
 For a more thorough exploration of the C/C++ language, I am sure you can find some excellent tutorials and classes on the web. Also, you can look at my list of a few resources I found on the web:
-- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/README.md#some-resources-on-the-web
+- [A Few C/C++ Resources on the Web](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/README.md#some-resources-on-the-web "Link to A Few C/C++ Resources on the Web")
 
 **Table Of Contents**
 * [Top](#notes "Top")

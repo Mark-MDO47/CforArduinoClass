@@ -5,12 +5,11 @@ Click this link to back to go back to the root of the **C for Arduino Class**
 - https://github.com/Mark-MDO47/CforArduinoClass
 
 
-## Table of Contents
 **Table Of Contents**
-* [Top](#c-for-arduino-class "Top")
-* [Learning C and Cplusplus](#learning-c-and-cplusplus "Learning C and Cplusplus")
-  * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
-  * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
+* [Top](#notes "Top")
+* [Back to Root of Class](#back-to-root-of-class "Back to Root of Class")
+* [Arduino IDE](#arduino-ide "Arduino IDE")
+* [C and Cplusplus Languages used in Arduino IDE](#c-and-cplusplus-languages-used-in-arduino-ide "C and Cplusplus Languages used in Arduino IDE")
 
 ## Arduino IDE
 [Top](#notes "Top")<br>

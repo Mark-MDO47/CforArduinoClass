@@ -2,7 +2,7 @@
 
 ## Back to Root of Class
 Click this link to back to go back to the root of the [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
-- https://github.com/Mark-MDO47/CforArduinoClass
+- [https://github.com/Mark-MDO47/CforArduinoClass](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
 
 In this section we will connect to the Arduino and run a standard sample program to make sure we are ready to do some C-language programming.
 

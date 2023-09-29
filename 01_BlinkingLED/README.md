@@ -6,12 +6,15 @@ Click this link to back to go back to the root of the **C for Arduino Class**
 
 In this section we will connect to the Arduino and run a standard sample program to make sure we are ready to do some C-language programming.
 
-**Table of Contents**
+**Table Of Contents**
 * [Top](#notes "Top")
+* [Back to Root of Class](#back-to-root-of-class "Back to Root of Class")
 * [Introducing the Arduino Nano](#introducing-the-arduino-nano "Introducing the Arduino Nano")
 * [Connect the Arduino Nano to the USB cable](#connect-the-arduino-nano-to-the-usb-cable "Connect the Arduino Nano to the USB cable")
+* [View an Empty Sketch (Arduino program)](#view-an-empty-sketch-(arduino-program) "View an Empty Sketch (Arduino program)")
 * [Run the example Blink program](#run-the-example-blink-program "Run the example Blink program")
 * [Now It Runs Whenever you Turn On Power](#now-it-runs-whenever-you-turn-on-power "Now It Runs Whenever you Turn On Power")
+  * [TLDR the Arduino delay function](#tldr-the-arduino-delay-function "TLDR the Arduino delay function")
 
 ## Introducing the Arduino Nano
 [Back to Top](#notes "Back to Top")<br>

@@ -359,6 +359,20 @@ Below shows the results on the Serial Monitor from running the entire Arduino pr
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")
 
 #### Extra Credit
+[Back to Top](#notes "Back to Top")<br>
+The **if** statements above work well for a while, but if you leave this running overnight you might see it typing about negative loop counts. This is because the integer loop_count will eventually overflow from the largest possible positive number to the most negative possible negative number and then count from there. For instance:
+- If we used int8_t loop_count, it would range from -128 through 127. After it reached 127 it would go to -128 then -127 etc.
+- If we used uint8_t loop_count, it would range from 0 through 255. After it reached 255 it would go to 0 then 1 etc.
+- This can happen for truly enormous counts too; see the [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem "link to article Year 2038 problem on Wikipedia").
+
+Questions:
+- How many bytes in **int**? What is the range for **int**? How long (approximately) will it take to overflow?
+- If we want the **if** statements in the code to execute exactly once, will the following methods work?
+  - change if statements that are of the form ** <= n ** to also require ** >= 0 **
+    - example: change **if (loop_count <= 5)** to **if ((loop_count <= 5) && (loop_count >= 0))**
+  - add something near the end of **loop()** that prevents loop_count from getting too big
+    - example: add line **if (loop_count >= 254) loop_count = 253;**
+  
 
 ## TLDR Float your Boat
 [Back to Top](#notes "Back to Top")<br>

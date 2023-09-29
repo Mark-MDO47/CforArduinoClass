@@ -6,12 +6,14 @@ Click this link to back to go back to the root of the **C for Arduino Class**
 
 In this section we will use the USB-serial interface to enter strings to our program and print strings from our program.
 
-**Table of Contents**
+**Table Of Contents**
 * [Top](#notes "Top")
+* [Back to Root of Class](#back-to-root-of-class "Back to Root of Class")
 * [The Arduino USB Serial Interface](#the-arduino-usb-serial-interface "The Arduino USB Serial Interface")
 * [The Code](#the-code "The Code")
   * [Comments and Code Statements](#comments-and-code-statements "Comments and Code Statements")
   * [Integers and other Strangers](#integers-and-other-strangers "Integers and other Strangers")
+  * [ASCII Characters and Strings](#ascii-characters-and-strings "ASCII Characters and Strings")
   * [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")
   * [Run the setup code](#run-the-setup-code "Run the setup code")
   * [Expressions - Express Yourself](#expressions-\--express-yourself "Expressions - Express Yourself")

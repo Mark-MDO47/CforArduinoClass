@@ -62,27 +62,60 @@ void setup() {
   Serial.print("sizeof(\"Hello World!\"): "); Serial.println(sizeof("Hello World!"));
 
   Serial.println("");
-  // while (1) { ; }
 } // end setup()
+
+#define TRUE  1 // in a LOGICAL statement, anything non-zero is true
+#define FALSE 0 // in a LOGICAL statement, only zero is false
+
+int squared(int tmp) {
+  return(tmp*tmp);
+} // end squared()
 
 // the loop function runs over and over again forever
 void loop() {
   loop_count += 1;    // instead of loop_count = loop_count + 1
-
-  if (loop_count == 1) { // first time loop() is called
-    Serial.print("1 && 1: "); Serial.println(1 && 1);
-    Serial.print("1 && 2: "); Serial.println(1 && 2);
-    Serial.print("-1 && 999: "); Serial.println(-1 && 999);
-    Serial.print("-1 && 0: "); Serial.println(-1 && 0);
-    Serial.print("0 || 2: "); Serial.println(0 || 2);
-    Serial.print("!(0 || 2): "); Serial.println(!(0 || 2));
-    Serial.println("");
-  } // end if (loop_count == 1)
-
-  if (loop_count <= 10) { // first 10 times loop() is called
+  if (loop_count <= 5) { // first "n" times loop() is called
     // Serial.print() does not go to a new line; Serial.println() does
-    Serial.print(" loop_count: "); Serial.println(loop_count);
+    Serial.print("loop_count: "); Serial.println(loop_count);
   } // end if (loop_count...)
+
+  if (1 == loop_count) { // first time loop() is called
+    Serial.print(" TRUE && 1: "); Serial.println(TRUE && 1);
+    Serial.print(" TRUE && 2: "); Serial.println(1 && 2);
+    Serial.print(" FALSE || TRUE: "); Serial.println(FALSE || TRUE);
+    Serial.print(" !(FALSE || TRUE): "); Serial.println(!(FALSE || TRUE));
+    Serial.println("");
+  } // end if (1 == loop_count)
+
+  if (2 == loop_count) {
+    int i = 0; int j = 0;
+    i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
+    Serial.print(" i = 17 * 17: "); Serial.println(i);
+    i = squared(17); // squared my be a function that returns the value of the parameter squared
+    Serial.print(" i = squared(17): "); Serial.println(i);
+    i = i+1; // if i is 289, this will store 289+1 = 290 into i
+    Serial.print(" i = i+1: "); Serial.println(i);
+    i += 1; // this is a shorthand way of doing the above
+    Serial.print(" i += 1: "); Serial.println(i);
+    Serial.print(" ++i BEFORE: "); Serial.print(i); Serial.print(" DURING: "); Serial.print(++i); Serial.print(" AFTER: "); Serial.println(i);
+    Serial.print(" i++ BEFORE: "); Serial.print(i); Serial.print(" DURING: "); Serial.print(i++); Serial.print(" AFTER: "); Serial.println(i);
+    i = i / 17; // this stores the truncated integer value into i - If i is 293 then 17 gets stored into i and the remainder of 4 is discarded
+    Serial.print(" i = i / 17: "); Serial.println(i);
+    j = (i /= 4) * 3; // this is complicated. Don't worry about this one too much; it is somewhat rare
+    Serial.print(" j = (i /= 4) * 3; i, j: "); Serial.print(i); Serial.print(", "); Serial.println(j);
+    i = 293 % 17; // the remainder or modulo - this time the remainder of 4 is stored in i and the 17 gets discarded
+    Serial.print(" i = 293 % 17: "); Serial.println(i);
+    Serial.println("");
+  } // end if (2 == loop_count)
+
+  if (11 == loop_count) {
+    int f, c; // fahrenheit and centigrade
+    Serial.println("\nFahrenheit and Centigrade computed with integers");
+    for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
+      c = ((f - 32) * 5) / 9;
+      Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
+    } // end Fahrenheit and Centigrade for loop
+  } // end if (11 == loop_count)
 
   delay(1000);                       // wait for a second
 } // end loop()

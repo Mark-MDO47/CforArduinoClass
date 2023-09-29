@@ -14,7 +14,7 @@ We will do some printing from **setup()** and from **loop()** and do some if and
 For a more thorough exploration of the C/C++ language, I am sure you can find some excellent tutorials and classes on the web. Also, you can look at my list of a few resources I found on the web:
 - https://github.com/Mark-MDO47/CforArduinoClass/blob/master/README.md#some-resources-on-the-web
 
-**Table of Contents**
+**Table Of Contents**
 * [Top](#notes "Top")
 * [Back to Root of Class](#back-to-root-of-class "Back to Root of Class")
 * [Introduction](#introduction "Introduction")
@@ -22,10 +22,12 @@ For a more thorough exploration of the C/C++ language, I am sure you can find so
 * [The Code](#the-code "The Code")
   * [Comments and Code Statements](#comments-and-code-statements "Comments and Code Statements")
   * [Integers and other Strangers](#integers-and-other-strangers "Integers and other Strangers")
-  * [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")
+  * [ASCII Characters and Strings](#ascii-characters-and-strings "ASCII Characters and Strings")
   * [Run the setup code](#run-the-setup-code "Run the setup code")
   * [Expressions - Express Yourself](#expressions-\--express-yourself "Expressions - Express Yourself")
   * [Run the loop code](#run-the-loop-code "Run the loop code")
+  * [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")
+  * [TLDR There are many other operators](#tldr-there-are-many-other-operators "TLDR There are many other operators")
 
 ## The Arduino USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>

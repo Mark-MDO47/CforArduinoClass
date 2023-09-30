@@ -337,7 +337,7 @@ If any non-zero value is used for a logic calculation such as **&&**, **||** or 
 - Some people don't like this style - they think everyone should memorize the precedence tables and that expressions should have as few parenthesis as possible.
 - Neither way is "right", it is a matter of style and preference.
 
-#### Expressions - Express Yourself
+#### The Loop Code - Arithmetic Expressions
 [Back to Top](#notes "Back to Top")<br>
 
 In C/C++, an expression is something that returns a value. This is not a complete list but here are some example expressions, using i and j as integer variables:

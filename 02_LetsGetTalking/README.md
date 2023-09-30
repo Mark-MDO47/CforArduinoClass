@@ -255,23 +255,6 @@ Here are a few other capabilities we use in the **setup()** code:
 Below shows the results on the Serial Monitor from running the **setup()** code:<br>
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
 
-#### Expressions - Express Yourself
-[Back to Top](#notes "Back to Top")<br>
-
-In C/C++, an expression is something that returns a value. This is not a complete list but here are some example expressions, using i and j as integer variables:
-* i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
-* i = squared(17); // squared my be a function that returns the value of the parameter squared
-* i = i+1; // if i is 289, this will store 289+1 = 290 into i
-* i += 1; // this is a shorthand way of doing the above
-* i++; ++i; // more ways to add one to i; these are subtly different from each other
-* i = i / 17; // this stores the truncated integer value into i - If i is 293 then 17 gets stored into i and the remainder of 4 is discarded
-* i = 293 % 17; // the remainder or modulo - this time the remainder of 4 is stored in i and the 17 gets discarded
-* j = (i /= 4) * 3; // this is complicated. Don't worry about this one too much; it is somewhat rare
-  * (i /= 4) means the left hand side divided by the right hand side, so 17/4 is 4.25 but truncated to 4 and stored into i
-  * then the 4 is multiplied by 3 to get 12 and stored into j
-
-Terms like +, -, /, *, etc. are called **operators**.
-
 ### The loop code
 [Back to Top](#notes "Back to Top")<br>
 
@@ -353,6 +336,23 @@ If any non-zero value is used for a logic calculation such as **&&**, **||** or 
 - That way I don't need to memorize the tables of the order of operations - know as **precedence**.
 - Some people don't like this style - they think everyone should memorize the precedence tables and that expressions should have as few parenthesis as possible.
 - Neither way is "right", it is a matter of style and preference.
+
+#### Expressions - Express Yourself
+[Back to Top](#notes "Back to Top")<br>
+
+In C/C++, an expression is something that returns a value. This is not a complete list but here are some example expressions, using i and j as integer variables:
+* i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
+* i = squared(17); // squared my be a function that returns the value of the parameter squared
+* i = i+1; // if i is 289, this will store 289+1 = 290 into i
+* i += 1; // this is a shorthand way of doing the above
+* i++; ++i; // more ways to add one to i; these are subtly different from each other
+* i = i / 17; // this stores the truncated integer value into i - If i is 293 then 17 gets stored into i and the remainder of 4 is discarded
+* i = 293 % 17; // the remainder or modulo - this time the remainder of 4 is stored in i and the 17 gets discarded
+* j = (i /= 4) * 3; // this is complicated. Don't worry about this one too much; it is somewhat rare
+  * (i /= 4) means the left hand side divided by the right hand side, so 17/4 is 4.25 but truncated to 4 and stored into i
+  * then the 4 is multiplied by 3 to get 12 and stored into j
+
+Terms like +, -, /, *, etc. are called **operators**.
 
 #### The Loop Code - if statement
 [Back to Top](#notes "Back to Top")<br>

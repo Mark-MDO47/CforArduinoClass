@@ -318,7 +318,7 @@ Note that the comments (// and after) are ignored as usual.
 
 **TLDR** - there is another common way to equate a string to a number - the **enum**. We won't go into this nor into the cases where you might prefer to use **enum** or prefer to use **#define**. For the purposes of the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class") we can always use **#define**.
 
-The reason we might want to define TRUE as 1 and FALSE as 0 is for logical comparisons, especially in **if** statements. The result of a logical calculation is always 0 or 1. For example:
+In C/C++, an expression is something that returns a value. The reason we might want to define TRUE as 1 and FALSE as 0 is for logical comparisons, especially in **if** statements. The result of a logical expression is always 0 or 1. For example:
 - Serial.print(1 < 2); will print 1
 - Serial.print(2 < 1); will print 0
 - Serial.print(2 == 1); will print 0
@@ -340,7 +340,7 @@ If any non-zero value is used for a logic calculation such as **&&**, **||** or 
 #### The Loop Code - Arithmetic Expressions
 [Back to Top](#notes "Back to Top")<br>
 
-In C/C++, an expression is something that returns a value. This is not a complete list but here are some example expressions, using i and j as integer variables:
+This is not a complete list but here are some example arithmetic expressions, using i and j as integer variables:
 * i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
 * i = squared(17); // squared my be a function that returns the value of the parameter squared
 * i = i+1; // if i is 289, this will store 289+1 = 290 into i

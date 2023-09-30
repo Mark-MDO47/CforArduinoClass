@@ -152,9 +152,9 @@ What if you want to print "Hello World!" to the terminal? Computers only underst
 One of the oldest and still commonly used methods of specifying strings is in **zero-terminated** **ASCII**.
 - ASCII stands for American Standard Code for Information Interchange.
 - https://www.asciitable.com/ shows a table with the ASCII code for each character. Note that there are **printable**, **non-printable**, and **extended** character codes in ASCII. Here are some examples:
-- A printable code is "A" represented by the number 65 (decimal).
-- A non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound to come out of the system.
-- An extended code is the character "PI" represented by the number 227 (decimal). Extended codes are often as shown but some systems may not display them as expected.
+- An example printable code is "A" represented by the number 65 (decimal).
+- An example non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound to come out of the system.
+- An example extended code is the character "PI" (from the Greek alphabet) represented by the number 227 (decimal). Extended codes are often displayed as shown in the ACII table, but some systems may not display them as expected.
 
 NOTE: There are other systems such as **UniCode** which will not be used in our [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
@@ -181,8 +181,8 @@ We could define this string as follows:<br>
 char  str_num[13] = { 72,  101,  108,  108,  111,  32,  87,  111,  114,  108,  100,  33,  0 };
 char *str_ptr = "Hello World!";
 ```
-The "char str_num[13] = { ... }" notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.
-The 'char *str_ptr = "Hello World!"' creates a zero-terminated **array** of type **char** somewhere and stores the address in str_ptr.
+The "char str_num[13] = { ... }" notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.<br>
+The 'char *str_ptr = "Hello World!"' creates a zero-terminated **array** of type **char** somewhere and stores the address in str_ptr.<br>
 Both str_num and str_ptr can **almost** always be used in code statements with exactly the same syntax.
 
 Below is how the array str_num is initialized:<br>

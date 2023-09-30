@@ -251,12 +251,12 @@ Here are a few other capabilities we use in the **setup()** code:
   - str_ptr is a pointer to an array of 13 bytes, but the pointer is two bytes so it returns 2
   - "Hello World!" (at least in this C compiler's mind) is an array of 13 bytes
 
-### Run the setup code
+### The setup code
 [Back to Top](#notes "Back to Top")<br>
 Below shows the results on the Serial Monitor from running the **setup()** code:<br>
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
 
-### Expressions - Express Yourself
+#### Expressions - Express Yourself
 [Back to Top](#notes "Back to Top")<br>
 
 In C/C++, an expression is something that returns a value. This is not a complete list but here are some example expressions, using i and j as integer variables:
@@ -273,7 +273,7 @@ In C/C++, an expression is something that returns a value. This is not a complet
 
 Terms like +, -, /, *, etc. are called **operators**.
 
-### Run the loop code
+### The loop code
 [Back to Top](#notes "Back to Top")<br>
 
 Here is the loop code (plus a little extra I put in front of it):
@@ -319,8 +319,10 @@ void loop() {
 } // end loop()
 ```
 
-#### PreProcess Directives and Logical 
+#### The Loop Code - PreProcess Directives and Logical 
 [Back to Top](#notes "Back to Top")<br>
+
+
 
 #### The Loop Code - if statement
 [Back to Top](#notes "Back to Top")<br>

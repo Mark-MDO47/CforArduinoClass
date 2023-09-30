@@ -28,7 +28,6 @@ For a more thorough exploration of the C/C++ language, I am sure you can find so
   * [The loop code](#the-loop-code "The loop code")
     * [The Loop Code - PreProcess Directives and Logical](#the-loop-code-\--preprocess-directives-and-logical "The Loop Code - PreProcess Directives and Logical")
     * [The Loop Code - if statement](#the-loop-code-\--if-statement "The Loop Code - if statement")
-    * [The Loop Code - for statement](#the-loop-code-\--for-statement "The Loop Code - for statement")
     * [The Loop Code - Run It](#the-loop-code-\--run-it "The Loop Code - Run It")
     * [Extra Credit](#extra-credit "Extra Credit")
 * [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")

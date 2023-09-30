@@ -333,7 +333,7 @@ void loop() {
 #### PreProcess Directives and Logical 
 [Back to Top](#notes "Back to Top")<br>
 
-#### The Actual Loop Code
+#### The Loop Code - if statement
 [Back to Top](#notes "Back to Top")<br>
 
 The first **if** statement tests the expression inside **()** and executes the code block inside the **{}** if the expression is TRUE (1).
@@ -354,6 +354,23 @@ The second **if** statement tests the expression (loop_count <= 10) and executes
 
 Finally we reach the delay(1000); code statement. This waits for about 1000 milliseconds each time loop() is called because it is not inside any control block such as **if** or **while**, etc.
 - delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
+
+#### The Loop Code - for statement
+[Back to Top](#notes "Back to Top")<br>
+Inside the last **if** statement there is a statement **int f, c; // fahrenheit and centigrade** followed by **for (f = 0; f < 130; f += 10)**. What do these do?
+
+First the **int** statement with a comma: this just means that both variables **f** and **c** are integers; the **int** applies to both of them. There can be tricky applications like what would happen if we said **int f, c = 5;**? Would both **f** and **c** be initialized to 5? This is an introductory class so I won't go into those type of detailed questions here. If you want to initialize both of them, you already know how to do that with two statements and no comma: **int f = 5; int c = 5;**.
+
+The **for** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons:
+- **f = 0** - this is the initialization section, where you can initialize any variable before the for loop starts
+  - If needed you can initialize more than one variable by separating with commas. Example: **f = 0, c = 1**
+- **f < 130** - this is the definition of the **condition** that must be true to execute anything in the for statement
+  - Pro Tip: it is checked BEFORE THE FIRST EXECUTION of the for loop. If it is false, the loop never executes.
+- **f += 10** - this is the action taken AFTER each loop and BEFORE checking the **condition**.
+  - Again, multiple actions could be taken. Example: **f += 10, Serial.println("Made f bigger")**
+
+#### The Loop Code - Run It
+[Back to Top](#notes "Back to Top")<br>
 
 Below shows the results on the Serial Monitor from running the entire Arduino program:<br>
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")

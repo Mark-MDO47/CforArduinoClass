@@ -278,13 +278,6 @@ Terms like +, -, /, *, etc. are called **operators**.
 
 Here is the loop code (plus a little extra I put in front of it):
 ```C
-#define TRUE  1 // in a LOGICAL statement, anything non-zero is true
-#define FALSE 0 // in a LOGICAL statement, only zero is false
-
-int squared(int tmp) {
-  return(tmp*tmp);
-} // end squared()
-
 // the loop function runs over and over again forever
 void loop() {
   loop_count += 1;    // instead of loop_count = loop_count + 1
@@ -321,15 +314,6 @@ void loop() {
     Serial.print(" i = 293 % 17: "); Serial.println(i);
     Serial.println("");
   } // end if (2 == loop_count)
-
-  if (11 == loop_count) {
-    int f, c; // fahrenheit and centigrade
-    Serial.println("\nFahrenheit and Centigrade computed with integers");
-    for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
-      c = ((f - 32) * 5) / 9;
-      Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
-    } // end Fahrenheit and Centigrade for loop
-  } // end if (11 == loop_count)
 
   delay(1000);                       // wait for a second
 } // end loop()

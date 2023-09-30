@@ -251,7 +251,7 @@ Here are a few other capabilities we use in the **setup()** code:
   - str_ptr is a pointer to an array of 13 bytes, but the pointer is two bytes so it returns 2
   - "Hello World!" (at least in this C compiler's mind) is an array of 13 bytes
 
-### The setup code
+### The setup code - Run it
 [Back to Top](#notes "Back to Top")<br>
 Below shows the results on the Serial Monitor from running the **setup()** code:<br>
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_setup_only.png "02 Lets get talking Serial Monitor from running setup code")
@@ -278,6 +278,13 @@ Terms like +, -, /, *, etc. are called **operators**.
 
 Here is the loop code (plus a little extra I put in front of it):
 ```C
+#define TRUE  1 // in a LOGICAL statement, anything non-zero is true
+#define FALSE 0 // in a LOGICAL statement, only zero is false
+
+int squared(int tmp) {
+  return(tmp*tmp);
+} // end squared()
+
 // the loop function runs over and over again forever
 void loop() {
   loop_count += 1;    // instead of loop_count = loop_count + 1
@@ -321,7 +328,13 @@ void loop() {
 
 #### The Loop Code - PreProcess Directives and Logical 
 [Back to Top](#notes "Back to Top")<br>
+In front of the loop code we see the two lines **#define TRUE  1** and **#define FALSE 0**. These are examples of **PreProcess Directives** of the type **macro definition**.
 
+There is a lot of capability in the **#define** statement but we will only touch on its mos common usage - to replace one string with another. **#define TRUE  1** means that where the compiler sees the string TRUE it should replace it with the string 1. If we wanted we could do **#define TRUE  EGG** but the compiler doesn't know a definition for EGG so it would give an error.
+
+**TLDR** - there is another common way to equate a string to a number - the **enum**. We won't go into this nor into the cases where you might prefer to use **enum** or prefer to use **#define**. For the purposes of the Arduino Class MDO we can always use **#define**.
+
+The reason we might want to define TRUE as 1 and FALSE as zero
 
 
 #### The Loop Code - if statement

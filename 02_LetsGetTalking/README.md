@@ -26,8 +26,13 @@ For a more thorough exploration of the C/C++ language, I am sure you can find so
   * [Run the setup code](#run-the-setup-code "Run the setup code")
   * [Expressions - Express Yourself](#expressions-\--express-yourself "Expressions - Express Yourself")
   * [Run the loop code](#run-the-loop-code "Run the loop code")
-  * [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")
-  * [TLDR There are many other operators](#tldr-there-are-many-other-operators "TLDR There are many other operators")
+    * [PreProcess Directives and Logical](#preprocess-directives-and-logical "PreProcess Directives and Logical")
+    * [The Loop Code - if statement](#the-loop-code-\--if-statement "The Loop Code - if statement")
+    * [The Loop Code - for statement](#the-loop-code-\--for-statement "The Loop Code - for statement")
+    * [The Loop Code - Run It](#the-loop-code-\--run-it "The Loop Code - Run It")
+    * [Extra Credit](#extra-credit "Extra Credit")
+* [TLDR Float your Boat](#tldr-float-your-boat "TLDR Float your Boat")
+* [TLDR There are many other operators](#tldr-there-are-many-other-operators "TLDR There are many other operators")
 
 ## The Arduino USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>

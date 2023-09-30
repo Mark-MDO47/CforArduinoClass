@@ -5,7 +5,7 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 - [https://github.com/Mark-MDO47/CforArduinoClass](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
 
 ## Introduction
-In this section we will use the USB-serial interface to enter strings to our program and print strings from our program.
+In this exercise we will use the USB-serial interface to print strings from our program. In the next exercise we will enter strings to our program use that to change the execution of the program.
 
 We will do some printing from **setup()** and from **loop()** and do some if and loop statements and some expressions.
 - The goal is to show a few examples of common ways to do things.

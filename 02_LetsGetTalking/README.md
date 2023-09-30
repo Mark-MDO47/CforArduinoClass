@@ -350,7 +350,7 @@ If any non-zero value is used for a logic calculation such as **&&**, **||** or 
 - Serial.print((-7) || (2 < 1)); will print 1
 
 **SemiPro Tip** - watch out for complicated expressions that do the operations in an order you didn't expect!
-- I tend to use too many parenthesis **()** in my expressions to force the compiler to do it the way I want.
+- I tend to use too many parenthesis **()** in my expressions in order to force the compiler to do it the way I want.
 - That way I don't need to memorize the tables of the order of operations - know as **precedence**.
 - Some people don't like this style - they think everyone should memorize the precedence tables and that expressions should have as few parenthesis as possible.
 - Neither way is "right", it is a matter of style and preference.
@@ -395,67 +395,6 @@ The result: we only print the lines from the code blocks inside each **if () {}*
 Finally we reach the delay(1000); code statement. This waits for about one second (1000 milliseconds) each time loop() is called because it is not inside any control block such as **if** or **while**, etc.
 
 **Pro Tip** - delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us here; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
-
-#### The Loop Code - for statement
-[Back to Top](#notes "Back to Top")<br>
-Inside the last **if** statement there is a statement **int f, c; // fahrenheit and centigrade** followed by **for (f = 0; f < 130; f += 10)**. What do these do?
-
-First the **int** statement with a comma: this just means that both variables **f** and **c** are integers; the **int** applies to both of them. There can be tricky applications like what would happen if we said **int f, c = 5;**? Would both **f** and **c** be initialized to 5? This is an introductory class so I won't go into those type of detailed questions here. If you want to initialize both of them, you already know how to do that with two statements and no comma: **int f = 5; int c = 5;**.
-
-The **for** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons:
-- **f = 0** - this is the initialization section, where you can initialize any variable before the for loop starts
-  - If needed you can initialize more than one variable by separating with commas. Example: **f = 0, c = 1**
-  - You can even define and initialize new variables in the initialization section that only affect the for loop. Example: **int new_variable = 7, f = 0, c = 1**
-- **f < 130** - this is the definition of the **condition** that must be true to execute anything in the for statement
-  - Pro Tip: it is checked BEFORE THE FIRST EXECUTION of the for loop. If it is false, the loop never executes.
-- **f += 10** - this is the action taken AFTER each loop and BEFORE checking the **condition**.
-  - Again, multiple actions could be taken. Example: **f += 10, Serial.println("Made f bigger")**
-
-This for loop is seen below:
-```C
-  int f, c; // fahrenheit and centigrade
-  Serial.println("\nFahrenheit and Centigrade computed with integers");
-  for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
-    c = ((f - 32) * 5) / 9;
-    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
-  } // end Fahrenheit and Centigrade for loop
-```
-
-The for loop behaves **somewhat** like the following:
-```C
-  int f, c; // fahrenheit and centigrade
-  Serial.println("\nFahrenheit and Centigrade computed with integers");
-  //
-  // for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
-  //
-  // initialization section
-  f = 0;
-  // condition
-  if (f < 130) {
-    // loop
-    c = ((f - 32) * 5) / 9;
-    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
-  }
-  // action after LOOP
-  f += 10;
-  // condition
-  if (f < 130) {
-    // loop
-    c = ((f - 32) * 5) / 9;
-    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
-  }
-  // action after LOOP
-  f += 10;
-  // condition
-  if (f < 130) {
-    // loop
-    c = ((f - 32) * 5) / 9;
-    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
-  }
-  // etc. - this doesn't take care of the case where (f < 130) is false, but you see the gist of it
-```
-
-As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
 #### The Loop Code - Run It
 [Back to Top](#notes "Back to Top")<br>

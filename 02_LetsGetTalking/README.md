@@ -101,7 +101,7 @@ This tells the compiler to find the standard C file string.h and compile as if i
 
 Note that the #include statement does NOT end with a semicolon (**;**). That is in general true of the other keywords starting with **#** that we will see later. That allows these **#** statements to operate on **;** as just another part of the string.
 
-**TLDR** it is also possible to do **#include <string.h>**. The difference as far as we are concerned is not a big one; it just narrows down the range of places that the C compiler would look for the file string.h. Anywhere in this class or in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class"), using the **"** form is always OK.
+**TLDR** it is also possible to do **#include <string.h>**. The difference as far as we are concerned is not a big one; it just narrows down the range of places that the C compiler would look for the file string.h. Anywhere in this class or in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class"), using the **#include "string.h"** form is always OK.
 
 All **code statements** that the compiler accepts DO end with a semicolon (**;**). There can be more than one code statement on a line. For example, we could write:<br>
 ```C
@@ -328,30 +328,43 @@ void loop() {
 
 #### The Loop Code - PreProcess Directives and Logical 
 [Back to Top](#notes "Back to Top")<br>
-In front of the loop code we see the two lines **#define TRUE  1** and **#define FALSE 0**. These are examples of **PreProcess Directives** of the type **macro definition**.
+In front of the loop code we see the two lines **#define TRUE  1** and **#define FALSE 0**. These are examples of **PreProcess Directives** of the type **macro definition**. We already saw a different type of **PreProcess Directive** with the **#include** statement.
 
-There is a lot of capability in the **#define** statement but we will only touch on its mos common usage - to replace one string with another. **#define TRUE  1** means that where the compiler sees the string TRUE it should replace it with the string 1. If we wanted we could do **#define TRUE  EGG** but the compiler doesn't know a definition for EGG so it would give an error.
+There is a lot of capability in the **#define** statement but we will only touch on its most common usage - to replace one string with another. **#define TRUE  1** means that where the compiler sees the string TRUE it should replace it with the string 1 before compiling.<br>
+If we wanted we could do **#define TRUE  EGG** but the compiler doesn't know a definition for EGG so it would give an error.<br>
+Note that the comments (// and after) are ignored as usual.
 
 **TLDR** - there is another common way to equate a string to a number - the **enum**. We won't go into this nor into the cases where you might prefer to use **enum** or prefer to use **#define**. For the purposes of the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class") we can always use **#define**.
 
-The reason we might want to define TRUE as 1 and FALSE as zero is for logical comparisons, especially in **if** statements. The result of a logical calculation is always 0 or 1. For example:
+The reason we might want to define TRUE as 1 and FALSE as 0 is for logical comparisons, especially in **if** statements. The result of a logical calculation is always 0 or 1. For example:
 - Serial.print(1 < 2); will print 1
 - Serial.print(2 < 1); will print 0
 - Serial.print(2 == 1); will print 0
   - **Pro Tip** - a common mistake is to use one equal sign **=** where you want two **==**, or vice versa.
 - Serial.print((TRUE) && (2 < 1)); will print 0
 - Serial.print((TRUE) || (2 < 1)); will print 1
+- Serial.print( !((TRUE) || (2 < 1)) ); will print 0 - **!** is the logical **NOT** operator, true if the expression is not true.
 
 If any non-zero value is used for a logic calculation such as **&&**, **||** or **!**, it will be treated as 1. For example:
 - Serial.print((7) || (2 < 1)); will print 1
 - Serial.print((-7) || (2 < 1)); will print 1
 
+**SemiPro Tip** - watch out for complicated expressions that do the operations in an order you didn't expect!
+- I tend to use too many parenthesis **()** in my expressions to force the compiler to do it the way I want.
+- That way I don't need to memorize the tables of the order of operations - know as **precedence**.
+- Some people don't like this style - they think everyone should memorize the precedence tables and that expressions should have as few parenthesis as possible.
+- Neither way is "right", it is a matter of style and preference.
+
 #### The Loop Code - if statement
 [Back to Top](#notes "Back to Top")<br>
 
-The first **if** statement tests the expression inside **()** and executes the code block inside the **{}** if the expression is TRUE (1).
-- The first time the code enters loop(), loop_count is zero
-  - loop_count += 1; sets loop_count to 1
+An **if** statement consists of a logical test and a block of code to execute if it is true.
+- A block of code can be a single statement or a set of code statements inside curly braces **{}**.
+There can be optional subsequent statements that rely on the **if** statement such as **else if** or **else**
+
+The first time the code enters loop(), loop_count is zero
+- loop_count += 1; sets loop_count to 1
+- The first **if** statement tests the expression (loop_count <= 5) and executes the code block inside the **{}** if the expression is TRUE (1).
   - if (1 == loop_count) is TRUE the first time so we execute the code block inside the **{}**
 - The second time the code enters loop(), loop_count is one
   - loop_count += 1; sets loop_count to 2
@@ -361,8 +374,8 @@ The first **if** statement tests the expression inside **()** and executes the c
     - actually it is FALSE for a long time but eventually loop_count will overflow
 - The result: we only print the lines from the code block inside the **{}** one time on the first time in loop()
 
-The second **if** statement tests the expression (loop_count <= 10) and executes the code block inside the **{}** if the expression is TRUE (1).
-- This is TRUE the first 10 times loop() is called
+The second **if** statement tests the expression (loop_count <= 5) and executes the code block inside the **{}** if the expression is TRUE (1).
+- This is TRUE the first 5 times loop() is called
 - After that it is FALSE until loop_count overflows (a long time)
 
 Finally we reach the delay(1000); code statement. This waits for about 1000 milliseconds each time loop() is called because it is not inside any control block such as **if** or **while**, etc.

@@ -364,14 +364,60 @@ First the **int** statement with a comma: this just means that both variables **
 The **for** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons:
 - **f = 0** - this is the initialization section, where you can initialize any variable before the for loop starts
   - If needed you can initialize more than one variable by separating with commas. Example: **f = 0, c = 1**
+  - You can even define and initialize new variables in the initialization section that only affect the for loop. Example: **int new_variable = 7, f = 0, c = 1**
 - **f < 130** - this is the definition of the **condition** that must be true to execute anything in the for statement
   - Pro Tip: it is checked BEFORE THE FIRST EXECUTION of the for loop. If it is false, the loop never executes.
 - **f += 10** - this is the action taken AFTER each loop and BEFORE checking the **condition**.
   - Again, multiple actions could be taken. Example: **f += 10, Serial.println("Made f bigger")**
 
+This for loop is seen below:
+```C
+  int f, c; // fahrenheit and centigrade
+  Serial.println("\nFahrenheit and Centigrade computed with integers");
+  for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
+    c = ((f - 32) * 5) / 9;
+    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
+  } // end Fahrenheit and Centigrade for loop
+```
+
+The for loop behaves **somewhat** like the following:
+```C
+  int f, c; // fahrenheit and centigrade
+  Serial.println("\nFahrenheit and Centigrade computed with integers");
+  //
+  // for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
+  //
+  // initialization section
+  f = 0;
+  // condition
+  if (f < 130) {
+    // loop
+    c = ((f - 32) * 5) / 9;
+    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
+  }
+  // action after LOOP
+  f += 10;
+  // condition
+  if (f < 130) {
+    // loop
+    c = ((f - 32) * 5) / 9;
+    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
+  }
+  // action after LOOP
+  f += 10;
+  // condition
+  if (f < 130) {
+    // loop
+    c = ((f - 32) * 5) / 9;
+    Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
+  }
+  // etc. - this doesn't take care of the case where (f < 130) is false, but you see the gist of it
+```
+
+As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
+
 #### The Loop Code - Run It
 [Back to Top](#notes "Back to Top")<br>
-
 Below shows the results on the Serial Monitor from running the entire Arduino program:<br>
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png "02 Lets get talking Serial Monitor from running entire Arduino program")
 

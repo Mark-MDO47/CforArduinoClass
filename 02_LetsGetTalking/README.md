@@ -154,7 +154,7 @@ One of the oldest and still commonly used methods of specifying strings is in **
 - https://www.asciitable.com/ shows a table with the ASCII code for each character. Note that there are **printable**, **non-printable**, and **extended** character codes in ASCII. Here are some examples:
 - An example printable code is "A" represented by the number 65 (decimal).
 - An example non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound to come out of the system.
-- An example extended code is the character "PI" (from the Greek alphabet) represented by the number 227 (decimal). Extended codes are often displayed as shown in the ACII table, but some systems may not display them as expected.
+- An example extended code is the character "PI" (from the Greek alphabet) represented by the number 227 (decimal). Extended codes are often displayed as shown in the ASCII table, but some systems may not display them as expected.
 
 NOTE: There are other systems such as **UniCode** which will not be used in our [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 

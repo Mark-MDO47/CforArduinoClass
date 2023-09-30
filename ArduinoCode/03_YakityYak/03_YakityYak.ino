@@ -18,9 +18,38 @@
 #define TRUE  1 // in a LOGICAL statement, anything non-zero is true
 #define FALSE 0 // in a LOGICAL statement, only zero is false
 
+void get_temp_values(int * first, int * increment, int * beyond_maximum) {
+  int tmp_first, tmp_inc, tmp_max;
+
+  // if there's any serial available, read it:
+  while (Serial.available() > 0) {
+    // look for the next valid integer in the incoming serial stream:
+    tmp_first = Serial.parseInt();
+    // do it again:
+    tmp_inc = Serial.parseInt();
+    // do it again:
+    tmp_max = Serial.parseInt();
+
+    // look for the newline. That's the end of the "sentence":
+    while (!(Serial.read() == '\n')) ; // wait for the end of line
+
+    // constrain values to something reasonable
+    /* I will let you experiment with the for loop
+    if (tmp_max <= tmp_first) {
+      tmp_max = tmp_first+1;
+    } // end if
+    */
+    if (tmp_max > (tmp_first + (20*tmp_inc))) {
+      tmp_max = tmp_first + (20*tmp_inc);
+    } // end if
+    *first = tmp_first;
+    *increment = tmp_inc;
+    *beyond_maximum = tmp_max;
+  } // end while (Serial.available() > 0)
+} // end get_temp_values()
+
 // the setup function runs once when you press reset or power the board
 void setup() {
-  int f, c; // fahrenheit and centigrade
 
   // this serial communication is for general debug; set the USB serial port to 115,200 baud
   Serial.begin(115200);
@@ -33,12 +62,14 @@ void setup() {
   Serial.println("CforArduinoClass init...");
 
   // we are showing that we don't actually need a loop()
+  int f, c; // fahrenheit and centigrade
+  int first, increment, beyond_maximum; // loop parameters
   while (TRUE) { // loop forever
     Serial.println("");
-    Serial.println("Enter start degF, end degF, and stride degF");
-    Serial.readln
+    Serial.println("Enter start degF, end degF, and stride degF\n");
+    get_temp_values(&first, &increment, &beyond_maximum);
     Serial.println("\nFahrenheit and Centigrade computed with integers");
-    for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
+    for (f = first; f < beyond_maximum; f += increment) { // last loop will be 120 since 130 is not < 130
       c = ((f - 32) * 5) / 9;
       Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
     } // end Fahrenheit and Centigrade for loop

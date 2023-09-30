@@ -5,9 +5,12 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 - [https://github.com/Mark-MDO47/CforArduinoClass](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
 
 ## Introduction
+[Back to Top](#notes "Back to Top")<br>
 
 **Table Of Contents**
 
+### The loop code
+[Back to Top](#notes "Back to Top")<br>
 
 #### The Loop Code - for statement
 [Back to Top](#notes "Back to Top")<br>

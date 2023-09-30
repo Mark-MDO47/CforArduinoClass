@@ -108,14 +108,5 @@ void loop() {
     Serial.println("");
   } // end if (2 == loop_count)
 
-  if (11 == loop_count) {
-    int f, c; // fahrenheit and centigrade
-    Serial.println("\nFahrenheit and Centigrade computed with integers");
-    for (f = 0; f < 130; f += 10) { // last loop will be 120 since 130 is not < 130
-      c = ((f - 32) * 5) / 9;
-      Serial.print(" degF, degC: "); Serial.print(f); Serial.print(", "); Serial.println(c);
-    } // end Fahrenheit and Centigrade for loop
-  } // end if (11 == loop_count)
-
   delay(1000);                       // wait for a second
 } // end loop()

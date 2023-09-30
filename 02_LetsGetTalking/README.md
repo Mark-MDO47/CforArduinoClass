@@ -364,22 +364,37 @@ There can be optional subsequent statements that rely on the **if** statement su
 
 The first time the code enters loop(), loop_count is zero
 - loop_count += 1; sets loop_count to 1
-- The first **if** statement tests the expression (loop_count <= 5) and executes the code block inside the **{}** if the expression is TRUE (1).
-  - if (1 == loop_count) is TRUE the first time so we execute the code block inside the **{}**
-- The second time the code enters loop(), loop_count is one
-  - loop_count += 1; sets loop_count to 2
-  - if (1 == loop_count) is FALSE the second and subsequent times so we skip the code block inside the **{}**
-- the third and subsequent times the code enters the loop
-  - if (1 == loop_count) is FALSE the second and subsequent times so we skip the code block inside the **{}**
-    - actually it is FALSE for a long time but eventually loop_count will overflow
-- The result: we only print the lines from the code block inside the **{}** one time on the first time in loop()
+- if (loop_count <= 5) is TRUE the first time so we print the loop count
+- if (1 == loop_count) is TRUE the first time so we execute the code block inside its **{}**
+  - We print some logical expressions and their result
+- if (2 == loop_count) is FALSE the first time so we skip the code block inside its **{}**
 
-The second **if** statement tests the expression (loop_count <= 5) and executes the code block inside the **{}** if the expression is TRUE (1).
-- This is TRUE the first 5 times loop() is called
-- After that it is FALSE until loop_count overflows (a long time)
+The second time the code enters loop(), loop_count is one
+- loop_count += 1; sets loop_count to 2
+- if (loop_count <= 5) is TRUE the second time so we print the loop count
+- if (1 == loop_count) is FALSE the second and subsequent times so we skip the code block inside the **{}**
+  - actually it is FALSE for a long time but eventually loop_count will overflow
+- if (2 == loop_count) is FALSE the second time so we execute the code block inside its **{}**
+  - We print some integer arithmetic expressions and their result
 
-Finally we reach the delay(1000); code statement. This waits for about 1000 milliseconds each time loop() is called because it is not inside any control block such as **if** or **while**, etc.
-- delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
+The third time the code enters the loop
+- loop_count += 1; sets loop_count to 3
+- if (loop_count <= 5) is TRUE the second time so we print the loop count
+- if (1 == loop_count) is FALSE again the third and subsequent times so we skip the code block inside the **{}**
+  - actually it is FALSE for a long time but eventually loop_count will overflow
+- if (2 == loop_count) is FALSE the third time so we skip the code block inside its **{}**
+  - actually it is FALSE for a long time but eventually loop_count will overflow
+
+The fourth and fifth time the code enters the loop, loop_count goes to 4 and 5 respectively and the loop_count is printed.
+
+After the fifth time the code enters the loop, **if (loop_count <= 5)** will be FALSE and the other **if** statements will also be false.
+- actually they are FALSE for a long time but eventually loop_count will overflow
+
+The result: we only print the lines from the code blocks inside each **if () {}** one time until the loop_count overflows
+
+Finally we reach the delay(1000); code statement. This waits for about one second (1000 milliseconds) each time loop() is called because it is not inside any control block such as **if** or **while**, etc.
+
+**Pro Tip** - delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us here; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
 
 #### The Loop Code - for statement
 [Back to Top](#notes "Back to Top")<br>
@@ -453,14 +468,14 @@ The **if** statements above work well for a while, but if you leave this running
 - If we used int8_t loop_count, it would range from -128 through 127. After it reached 127 it would go to -128 then -127 etc.
 - If we used uint8_t loop_count, it would range from 0 through 255. After it reached 255 it would go to 0 then 1 etc.
 - This can happen for truly enormous counts too; see the [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem "link to article Year 2038 problem on Wikipedia").
+- How many bytes are there in loop_count, which is declared as an **int**? What is the range for **int**? How long (approximately) will it take to overflow?
 
-Questions:
-- How many bytes in **int**? What is the range for **int**? How long (approximately) will it take to overflow?
-- If we want the **if** statements in the code to execute exactly once, will the following methods work?
-  - change if statements that are of the form ** <= n ** to also require ** >= 0 **
-    - example: change **if (loop_count <= 5)** to **if ((loop_count <= 5) && (loop_count >= 0))**
-  - add something near the end of **loop()** that prevents loop_count from getting too big
-    - example: add line **if (loop_count >= 254) loop_count = 253;**
+If we want the **if** statements in the code to execute exactly once, will the following methods work?
+- Change if statements that are of the form ** <= n ** to also require ** >= 0 **
+  - example: change **if (loop_count <= 5)** to **if ((loop_count <= 5) && (loop_count >= 0))**
+- Put the if statements and blocks for **if (1 == loop_count) {}** and **if (2 == loop_count) {}** inside the if statement block for **if (loop_count <= 5) {}** and then add these statements after that block: **else { while (TRUE) delay(1000); }**
+- Add something near the end of **loop()** that prevents loop_count from getting too big
+  - example: add line **if (loop_count >= 123) loop_count = 122;**
   
 
 ## TLDR Float your Boat

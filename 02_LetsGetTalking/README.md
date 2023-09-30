@@ -332,10 +332,19 @@ In front of the loop code we see the two lines **#define TRUE  1** and **#define
 
 There is a lot of capability in the **#define** statement but we will only touch on its mos common usage - to replace one string with another. **#define TRUE  1** means that where the compiler sees the string TRUE it should replace it with the string 1. If we wanted we could do **#define TRUE  EGG** but the compiler doesn't know a definition for EGG so it would give an error.
 
-**TLDR** - there is another common way to equate a string to a number - the **enum**. We won't go into this nor into the cases where you might prefer to use **enum** or prefer to use **#define**. For the purposes of the Arduino Class MDO we can always use **#define**.
+**TLDR** - there is another common way to equate a string to a number - the **enum**. We won't go into this nor into the cases where you might prefer to use **enum** or prefer to use **#define**. For the purposes of the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class") we can always use **#define**.
 
-The reason we might want to define TRUE as 1 and FALSE as zero
+The reason we might want to define TRUE as 1 and FALSE as zero is for logical comparisons, especially in **if** statements. The result of a logical calculation is always 0 or 1. For example:
+- Serial.print(1 < 2); will print 1
+- Serial.print(2 < 1); will print 0
+- Serial.print(2 == 1); will print 0
+  - **Pro Tip** - a common mistake is to use one equal sign **=** where you want two **==**, or vice versa.
+- Serial.print((TRUE) && (2 < 1)); will print 0
+- Serial.print((TRUE) || (2 < 1)); will print 1
 
+If any non-zero value is used for a logic calculation such as **&&**, **||** or **!**, it will be treated as 1. For example:
+- Serial.print((7) || (2 < 1)); will print 1
+- Serial.print((-7) || (2 < 1)); will print 1
 
 #### The Loop Code - if statement
 [Back to Top](#notes "Back to Top")<br>

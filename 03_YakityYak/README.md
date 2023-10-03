@@ -14,9 +14,9 @@ Some of the code might get a little complicated. Don't worry, this is a first in
 * [Top](#notes "Top")
 * [Back to Root of Class](#back-to-root-of-class "Back to Root of Class")
 * [Introduction](#introduction "Introduction")
-  * [The setup code](#the-setup-code "The setup code")
-    * [The setup Code - before the setup Code](#the-setup-code-\--before-the-setup-code "The setup Code - before the setup Code")
-    * [The setup Code - for loop](#the-setup-code-\--for-loop "The setup Code - for loop")
+* [The setup code](#the-setup-code "The setup code")
+  * [The setup Code - before the setup Code](#the-setup-code-\--before-the-setup-code "The setup Code - before the setup Code")
+  * [The setup Code - for loop](#the-setup-code-\--for-loop "The setup Code - for loop")
 
 ## The setup code
 [Back to Top](#notes "Back to Top")<br>

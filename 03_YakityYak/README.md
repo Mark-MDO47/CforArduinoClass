@@ -89,7 +89,44 @@ Then we see **DEBUG_PRINT(F("\nNUMOF_DAD_JOKES ")); DEBUG_PRINTLN(NUMOF_DAD_JOKE
 - I left these DEBUG_ macros in the code since they can be pretty handy for debugging. When it seems to work you can turn them off. If later you experience another bug, you can turn them back on.
 - **Pro Tip** - there are some predefined things \_\_file\_\_, \_\_func\_\_, \_\_line\_\_, and others that can be helpful to print in debug statements. Try setting **#define DO_DEBUG 1** and **#define DO_DEBUG_INPUT 1** and see what sorts of printouts there are.
 
-### The setup Code - for loop inside the parenthesis
+### The setup Code - while TRUE - forever loop
+[Back to Top](#notes "Back to Top")<br>
+```C
+  char * input_string; // this variable will store a pointer to a zero-terminated ASCII string
+
+  while (TRUE) { // loop forever
+    Serial.println(F(""));
+
+    Serial.println(F("Enter T (Temp), J (Joke), C (ChooseJoke), or A (AllJoke)"));
+    input_string = get_one_string(); 
+    Serial.print(F("You entered ")); Serial.println(input_string); Serial.println(F(""));
+    // make sure first letter of string is capitalized
+    if (('a' <= input_string[0]) && ('z' >= input_string[0])) input_string[0] -= 'a' - 'A';
+    if ('T' == input_string[0]) {
+    } else if ('J' == input_string[0]) {
+    } else if ('C' == input_string[0]) {
+    } else if ('A' == input_string[0]) {
+    } else {
+      Serial.print(F("ERROR - ")); Serial.print(input_string); Serial.println(F(" is not a valid choice"));
+    } // end if which command
+```
+
+We saw the concept of pointers to zero-terminated ASCII strings in the last exercise. This time we will fill in the pointer from a function call to **get_one_string()**.
+- Once again we use routines from https://www.arduino.cc/reference/en/language/functions/communication/serial/
+- get_one_string() is a surprisingly complicated routine to get a zero-terminated ASCII string from the USB serial port.
+  - I thought I was avoiding the complexity of using something like Serial.readStringUntil() and having to explain the difference between a **String** and a **char \***, but maybe I should have gone the other way - or maybe I should re-write get_one_string().
+- It only calls two routines to check and get characters: Serial.available() and Serial.read().
+  - Serial.available() returns TRUE if there is a character that can be read
+  - Serial.read() reads one character
+
+Once we have the address of the string in input_string, we check the first letter of the string to see if it is lower-case between 'a' and 'z'.
+- If so we convert to upper-case by subtracting the difference betwee ASCII 'a' and ASCII 'A'.
+- Look again at https://www.asciitable.com/ if you want to see how this works.
+
+Then we execute different code blocks depending on what the first letter is.
+- Note the **if () {} else if () {} else {}** structure. If the first letter is not T, J, C or A we will complain and try again.
+
+### The setup Code - Temp - for loop inside the parenthesis
 [Back to Top](#notes "Back to Top")<br>
 ```C
   int f, c; // fahrenheit and centigrade
@@ -160,4 +197,4 @@ The for loop behaves **somewhat** like the following:
 
 As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
-### The setup Code - for loop inside the curly braces
+### The setup Code - Temp - for loop inside the curly braces

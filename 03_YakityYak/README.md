@@ -50,9 +50,41 @@ We have a few routines definitions before the setup Code. Here is a little map:
 | get_one_string() | Routine to get one string (no leading or trailing ' ' or '\t') then flush to '\n'<br>'\t' is the **TAB** character<br>IF you enter "Fred Joe Mary" it will just return "Fred". |
 | setup() | Initializes everything then does a forever loop with **while (TRUE) {}**.<br>Inside the while loop it asks "Enter T (Temp), J (Joke), C (ChooseJoke), or A (AllJoke)"<br>T (or t) asks for three integer parameters for a **for loop** converting degrees Fahrenheit to degrees Centigrade.<br>J gives you the next Dad Joke in its list.<br>C asks for three integer numbers to have the corresponding Dad Jokes printed.<br>A gives you all the Dad Jokes. |
 
-### The setup Code - for loop
+### The setup Code - initialization
 [Back to Top](#notes "Back to Top")<br>
-There is a statement **int f, c; // fahrenheit and centigrade** followed by **for (f = first; f < beyond_maximum; f += increment)**. What do these do?
+```C
+void setup() {
+  // this serial communication is for general debug; set the USB serial port to 115,200 baud
+  Serial.begin(115200);
+  while (!Serial) {
+    ; // note that ";" is a null code statement. Wait for serial port to connect.
+  }
+  while (Serial.available()) Serial.read(); // clear any startup junk from the serial queue
+
+  Serial.println(""); // print a blank line in case there is some junk from power-on
+  Serial.println(F("CforArduinoClass init..."));
+
+  DEBUG_PRINT(F("\nNUMOF_DAD_JOKES ")); DEBUG_PRINTLN(NUMOF_DAD_JOKES); DEBUG_PRINTLN(F(""));
+```
+
+The serial initialization code looks pretty familiar with a **while (!Serial) { ; }** loop on three lines.
+
+Next there is a **while (Serial.available()) Serial.read();**. Where are the curly braces? The answer is that in any block statement such as **if () {}** or **while () {}**, if there is only one code statement to be executed in the block you don't need the curly braces. If there is more than one code statement, you need the curly braces to show what is inside the block.
+
+We start to do the normal prints and then we get **Serial.println(F("CforArduinoClass init..."));**. What is the **F()** doing there?
+
+### The setup Code - for loop inside the parenthesis
+[Back to Top](#notes "Back to Top")<br>
+```C
+  int f, c; // fahrenheit and centigrade
+          < ... >
+      for (f = first; f < beyond_maximum; f += increment) {
+        c = ((f - 32) * 5) / 9;
+        Serial.print(F(" degF, degC: ")); Serial.print(f); Serial.print(", "); Serial.println(c);
+      } // end Fahrenheit and Centigrade for loop
+```
+
+Early in setup there is a statement **int f, c; // fahrenheit and centigrade** followed about 20 lines later by **for (f = first; f < beyond_maximum; f += increment)**. What do these do?
 
 First the **int** statement with a comma: this just means that both variables **f** and **c** are integers; the **int** applies to both of them. There can be tricky applications like what would happen if we said **int f, c = 5;**? Would both **f** and **c** be initialized to 5? This is an introductory class so I won't go into those type of detailed questions here. If you want to initialize both of them, you already know how to do that with two statements and no comma:<br>
 ```C
@@ -60,7 +92,7 @@ First the **int** statement with a comma: this just means that both variables **
 ```
 
 The **for** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons. In our case, the three sections are as follows:
-- **f = first** - this is the initialization section, where you can initialize any variable before the for loop starts
+- **f = first** - this is the initialization section, where you can initialize any variable before the "for loop" starts
   - If needed you can initialize more than one variable by separating with commas. Example: **f = first, c = 1**
   - You can even define and initialize new variables in the initialization section that only affect the for loop. Example: **int new_variable = 7, f = first, c = 1**
 - **f < beyond_maximum** - this is the definition of the **condition** that must be true to execute anything in the for statement
@@ -112,3 +144,4 @@ The for loop behaves **somewhat** like the following:
 
 As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
+### The setup Code - for loop inside the curly braces

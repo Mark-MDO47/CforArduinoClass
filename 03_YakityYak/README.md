@@ -11,8 +11,14 @@ In this section we will investigate reading input from the USB serial port and u
 Some of the code might get a little complicated. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. Also I left some debugging code in so you can see a couple of debugging techniques.
 
 **Table Of Contents**
+* [Top](#notes "Top")
+* [Back to Root of Class](#back-to-root-of-class "Back to Root of Class")
+* [Introduction](#introduction "Introduction")
+  * [The setup code](#the-setup-code "The setup code")
+    * [The setup Code - before the setup Code](#the-setup-code-\--before-the-setup-code "The setup Code - before the setup Code")
+    * [The setup Code - for loop](#the-setup-code-\--for-loop "The setup Code - for loop")
 
-### The setup code
+## The setup code
 [Back to Top](#notes "Back to Top")<br>
 One thing I want to point out is that there is nothing magic about the **setup()** and **loop()** code. It is there for your convenience, but in this section we will only use the **setup()** and not do the **loop()** ever.
 
@@ -33,7 +39,7 @@ One way to break out of any loop is with the **break** statement. This would qui
 
 In fact the code underneath **setup()** and **loop()** is more complicated than my code above, but you can almost always do your code as if it was being called from the above.
 
-#### The setup Code - before the setup Code
+### The setup Code - before the setup Code
 [Back to Top](#notes "Back to Top")<br>
 We have a few routines definitions before the setup Code. Here is a little map:
 | What | Description |
@@ -44,13 +50,16 @@ We have a few routines definitions before the setup Code. Here is a little map:
 | get_one_string() | Routine to get one string (no leading or trailing ' ' or '\t') then flush to '\n'<br>'\t' is the **TAB** character<br>IF you enter "Fred Joe Mary" it will just return "Fred". |
 | setup() | Initializes everything then does a forever loop with **while (TRUE) {}**.<br>Inside the while loop it asks "Enter T (Temp), J (Joke), C (ChooseJoke), or A (AllJoke)"<br>T (or t) asks for three integer parameters for a **for loop** converting degrees Fahrenheit to degrees Centigrade.<br>J gives you the next Dad Joke in its list.<br>C asks for three integer numbers to have the corresponding Dad Jokes printed.<br>A gives you all the Dad Jokes. |
 
-#### The setup Code - for loop
+### The setup Code - for loop
 [Back to Top](#notes "Back to Top")<br>
 There is a statement **int f, c; // fahrenheit and centigrade** followed by **for (f = first; f < beyond_maximum; f += increment)**. What do these do?
 
-First the **int** statement with a comma: this just means that both variables **f** and **c** are integers; the **int** applies to both of them. There can be tricky applications like what would happen if we said **int f, c = 5;**? Would both **f** and **c** be initialized to 5? This is an introductory class so I won't go into those type of detailed questions here. If you want to initialize both of them, you already know how to do that with two statements and no comma: **int f = 5; int c = 5;**.
+First the **int** statement with a comma: this just means that both variables **f** and **c** are integers; the **int** applies to both of them. There can be tricky applications like what would happen if we said **int f, c = 5;**? Would both **f** and **c** be initialized to 5? This is an introductory class so I won't go into those type of detailed questions here. If you want to initialize both of them, you already know how to do that with two statements and no comma:<br>
+```C
+  int f = 5; int c = 5;
+```
 
-The **for** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons:
+The **for** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons. In our case, the three sections are as follows:
 - **f = first** - this is the initialization section, where you can initialize any variable before the for loop starts
   - If needed you can initialize more than one variable by separating with commas. Example: **f = first, c = 1**
   - You can even define and initialize new variables in the initialization section that only affect the for loop. Example: **int new_variable = 7, f = first, c = 1**

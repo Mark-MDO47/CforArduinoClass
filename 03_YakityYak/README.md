@@ -16,7 +16,9 @@ Some of the code might get a little complicated. Don't worry, this is a first in
 * [Introduction](#introduction "Introduction")
 * [The setup code](#the-setup-code "The setup code")
   * [The setup Code - before the setup Code](#the-setup-code-\--before-the-setup-code "The setup Code - before the setup Code")
-  * [The setup Code - for loop](#the-setup-code-\--for-loop "The setup Code - for loop")
+  * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
+  * [The setup Code - for loop inside the parenthesis](#the-setup-code-\--for-loop-inside-the-parenthesis "The setup Code - for loop inside the parenthesis")
+  * [The setup Code - for loop inside the curly braces](#the-setup-code-\--for-loop-inside-the-curly-braces "The setup Code - for loop inside the curly braces")
 
 ## The setup code
 [Back to Top](#notes "Back to Top")<br>

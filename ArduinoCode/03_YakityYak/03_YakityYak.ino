@@ -24,8 +24,8 @@
   #define DEBUG_PRINT(x) Serial.print((x))
   #define DEBUG_PRINTLN(x) Serial.println((x))
 #else
-  #define DEBUG_PRINT 
-  #define DEBUG_PRINTLN 
+  #define DEBUG_PRINT(x) 
+  #define DEBUG_PRINTLN(x) 
 #endif // DO_DEBUG
 
 #define DO_DEBUG_INPUT 0 // 1=debug, 0=no debug
@@ -34,8 +34,8 @@
   #define DEBUG_INPUT_PRINT(x) Serial.print((x))
   #define DEBUG_INPUT_PRINTLN(x) Serial.println((x))
 #else
-  #define DEBUG_INPUT_PRINT 
-  #define DEBUG_INPUT_PRINTLN 
+  #define DEBUG_INPUT_PRINT(x)
+  #define DEBUG_INPUT_PRINTLN(x)
 #endif // DO_DEBUG_INPUT
 
 // NOTE: the following will not warn you if you use it on something that is not an array
@@ -134,7 +134,14 @@ void get_3_int_values(int * first, int * second, int * third) {
 //
 // Reads from Serial, gets one string then flushes to '\n'.
 // Does not return until the flush is complete.
-// Maximum string length is 
+// Maximum string length is MAX_STRING_LENGTH
+//
+// Restriction: if you want to get two different strings, you need to copy
+//    them out of our string buffer when we return and store the strings in
+//    your own separate buffers.
+// Another way to say this is that this routine only has one string buffer.
+//    The second time you call it, it will overwrite the string buffer from
+//    the first call.
 //
 #define MAX_STRING_LENGTH 20
 
@@ -199,7 +206,8 @@ void setup() {
   while (!Serial) {
     ; // note that ";" is a null code statement. Wait for serial port to connect.
   }
-  
+  while (Serial.available()) Serial.read(); // clear any startup junk from the serial queue
+
   Serial.println(""); // print a blank line in case there is some junk from power-on
   Serial.println(F("CforArduinoClass init..."));
 
@@ -209,13 +217,14 @@ void setup() {
   int f, c; // fahrenheit and centigrade
   int first, increment, beyond_maximum; // temp loop parameters
   int j1, j2, j3; // joke parameters
-  char * input_string;
+  char * input_string; // this variable will store a pointer to a zero-terminated ASCII string
   while (TRUE) { // loop forever
     Serial.println(F(""));
 
     Serial.println(F("Enter T (Temp), J (Joke), C (ChooseJoke), or A (AllJoke)"));
     input_string = get_one_string(); 
     Serial.print(F("You entered ")); Serial.println(input_string); Serial.println(F(""));
+    // make sure first letter of string is capitalized
     if (('a' <= input_string[0]) && ('z' >= input_string[0])) input_string[0] -= 'a' - 'A';
     if ('T' == input_string[0]) {
       #define PRINT_MAX 30 // PRINT_MAX is the maximum number of temp loops to allow

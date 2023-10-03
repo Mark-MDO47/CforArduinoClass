@@ -69,9 +69,16 @@ void setup() {
 
 The serial initialization code looks pretty familiar with a **while (!Serial) { ; }** loop on three lines.
 
-Next there is a **while (Serial.available()) Serial.read();**. Where are the curly braces? The answer is that in any block statement such as **if () {}** or **while () {}**, if there is only one code statement to be executed in the block you don't need the curly braces. If there is more than one code statement, you need the curly braces to show what is inside the block.
+Next there is a **while (Serial.available()) Serial.read();**. Where are the curly braces?
+- The answer is that in any block statement such as **if () {}** or **while () {}**, if there is only one code statement to be executed in the block you don't need the curly braces. If there is more than one code statement, you need the curly braces to show what is inside the block.
 
 We start to do the normal prints and then we get **Serial.println(F("CforArduinoClass init..."));**. What is the **F()** doing there?
+- The F() surrounding the string places the string into **PROGMEM** instead of **RAM**. The Arduino Nano has very little RAM but much more PROGMEM.
+- Using PROGMEM usually requires some extra code, but replacing a double-quoted string in a function or method call is as simple as surrounding it with **F()**.
+- I did this trick throughout the code so there would be more room for Dad Jokes.
+- You can find more info about this in the Resources page from the Arduino Class: [PROGMEM and F macro to save RAM](https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/README.md#progmem-and-f-macro-to-save-ram "PROGMEM and F macro to save RAM")
+
+Then we see **DEBUG_PRINT(F("\nNUMOF_DAD_JOKES ")); DEBUG_PRINTLN(NUMOF_DAD_JOKES); DEBUG_PRINTLN(F(""));**. This is some debug code I put in to test my "#define NUMOF" code.
 
 ### The setup Code - for loop inside the parenthesis
 [Back to Top](#notes "Back to Top")<br>

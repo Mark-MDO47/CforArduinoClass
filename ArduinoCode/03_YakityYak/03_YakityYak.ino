@@ -51,7 +51,7 @@ char * DAD_JOKES[] = {
   "Never date a tennis player. Love means nothing to them.",
   "What do you call a Frenchman wearing sandals? Philippe Flop.",
   "When does a joke become a dad joke? When it becomes apparent.",
-  "\"Dad, can you explain to me what a solar eclipse is? \"No sun.",
+  "\"Dad, can you explain to me what a solar eclipse is?\" \"No sun.\"",
   "Why is it a bad idea to eat a clock? Because it's so time-consuming.",
   "What do you call a line of men waiting to get haircuts? A barberqueue.",
   "The guy who stole my diary just died. My thoughts are with his family.",
@@ -230,6 +230,7 @@ void setup() {
       #define PRINT_MAX 30 // PRINT_MAX is the maximum number of temp loops to allow
       Serial.println(F("Enter start degF, end degF, and stride degF\n"));
       get_3_int_values(&first, &beyond_maximum, &increment);
+      Serial.print(F("You entered ")); Serial.print(first); Serial.print(F(", ")); Serial.print(beyond_maximum); Serial.print(F(", and ")); Serial.println(increment);
       // constrain values to print something reasonable
       if (beyond_maximum > (first + (PRINT_MAX*increment))) {
         beyond_maximum = first + (PRINT_MAX*increment) + ((beyond_maximum-first)%increment);
@@ -248,6 +249,7 @@ void setup() {
     } else if ('C' == input_string[0]) {
       Serial.print(F("Choose 3 Dad Joke nums separated by commas; max num = ")); Serial.println(NUMOF_DAD_JOKES);
       get_3_int_values(&j1, &j2, &j3);
+      Serial.print(F("You entered ")); Serial.print(j1); Serial.print(F(", ")); Serial.print(j2); Serial.print(F(", and ")); Serial.println(j3);
       Serial.print(j1); Serial.print(": "); Serial.println(DAD_JOKES[max(min(j1,NUMOF_DAD_JOKES),1)-1]);
       Serial.print(j2); Serial.print(": "); Serial.println(DAD_JOKES[max(min(j2,NUMOF_DAD_JOKES),1)-1]);
       Serial.print(j3); Serial.print(": "); Serial.println(DAD_JOKES[max(min(j3,NUMOF_DAD_JOKES),1)-1]);

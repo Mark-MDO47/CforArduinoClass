@@ -78,7 +78,14 @@ We start to do the normal prints and then we get **Serial.println(F("CforArduino
 - I did this trick throughout the code so there would be more room for Dad Jokes.
 - You can find more info about this in the Resources page from the Arduino Class: [PROGMEM and F macro to save RAM](https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/README.md#progmem-and-f-macro-to-save-ram "PROGMEM and F macro to save RAM")
 
-Then we see **DEBUG_PRINT(F("\nNUMOF_DAD_JOKES ")); DEBUG_PRINTLN(NUMOF_DAD_JOKES); DEBUG_PRINTLN(F(""));**. This is some debug code I put in to test my "#define NUMOF" code.
+Then we see **DEBUG_PRINT(F("\nNUMOF_DAD_JOKES ")); DEBUG_PRINTLN(NUMOF_DAD_JOKES); DEBUG_PRINTLN(F(""));**. This is some debug code I put in to test my "#define NUMOF" macro.
+- #define macros can get pretty complex. I won't really describe how they work here.
+- If you are interested you might start with https://en.wikibooks.org/wiki/C_Programming/Preprocessor_directives_and_macros and search for #define
+- NUMOF() was a simple to moderately-complicated macro to return the number of array elements in its parameter.
+- I had an earlier statement **int NUMOF_DAD_JOKES = NUMOF(DAD_JOKES);** which initialized the variable NUMOF_DAD_JOKES with the number of elements in the array DAD_JOKES.
+- DEBUG_PRINT() and DEBUG_PRINTLN() are simple macros that either turn into Serial.print() or Serial.println(). They can be set to just return blanks so there is no print statement.
+- I left these DEBUG_ macros in the code since they can be pretty handy for debugging. When it seems to work you can turn them off. If later you experience another bug, you can turn them back on.
+- **Pro Tip** - there are some predefined things \_\_file\_\_, \_\_func\_\_, \_\_line\_\_, and others that can be helpful to print in debug statements. Try setting **#define DO_DEBUG 1** and **#define DO_DEBUG_INPUT 1** and see what sorts of printouts there are.
 
 ### The setup Code - for loop inside the parenthesis
 [Back to Top](#notes "Back to Top")<br>
@@ -103,7 +110,7 @@ The **for** statement (and the for loop that it generates) is an extremely usefu
   - If needed you can initialize more than one variable by separating with commas. Example: **f = first, c = 1**
   - You can even define and initialize new variables in the initialization section that only affect the for loop. Example: **int new_variable = 7, f = first, c = 1**
 - **f < beyond_maximum** - this is the definition of the **condition** that must be true to execute anything in the for statement
-  - Pro Tip: it is checked BEFORE THE FIRST EXECUTION of the for loop. If it is false, the loop never executes.
+  - **Pro Tip** - it is checked BEFORE THE FIRST EXECUTION of the for loop. If it is false, the loop never executes.
 - **f += increment** - this is the action taken AFTER each loop and BEFORE checking the **condition**.
   - Again, multiple actions could be taken. Example: **f += increment, Serial.println("Made f bigger")**
 

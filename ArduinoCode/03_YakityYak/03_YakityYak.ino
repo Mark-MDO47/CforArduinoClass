@@ -18,7 +18,9 @@
 #define TRUE  1 // in a LOGICAL statement, anything non-zero is true
 #define FALSE 0 // in a LOGICAL statement, only zero is false
 
-#define DO_DEBUG 0 // 1=debug, 0=no debug
+#define USE_STRING_CLASS TRUE // TRUE=string class, FALSE=ASCII .read and .available
+
+#define DO_DEBUG FALSE // TRUE=debug, FALSE=no debug
 #if DO_DEBUG
   // NOTE: these are not complex enough to cover all the cases
   #define DEBUG_PRINT(x) Serial.print((x))
@@ -28,7 +30,7 @@
   #define DEBUG_PRINTLN(x) 
 #endif // DO_DEBUG
 
-#define DO_DEBUG_INPUT 0 // 1=debug, 0=no debug
+#define DO_DEBUG_INPUT FALSE // TRUE=debug, FALSE=no debug
 #if DO_DEBUG_INPUT
   // NOTE: these are not complex enough to cover all the cases
   #define DEBUG_INPUT_PRINT(x) Serial.print((x))
@@ -118,7 +120,7 @@ void get_3_int_values(int * first, int * second, int * third) {
 
     // look for the newline. That's the end of the "sentence":
     while (!(Serial.read() == '\n')) ; // wait for the end of line
-    DEBUG_PRINTLN(" Got the newline");
+    DEBUG_PRINTLN(F(" Got the newline"));
 
     *first = tmp_first;
     *second = tmp_second;
@@ -126,8 +128,11 @@ void get_3_int_values(int * first, int * second, int * third) {
   } // end while (Serial.available() > 0)
 } // end get_3_int_values()
 
+#if !USE_STRING_CLASS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-// get_one_string() - get one string (no leading or trailing ' ' or '\t') then flush to '\n'
+// get_ascii_string() - get one string (no leading or trailing ' ' or '\t') then flush to '\n'
+//
+// THIS IS THE ASCII VERSION - uses Serial.available() and Serial.read()
 //
 //    parameters: none
 //    returns:    char * pointer to the string
@@ -145,15 +150,15 @@ void get_3_int_values(int * first, int * second, int * third) {
 //
 #define MAX_STRING_LENGTH 20
 
-char * get_one_string() {
-  uint16_t one_string_end = 0; // points to zero at end of current string
+char * get_ascii_string() {
+  uint16_t ascii_string_end = 0; // points to zero at end of current string
   uint8_t str_start = FALSE;
   uint8_t str_end = FALSE;
   uint8_t str_done = FALSE;
   char inchar;
-  static char one_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
 
-  memset((void *)one_string, 0, NUMOF(one_string)); // clear buffer; good idea for zero-terminated strings
+  memset((void *)ascii_string, 0, NUMOF(ascii_string)); // clear buffer; good idea for zero-terminated strings
   while (TRUE) {
     // if there's any serial available, read it:
     if (Serial.available() > 0) {
@@ -162,20 +167,20 @@ char * get_one_string() {
       if ( !str_start ) { // if waiting for start of string
         if (' ' < inchar) {
           DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-          one_string[one_string_end++] = inchar;
+          ascii_string[ascii_string_end++] = inchar;
           str_start = TRUE;
         }
       } else if ( !str_end ) { // if waiting for string finish
         if (' ' < inchar) {
           DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-          if (one_string_end < MAX_STRING_LENGTH) one_string[one_string_end++] = inchar;
+          if (ascii_string_end < MAX_STRING_LENGTH) ascii_string[ascii_string_end++] = inchar;
           else str_end = TRUE;
         } else if ('\n' == inchar) {
-          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);DEBUG_INPUT_PRINT("DBGIN "); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(" st="); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(" en="); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(" dn="); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(" line "); DEBUG_INPUT_PRINTLN(__LINE__);
+          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
           str_end = TRUE;
           str_done = TRUE;
         } else {
-          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);DEBUG_INPUT_PRINT("DBGIN "); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(" st="); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(" en="); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(" dn="); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(" line "); DEBUG_INPUT_PRINTLN(__LINE__);
+          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
           str_end = TRUE;
         }
       } else { // flush the remaining
@@ -188,8 +193,92 @@ char * get_one_string() {
     if (str_done) break; // we got our string
   } // end while (TRUE)
   DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-  return(one_string);
-} // end get_one_string()
+  return(ascii_string);
+} // end get_ascii_string() - ASCII version
+#else // #if USE_STRING_CLASS
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// string2ascii_ncopy() - copy the ASCII chars from a string subset to a zero-terminated string
+//
+// strptr           - String object with the source chars
+// asciiptr         - pointer to a char buffer containing at least (1+maxout) locations
+// idxstart, idxend - int indices within *strptr for the first char and one past the last char to copy
+// maxout           - int one less than the size of the buffer at *asciiptr
+//
+// Will not copy more than maxout chars
+//
+// returns: pointer to start of asciiptr
+//
+// limitations: for simplicity does not do error checking such as
+//      strptr and asciiptr not NULL pointers
+//      idxend > idxstart
+//      idxend-idxstart <= maxout
+//
+char * string2ascii_ncopy(String strobj, char *asciiptr, int idxstart, int idxend, int maxout) {
+  for (int i = 0; i < min(min(idxend-idxstart,maxout),strobj.length()); i++) {
+    asciiptr[i] = strobj[i+idxstart];
+  }
+  return(asciiptr);
+} // end string2ascii_ncopy()
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// get_ascii_string() - get one string (no leading or trailing ' ' or '\t') then flush to '\n'
+//
+// THIS IS THE STRING CLASS VERSION
+//
+//    parameters: none
+//    returns:    char * pointer to the string
+//
+// Reads from Serial, gets one string then flushes to '\n'.
+// Does not return until the flush is complete.
+// Maximum string length is MAX_STRING_LENGTH
+//
+// Restriction: if you want to get two different strings, you need to copy
+//    them out of our string buffer when we return and store the strings in
+//    your own separate buffers.
+// Another way to say this is that this routine only has one string buffer.
+//    The second time you call it, it will overwrite the string buffer from
+//    the first call.
+//
+#define MAX_STRING_LENGTH 20
+
+char * get_ascii_string() {
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  String my_string_instance = "Hello!";
+  int16_t tmp1 = 0;
+  int16_t tmp2 = 0;
+  uint8_t found = FALSE;
+
+  Serial.setTimeout(10000); // 10,000 milliseconds is 10 seconds
+  memset((void *)ascii_string, 0, NUMOF(ascii_string)); // clear buffer; good idea for zero-terminated strings
+
+  while (!found) {
+    while (!Serial.available()) ; // wait for typing to start
+    my_string_instance = Serial.readStringUntil('\n'); // get a line
+    DEBUG_INPUT_PRINT(F("DBGIN Entire String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
+    my_string_instance.trim(); // trim off spaces/tabs front and back
+    DEBUG_INPUT_PRINT(F("DBGIN trimmed String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
+    if (0 != my_string_instance.length()) {
+      found = TRUE;
+      tmp1 = my_string_instance.indexOf(' ');
+      tmp2 = my_string_instance.indexOf('\t');
+      DEBUG_INPUT_PRINT(F("DBGIN tmp1=")); DEBUG_INPUT_PRINT(tmp1); DEBUG_INPUT_PRINT(F(", tmp2=")); DEBUG_INPUT_PRINTLN(tmp2);
+      if (-1 == tmp1) tmp1 = 2*MAX_STRING_LENGTH; // make it big and positive
+      if (-1 == tmp2) tmp2 = 2*MAX_STRING_LENGTH;
+      // if no ' ' or '\t' found, will copy entire string
+      //string2ascii_ncopy(my_string_instance, ascii_string, 0, min(tmp1,tmp2), MAX_STRING_LENGTH);
+      tmp1 = min(tmp1,tmp2);
+      tmp1 = min(tmp1,my_string_instance.length());
+      tmp1 = min(tmp1,MAX_STRING_LENGTH);
+      for (int i = 0; i < tmp1; i++) {
+        ascii_string[i] = my_string_instance[i];
+      }
+      DEBUG_INPUT_PRINT(F("DBGIN Entire ASCII string result |")); DEBUG_INPUT_PRINT(ascii_string); DEBUG_INPUT_PRINTLN(F("|"));
+    } // end if my_string_instance has at least one character
+  } // end while (!found)
+
+  return(ascii_string);
+} // end get_ascii_string() - STRING CLASS version
+#endif // #if !USE_STRING_CLASS
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // setup() - the setup function runs once when you press reset or power the board
@@ -222,7 +311,7 @@ void setup() {
     Serial.println(F(""));
 
     Serial.println(F("Enter T (Temp), J (Joke), C (ChooseJoke), or A (AllJoke)"));
-    input_string = get_one_string(); 
+    input_string = get_ascii_string(); 
     Serial.print(F("You entered ")); Serial.println(input_string); Serial.println(F(""));
     // make sure first letter of string is capitalized
     if (('a' <= input_string[0]) && ('z' >= input_string[0])) input_string[0] -= 'a' - 'A';

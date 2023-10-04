@@ -232,7 +232,8 @@ void setup() {
 } // end setup()
 ```
 
-For now, just think of the **Serial.begin(115200);** and the block inside **while (!Serial)** as a way to initialize the **Serial** object. We can discuss the details of how this works at a later time; for now, this is just how we get it working.
+For now, just think of the **Serial.begin(115200);** and the block inside **while (!Serial)** as a way to initialize the **Serial** object. For now, it is enough if you accept thatthis is just how we get it working.
+- If you are interested in learning more, see https://www.arduino.cc/reference/en/language/functions/communication/serial/ifserial/
 
 The next thing we see is **Serial.println("");**.
 - The "" is a double-quoted string of zero characters, so it creates an address that points to a zero-terminated ASCII string. Since there are no characters inside the "", the zero-terminated ASCII string starts with the ASCII NUL (zero) character and then ends; it is of length one.

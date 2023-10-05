@@ -112,6 +112,11 @@ By using this NUMOF macro, I don't have to count the strings by hand later on wh
 
 ### Before the setup Code - get_3_int_values
 [Back to Top](#notes "Back to Top")<br>
+
+We will first talk syntax on how to call a routine and get three values back. Next we will show how get_3_int_values reads the input and converts it to 3 integers.
+
+#### How to call get_3_int_values and get three values back
+[Back to Top](#notes "Back to Top")<br>
 Some later code does the following
 ```C
       int first, increment, beyond_maximum; // temp loop parameters
@@ -137,6 +142,58 @@ void get_3_int_values(int * first, int * second, int * third) {
 - the asterisk **\*** in routine **get_3_int_values(int * first, int * second, int * third)** tells the C compiler to treat the parameters being passed in as a pointer to (the address of) the three integers.
 - the parameters get substituted in order. For instance, &first in the call goes to "int * first" in the routine get_3_int_values, &beyond_maximum goes to "int * second", and &increment goes to "int * third".
 - to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as "dereferencing" the pointer.
+
+#### How does get_3_int_values work
+[Back to Top](#notes "Back to Top")<br>
+Here is the code for get_3_int_values():
+```C
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// get_3_int_values() - get three integer values then flush to '\n'
+//
+//    parameters:
+//       int * first, int * second, int * third - place to store three integers
+//    returns: nothing; values are stored via parameter pointers
+//
+// Reads from Serial, gets three integers then flushes to '\n'.
+// Stores the three integers via the addresses from the three input parameters
+// Does not return until the flush is complete.
+//
+// Example input strings that will fill results with 1, 2, and 3:
+//     (one line) -> "1,2,3"
+//     (one line) -> "    1   2   3    this is ignored"
+//     (3 lines)  -> "1
+//                    2
+//                    3"
+//
+
+void get_3_int_values(int * first, int * second, int * third) {
+  int tmp_first, tmp_second, tmp_third;
+
+  while (0 == Serial.available()) ; // wait for some typing
+
+  // if there's any serial available, read it:
+  while (Serial.available() > 0) {
+    // look for the next valid integer in the incoming serial stream:
+    tmp_first = Serial.parseInt();
+    DEBUG_PRINT(F("DEBUG tmp_first=")); DEBUG_PRINT(tmp_first);
+    // do it again:
+    tmp_second = Serial.parseInt();
+    DEBUG_PRINT(F(" tmp_second=")); DEBUG_PRINT(tmp_second);
+    // do it again:
+    tmp_third = Serial.parseInt();
+    DEBUG_PRINT(F(" tmp_third=")); DEBUG_PRINT(tmp_third);
+
+    // look for the newline. That's the end of the "sentence":
+    while (!(Serial.read() == '\n')) ; // wait for the end of line
+    DEBUG_PRINTLN(F(" Got the newline"));
+
+    *first = tmp_first;
+    *second = tmp_second;
+    *third = tmp_third;
+  } // end while (Serial.available() > 0)
+} // end get_3_int_values()
+```
+
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>

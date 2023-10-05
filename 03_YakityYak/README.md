@@ -16,13 +16,13 @@ Some of the code might get a little complicated. Don't worry, this is a first in
 * [Introduction](#introduction "Introduction")
 * [Calling the setup code](#calling-the-setup-code "Calling the setup code")
 * [Before the setup Code](#before-the-setup-code "Before the setup Code")
-* [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
-* [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
+  * [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
+  * [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
 * [The setup Code](#the-setup-code "The setup Code")
   * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
   * [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")
-    * [The setup Code - Temperature - for loop inside the parenthesis](#the-setup-code-\--temperature-\--for-loop-inside-the-parenthesis "The setup Code - Temperature - for loop inside the parenthesis")
-    * [The setup Code - Joke](#the-setup-code-\--joke "The setup Code - Joke")
+  * [The setup Code - Temperature - for loop inside the parenthesis](#the-setup-code-\--temperature-\--for-loop-inside-the-parenthesis "The setup Code - Temperature - for loop inside the parenthesis")
+  * [The setup Code - Joke](#the-setup-code-\--joke "The setup Code - Joke")
 
 ## Calling the setup code
 [Back to Top](#notes "Back to Top")<br>
@@ -55,7 +55,7 @@ We have a few routines and definitions before the setup Code. Here is a little m
 | get_3_int_values() | Routine to get three integer values from the USB serial port then flush to '\n'<br>'\n' is end of line; called **newline**<br>When you call this routine it will not return until it gets three integers. You can enter them all on one line such as "1,2,3" or enter each number on a separate line without using commas. If you enter "1,2,3,fred" it will ignore everything after the "," following 3. |
 | get_ascii_string() | Routine to get one string (no leading or trailing ' ' or '\t') then flush to '\n'<br>'\t' is the **TAB** character<br>IF you enter "Fred Joe Mary" it will just return "Fred". |
 
-## Before the setup Code - get_3_int_values
+### Before the setup Code - get_3_int_values
 [Back to Top](#notes "Back to Top")<br>
 Some later code does the following
 ```C
@@ -83,7 +83,7 @@ void get_3_int_values(int * first, int * second, int * third) {
 - the parameters get substituted in order. For instance, &first in the call goes to "int * first" in the routine get_3_int_values, &beyond_maximum goes to "int * second", and &increment goes to "int * third".
 - to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as "dereferencing" the pointer.
 
-## Before the setup Code - get_ascii_string
+### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>
 
 ## The setup Code
@@ -166,7 +166,7 @@ Once we have the address of the string in input_string, we check the first lette
 Then we execute different code blocks depending on what the first letter is.
 - Note the **if () {} else if () {} else {}** structure. If the first letter is not T, J, C or A we will complain and try again.
 
-#### The setup Code - Temperature - for loop inside the parenthesis
+### The setup Code - Temperature - for loop inside the parenthesis
 [Back to Top](#notes "Back to Top")<br>
 ```C
   int f, c; // fahrenheit and centigrade
@@ -237,7 +237,7 @@ The for loop behaves **somewhat** like the following:
 
 As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
-#### The setup Code - Joke
+### The setup Code - Joke
 [Back to Top](#notes "Back to Top")<br>
 
 

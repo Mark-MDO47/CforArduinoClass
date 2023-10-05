@@ -8,7 +8,20 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 [Back to Top](#notes "Back to Top")<br>
 In this section we will investigate reading **input from the USB serial port** and using it to affect our code operation. We will also look at a few C-language **syntax**, **for** and **while** loops (we won't look at **until** loops), and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
 
-Some of the code might get a little complicated. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
+Some of the code might get a little complicated. It might feel like drinking from a fire hose. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
+
+What will you want to pay attention to?
+- General useful C language:
+  - [Before the setup Code](#before-the-setup-code "Before the setup Code")
+- Techniques to get numbers or strings from a serial port:
+  - [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
+  - [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
+- Looping methods:
+  - [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")
+  - [The setup Code - forever loop - Temperature for loop](#the-setup-code-\--forever-loop-\--temperature-for-loop "The setup Code - forever loop - Temperature for loop")
+  - [The setup Code - forever loop - All Jokes for loop](#the-setup-code-\--forever-loop-\--all-jokes-for-loop "The setup Code - forever loop - All Jokes for loop")
+- Debugging methods and #define macros:
+  - [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
 
 **Table Of Contents**
 * [Top](#notes "Top")
@@ -21,7 +34,7 @@ Some of the code might get a little complicated. Don't worry, this is a first in
 * [The setup Code](#the-setup-code "The setup Code")
   * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
   * [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")
-  * [The setup Code - forever loop - Temperature](#the-setup-code-\--forever-loop-\--temperature "The setup Code - forever loop - Temperature")
+  * [The setup Code - forever loop - Temperature for loop](#the-setup-code-\--forever-loop-\--temperature-for-loop "The setup Code - forever loop - Temperature for loop")
   * [The setup Code - forever loop - Joke](#the-setup-code-\--forever-loop-\--joke "The setup Code - forever loop - Joke")
 
 ## Calling the setup code
@@ -84,6 +97,9 @@ void get_3_int_values(int * first, int * second, int * third) {
 - to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as "dereferencing" the pointer.
 
 ### Before the setup Code - get_ascii_string
+[Back to Top](#notes "Back to Top")<br>
+
+### Before the setup Code - DAD_JOKES
 [Back to Top](#notes "Back to Top")<br>
 
 ## The setup Code
@@ -166,7 +182,7 @@ Once we have the address of the string in input_string, we check the first lette
 Then we execute different code blocks depending on what the first letter is.
 - Note the **if () {} else if () {} else {}** structure. If the first letter is not T, J, C or A we will complain and try again.
 
-### The setup Code - forever loop - Temperature
+### The setup Code - forever loop - Temperature for loop
 [Back to Top](#notes "Back to Top")<br>
 ```C
   int f, c; // fahrenheit and centigrade
@@ -238,6 +254,12 @@ The for loop behaves **somewhat** like the following:
 As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
 ### The setup Code - forever loop - Joke
+[Back to Top](#notes "Back to Top")<br>
+
+### The setup Code - forever loop - Choose Joke
+[Back to Top](#notes "Back to Top")<br>
+
+### The setup Code - forever loop - All Jokes for loop
 [Back to Top](#notes "Back to Top")<br>
 
 

@@ -72,37 +72,6 @@ We have a few routines and definitions before the setup Code. Here is a little m
 | get_3_int_values() | Routine to get three integer values from the USB serial port then flush to '\n'<br>'\n' is end of line; called **newline**<br>When you call this routine it will not return until it gets three integers. You can enter them all on one line such as "1,2,3" or enter each number on a separate line without using commas. If you enter "1,2,3,fred" it will ignore everything after the "," following 3. |
 | get_ascii_string() | Routine to get one string (no leading or trailing ' ' or '\t') then flush to '\n'<br>'\t' is the **TAB** character<br>IF you enter "Fred Joe Mary" it will just return "Fred". |
 
-### Before the setup Code - get_3_int_values
-[Back to Top](#notes "Back to Top")<br>
-Some later code does the following
-```C
-      int first, increment, beyond_maximum; // temp loop parameters
-          < ... >
-      Serial.println(F("Enter start degF, end degF, and stride degF\n"));
-      get_3_int_values(&first, &beyond_maximum, &increment);
-      Serial.print(F("You entered ")); Serial.print(first); Serial.print(F(", ")); Serial.print(beyond_maximum); Serial.print(F(", and "));
-```
-
-**Syntax** - the comma (**,**) in **int first, increment, beyond_maximum;** causes all of these variables to be defined as **int**.
-
-At the end of **get_3_int_values** we see the code
-```C
-void get_3_int_values(int * first, int * second, int * third) {
-          < ... >
-    *first = tmp_first;
-    *second = tmp_second;
-    *third = tmp_third;
-```
-
-**Syntax**
-- the ampersand **&** in the call to **get_3_int_values(&first, &beyond_maximum, &increment);** means to pass a pointer to (the address of) the variables first, etc.
-- the asterisk **\*** in routine **get_3_int_values(int * first, int * second, int * third)** tells the C compiler to treat the parameters being passed in as a pointer to (the address of) the three integers.
-- the parameters get substituted in order. For instance, &first in the call goes to "int * first" in the routine get_3_int_values, &beyond_maximum goes to "int * second", and &increment goes to "int * third".
-- to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as "dereferencing" the pointer.
-
-### Before the setup Code - get_ascii_string
-[Back to Top](#notes "Back to Top")<br>
-
 ### Before the setup Code - DAD_JOKES
 [Back to Top](#notes "Back to Top")<br>
 The definition of the DAD_JOKES array of pointers is shown below, with **< ... >** indicating some lines left out.
@@ -133,6 +102,42 @@ These strings take a lot of our RAM and our total usage of allocated RAM is almo
 - Global variables use 1522 bytes (74%) of dynamic memory, leaving 526 bytes for local variables. Maximum is 2048 bytes.
 
 Because we need to leave some RAM for dynamic allocation, I just commented out a bunch of dad jokes until we had about 25% of RAM left.
+
+**Syntax** - we create the #define macro **#define NUMOF(x) (sizeof((x)) / sizeof((x[0])))**. Later in a code statement we use **NUMOF(DAD_JOKES)** to initialize an int variable named NUMOF_DAD_JOKES. If we look at **sizeof(DAD_JOKES)** we will see it is 38, but there are 19 strings that are not commented out. That is because each entry in DAD_JOKES is two bytes long which we can see by looking at the size of the first entry: **sizeof(DAD_JOKES[0])**. So by using NUMOF(DAD_JOKES) it is 38/2 or 19, the number of strings in DAD_JOKES.
+- The extra levels **()** helps to make the macro **NUMOF** work even on some odd ways of defining an array.
+
+By using this NUMOF macro, I don't have to count the strings by hand later on when I set up a loop to print all the DAD_JOKES.
+
+### Before the setup Code - get_3_int_values
+[Back to Top](#notes "Back to Top")<br>
+Some later code does the following
+```C
+      int first, increment, beyond_maximum; // temp loop parameters
+          < ... >
+      Serial.println(F("Enter start degF, end degF, and stride degF\n"));
+      get_3_int_values(&first, &beyond_maximum, &increment);
+      Serial.print(F("You entered ")); Serial.print(first); Serial.print(F(", ")); Serial.print(beyond_maximum); Serial.print(F(", and "));
+```
+
+**Syntax** - the comma (**,**) in **int first, increment, beyond_maximum;** causes all of these variables to be defined as **int**.
+
+At the end of **get_3_int_values** we see the code
+```C
+void get_3_int_values(int * first, int * second, int * third) {
+          < ... >
+    *first = tmp_first;
+    *second = tmp_second;
+    *third = tmp_third;
+```
+
+**Syntax**
+- the ampersand **&** in the call to **get_3_int_values(&first, &beyond_maximum, &increment);** means to pass a pointer to (the address of) the variables first, etc.
+- the asterisk **\*** in routine **get_3_int_values(int * first, int * second, int * third)** tells the C compiler to treat the parameters being passed in as a pointer to (the address of) the three integers.
+- the parameters get substituted in order. For instance, &first in the call goes to "int * first" in the routine get_3_int_values, &beyond_maximum goes to "int * second", and &increment goes to "int * third".
+- to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as "dereferencing" the pointer.
+
+### Before the setup Code - get_ascii_string
+[Back to Top](#notes "Back to Top")<br>
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

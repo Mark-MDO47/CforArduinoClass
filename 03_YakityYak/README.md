@@ -94,31 +94,31 @@ Then we see **DEBUG_PRINT(F("\nNUMOF_DAD_JOKES ")); DEBUG_PRINTLN(NUMOF_DAD_JOKE
 [Back to Top](#notes "Back to Top")<br>
 ```C
   char * input_string; // this variable will store a pointer to a zero-terminated ASCII string
-
   while (TRUE) { // loop forever
     Serial.println(F(""));
 
     Serial.println(F("Enter T (Temp), J (Joke), C (ChooseJoke), or A (AllJoke)"));
-    input_string = get_one_string(); 
+    input_string = get_ascii_string(); 
     Serial.print(F("You entered ")); Serial.println(input_string); Serial.println(F(""));
     // make sure first letter of string is capitalized
     if (('a' <= input_string[0]) && ('z' >= input_string[0])) input_string[0] -= 'a' - 'A';
-    if ('T' == input_string[0]) {
-    } else if ('J' == input_string[0]) {
-    } else if ('C' == input_string[0]) {
-    } else if ('A' == input_string[0]) {
-    } else {
-      Serial.print(F("ERROR - ")); Serial.print(input_string); Serial.println(F(" is not a valid choice"));
-    } // end if which command
 ```
 
-We saw the concept of pointers to zero-terminated ASCII strings in the last exercise. This time we will fill in the pointer from a function call to **get_one_string()**.
+We saw the concept of pointers to zero-terminated ASCII strings in the last exercise. This time we will call **get_ascii_string()**, which returns pointer to a zero-terminated ASCII string typed in on the "Serial Monitor" window across the USB serial port.
 - Once again we use routines from https://www.arduino.cc/reference/en/language/functions/communication/serial/
-- get_one_string() is a surprisingly complicated routine to get a zero-terminated ASCII string from the USB serial port.
-  - I thought I was avoiding the complexity of using something like Serial.readStringUntil() and having to explain the difference between a **String** and a **char \***, but maybe I should have gone the other way - or maybe I should re-write get_one_string().
-- It only calls two routines to check and get characters: Serial.available() and Serial.read().
-  - Serial.available() returns TRUE if there is a character that can be read
-  - Serial.read() reads one character
+- I made a version of **get_ascii_string()** using only the following two routines. I thought it would be simple but it was surprisingly complicated.
+  - Serial.available() - returns TRUE if there is a character that can be read
+  - Serial.read() - reads one character
+  - I thought I was avoiding the complexity of using something like Serial.readStringUntil() and having to explain the difference between a **String object** and a **char \*** pointer to a zero-terminated ASCII string.
+- I gave up on that and rewrote it using the builtin **String object** capabilities and these routines:
+  - Serial.setTimeout() - sets the timeout for routines like readStringUntil()
+  - Serial.available() - returns TRUE if there is a character that can be read
+  - Serial.readStringUntil() - reads typing until either timeout or the character specified
+  - <string-object>.trim() - removes leading or trailing blanks and/or TABs (' ' or '\t') from String object
+  - <string-object>.length() - returns length in characters of the ASCII string within String object
+  - <string-object>.indexOf() - returns -1 or first character position of specified character within String object
+  - <string-object>.[] - returns the ASCII character at the specified position of the ASCII string within String object
+    - Yes this is a "method" of an "object" in C++ - too complicated for an introductory class to cover
 
 Once we have the address of the string in input_string, we check the first letter of the string to see if it is lower-case between 'a' and 'z'.
 - If so we convert to upper-case by subtracting the difference betwee ASCII 'a' and ASCII 'A'.
@@ -127,7 +127,7 @@ Once we have the address of the string in input_string, we check the first lette
 Then we execute different code blocks depending on what the first letter is.
 - Note the **if () {} else if () {} else {}** structure. If the first letter is not T, J, C or A we will complain and try again.
 
-### The setup Code - Temp - for loop inside the parenthesis
+### The setup Code - Temperature - for loop inside the parenthesis
 [Back to Top](#notes "Back to Top")<br>
 ```C
   int f, c; // fahrenheit and centigrade
@@ -198,4 +198,17 @@ The for loop behaves **somewhat** like the following:
 
 As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
-### The setup Code - Temp - for loop inside the curly braces
+### The setup Code - Temperature - where did those numbers come from
+[Back to Top](#notes "Back to Top")<br>
+Now that we have seen how a for loop operates, where did we get those numbers first, beyond_maximum, and increment?
+
+The temperature section starts like this
+```C
+    if ('T' == input_string[0]) {
+      #define PRINT_MAX 30 // PRINT_MAX is the maximum number of temp loops to allow
+      Serial.println(F("Enter start degF, end degF, and stride degF\n"));
+      get_3_int_values(&first, &beyond_maximum, &increment);
+      Serial.print(F("You entered ")); Serial.print(first); Serial.print(F(", ")); Serial.print(beyond_maximum); Serial.print(F(", and ")); Serial.println(increment);
+```
+
+

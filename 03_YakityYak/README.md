@@ -14,12 +14,15 @@ Some of the code might get a little complicated. Don't worry, this is a first in
 * [Top](#notes "Top")
 * [Back to Root of Class](#back-to-root-of-class "Back to Root of Class")
 * [Introduction](#introduction "Introduction")
-* [The setup code](#the-setup-code "The setup code")
-  * [The setup Code - before the setup Code](#the-setup-code-\--before-the-setup-code "The setup Code - before the setup Code")
+* [Calling the setup code](#calling-the-setup-code "Calling the setup code")
+* [Before the setup Code](#before-the-setup-code "Before the setup Code")
+* [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
+* [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
+* [The setup Code](#the-setup-code "The setup Code")
   * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
   * [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")
-  * [The setup Code - Temp - for loop inside the parenthesis](#the-setup-code-\--temp-\--for-loop-inside-the-parenthesis "The setup Code - Temp - for loop inside the parenthesis")
-  * [The setup Code - Temp - for loop inside the curly braces](#the-setup-code-\--temp-\--for-loop-inside-the-curly-braces "The setup Code - Temp - for loop inside the curly braces")
+    * [The setup Code - Temperature - for loop inside the parenthesis](#the-setup-code-\--temperature-\--for-loop-inside-the-parenthesis "The setup Code - Temperature - for loop inside the parenthesis")
+    * [The setup Code - Joke](#the-setup-code-\--joke "The setup Code - Joke")
 
 ## Calling the setup code
 [Back to Top](#notes "Back to Top")<br>

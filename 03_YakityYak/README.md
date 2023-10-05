@@ -21,8 +21,8 @@ Some of the code might get a little complicated. Don't worry, this is a first in
 * [The setup Code](#the-setup-code "The setup Code")
   * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
   * [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")
-  * [The setup Code - Temperature - for loop inside the parenthesis](#the-setup-code-\--temperature-\--for-loop-inside-the-parenthesis "The setup Code - Temperature - for loop inside the parenthesis")
-  * [The setup Code - Joke](#the-setup-code-\--joke "The setup Code - Joke")
+  * [The setup Code - forever loop - Temperature](#the-setup-code-\--forever-loop-\--temperature "The setup Code - forever loop - Temperature")
+  * [The setup Code - forever loop - Joke](#the-setup-code-\--forever-loop-\--joke "The setup Code - forever loop - Joke")
 
 ## Calling the setup code
 [Back to Top](#notes "Back to Top")<br>

@@ -166,7 +166,7 @@ Once we have the address of the string in input_string, we check the first lette
 Then we execute different code blocks depending on what the first letter is.
 - Note the **if () {} else if () {} else {}** structure. If the first letter is not T, J, C or A we will complain and try again.
 
-### The setup Code - Temperature - for loop inside the parenthesis
+### The setup Code - forever loop - Temperature
 [Back to Top](#notes "Back to Top")<br>
 ```C
   int f, c; // fahrenheit and centigrade
@@ -237,7 +237,7 @@ The for loop behaves **somewhat** like the following:
 
 As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
-### The setup Code - Joke
+### The setup Code - forever loop - Joke
 [Back to Top](#notes "Back to Top")<br>
 
 

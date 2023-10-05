@@ -22,6 +22,7 @@ What will you want to pay attention to or return to when you have a need?
   - [The setup Code - forever loop - Temperature for loop](#the-setup-code-\--forever-loop-\--temperature-for-loop "The setup Code - forever loop - Temperature for loop")
   - [The setup Code - forever loop - All Jokes for loop](#the-setup-code-\--forever-loop-\--all-jokes-for-loop "The setup Code - forever loop - All Jokes for loop")
 - Debugging methods and #define macros:
+  - [Before the setup Code - DAD_JOKES](#before-the-setup-code-\--dad_jokes "Before the setup Code - DAD_JOKES")
   - [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
 
 **Table Of Contents**
@@ -30,9 +31,9 @@ What will you want to pay attention to or return to when you have a need?
 * [Introduction](#introduction "Introduction")
 * [Calling the setup code](#calling-the-setup-code "Calling the setup code")
 * [Before the setup Code](#before-the-setup-code "Before the setup Code")
+  * [Before the setup Code - DAD_JOKES](#before-the-setup-code-\--dad_jokes "Before the setup Code - DAD_JOKES")
   * [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
   * [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
-  * [Before the setup Code - DAD_JOKES](#before-the-setup-code-\--dad_jokes "Before the setup Code - DAD_JOKES")
 * [The setup Code](#the-setup-code "The setup Code")
   * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
   * [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")

@@ -31,11 +31,14 @@ What will you want to pay attention to?
 * [Before the setup Code](#before-the-setup-code "Before the setup Code")
   * [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
   * [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
+  * [Before the setup Code - DAD_JOKES](#before-the-setup-code-\--dad_jokes "Before the setup Code - DAD_JOKES")
 * [The setup Code](#the-setup-code "The setup Code")
   * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
   * [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")
   * [The setup Code - forever loop - Temperature for loop](#the-setup-code-\--forever-loop-\--temperature-for-loop "The setup Code - forever loop - Temperature for loop")
   * [The setup Code - forever loop - Joke](#the-setup-code-\--forever-loop-\--joke "The setup Code - forever loop - Joke")
+  * [The setup Code - forever loop - Choose Joke](#the-setup-code-\--forever-loop-\--choose-joke "The setup Code - forever loop - Choose Joke")
+  * [The setup Code - forever loop - All Jokes for loop](#the-setup-code-\--forever-loop-\--all-jokes-for-loop "The setup Code - forever loop - All Jokes for loop")
 
 ## Calling the setup code
 [Back to Top](#notes "Back to Top")<br>

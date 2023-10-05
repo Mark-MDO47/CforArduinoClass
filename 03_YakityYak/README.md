@@ -105,7 +105,7 @@ void get_3_int_values(int * first, int * second, int * third) {
 
 ### Before the setup Code - DAD_JOKES
 [Back to Top](#notes "Back to Top")<br>
-
+The definition of the DAD_JOKES array of pointers is shown below, with **< ... >** indicating some lines left out.
 ```C
 // NOTE: the following will not warn you if you use it on something that is not an array
 #define NUMOF(x) (sizeof((x)) / sizeof((x[0]))) // calculates the size of an array
@@ -126,6 +126,13 @@ char * DAD_JOKES[] = {
 int NUMOF_DAD_JOKES = NUMOF(DAD_JOKES);
 int CURRENT_DAD_JOKE = 0;
 ```
+
+As we saw in [02_LetsGetTalking](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/02_LetsGetTalking/README.md "02_LetsGetTalking"), the form using double-quoted text such as **"string"** creates in most instances a **pointer** to a place where the **zero-terminated ASCII string** is stored. The code **char * DAD_JOKES[] = {** creates an array of **char \*** (int this case, pointers to strings) and everything after the open-curly-brace **{** until the closing-curly-brace **}** creates initialization values for this array.
+
+These strings take a lot of our RAM and our total usage of allocated RAM is almost 75% as shown when we compile.
+- Global variables use 1522 bytes (74%) of dynamic memory, leaving 526 bytes for local variables. Maximum is 2048 bytes.
+
+Because we need to leave some RAM for dynamic allocation, I just commented out a bunch of dad jokes until we had about 25% of RAM left.
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

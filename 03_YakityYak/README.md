@@ -10,9 +10,10 @@ In this section we will investigate reading **input from the USB serial port** a
 
 Some of the code might get a little complicated. It might feel like drinking from a fire hose. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
-What will you want to pay attention to?
+What will you want to pay attention to or return to when you have a need?
 - General useful C language:
   - [Before the setup Code](#before-the-setup-code "Before the setup Code")
+  - [Before the setup Code - DAD_JOKES](#before-the-setup-code-\--dad_jokes "Before the setup Code - DAD_JOKES")
 - Techniques to get numbers or strings from a serial port:
   - [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
   - [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
@@ -104,6 +105,27 @@ void get_3_int_values(int * first, int * second, int * third) {
 
 ### Before the setup Code - DAD_JOKES
 [Back to Top](#notes "Back to Top")<br>
+
+```C
+// NOTE: the following will not warn you if you use it on something that is not an array
+#define NUMOF(x) (sizeof((x)) / sizeof((x[0]))) // calculates the size of an array
+
+char * DAD_JOKES[] = {
+  "What's a lawyer's favorite drink? Subpoena colada.",
+  "I'm afraid for the calendar. Its days are numbered.",
+          < ... >
+  "My wife said I should do lunges to stay in shape. That would be a big step forward.",
+  "I used to run a dating service for chickens. But I was struggling to make hens meet."
+/*
+  "My hotel tried to charge me ten dollars extra for air conditioning. That wasn’t cool.",
+          < ... >
+  "A man walks into a magic forest and tries to cut down a talking tree. \"You can't cut me down,\" the tree complains. \"I’m a talking tree!\" The man responds, \"You may be a talking tree, but you will dialogue.\"",
+ */
+}; // end DAD_JOKES[]
+
+int NUMOF_DAD_JOKES = NUMOF(DAD_JOKES);
+int CURRENT_DAD_JOKE = 0;
+```
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

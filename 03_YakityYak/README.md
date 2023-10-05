@@ -6,7 +6,7 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 
 ## Introduction
 [Back to Top](#notes "Back to Top")<br>
-In this section we will investigate reading input from the USB serial port and using it to affect our code operation. We will also look at a few C-language syntactical things, **for** and **while** loops, and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
+In this section we will investigate reading **input from the USB serial port** and using it to affect our code operation. We will also look at a few C-language **syntax**, **for** and **while** loops (we won't look at **until** loops), and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
 
 Some of the code might get a little complicated. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
@@ -21,7 +21,7 @@ Some of the code might get a little complicated. Don't worry, this is a first in
   * [The setup Code - Temp - for loop inside the parenthesis](#the-setup-code-\--temp-\--for-loop-inside-the-parenthesis "The setup Code - Temp - for loop inside the parenthesis")
   * [The setup Code - Temp - for loop inside the curly braces](#the-setup-code-\--temp-\--for-loop-inside-the-curly-braces "The setup Code - Temp - for loop inside the curly braces")
 
-## The setup code
+## Calling the setup code
 [Back to Top](#notes "Back to Top")<br>
 One thing I want to point out is that there is nothing magic about the **setup()** and **loop()** code. It is there for your convenience, but in this section we will only use the **setup()** and not do the **loop()** ever.
 
@@ -38,19 +38,55 @@ void main() {
 
 This code would call **setup()** once and then loop forever calling **loop()**. This is because the **while () {}** statement will repeat the code inside the **{}** block as long as the condition inside the **()** is non-zero. Because we did **#define TRUE 1**, that will always be the case.
 
-One way to break out of any loop is with the **break** statement. This would quit executing the loop **{}** block and continue on the next code statement after the loop **{}** block. This works for all types of loops.
+One way to break out of any loop is with the **break** statement. This would quit executing the loop **{}** block and continue on the next code statement after the loop **{}** block. The **break** statement works for exiting all types of loops.
 
-In fact the code underneath **setup()** and **loop()** is more complicated than my code above, but you can almost always do your code as if it was being called from the above.
+In fact the code calling **setup()** and **loop()** is more complicated than my code above, but you can **almost** always do your code as if it was being called from the above.
 
-### The setup Code - before the setup Code
+## Before the setup Code
 [Back to Top](#notes "Back to Top")<br>
-We have a few routines definitions before the setup Code. Here is a little map:
+We have a few routines and definitions before the setup Code. Here is a little map:
 | What | Description |
 | --- | --- |
 | #define's | We #define TRUE, FALSE, DO_DEBUG, and DO_DEBUG_INPUT.<br>The DEBUG #defines control macro definitions for things such as DEBUG_PRINT and DEBUG_PRINTLN. These statements can be sprinkled around to help debugging. After debugging is complete, DO_DEBUG and DO_DEBUG_INPUT can be #defined as 0 and the statements won't compile. |
 | #define's | #define NUMOF(x) (sizeof((x)) / sizeof((*x))) // calculates the size of an array<br>This simple version of NUMOF is quite handy: it gives the number of elements in an array. We will use it with the array of character pointers named DAD_JOKES. The reason NUMOF is simple is that it doesn't try to do everything. If you give it something that is not an array and doesn't behave like an array, it will cheerfully give a compile error or quietly give you a nonsense number |
 | get_3_int_values() | Routine to get three integer values from the USB serial port then flush to '\n'<br>'\n' is end of line; called **newline**<br>When you call this routine it will not return until it gets three integers. You can enter them all on one line such as "1,2,3" or enter each number on a separate line without using commas. If you enter "1,2,3,fred" it will ignore everything after the "," following 3. |
-| get_one_string() | Routine to get one string (no leading or trailing ' ' or '\t') then flush to '\n'<br>'\t' is the **TAB** character<br>IF you enter "Fred Joe Mary" it will just return "Fred". |
+| get_ascii_string() | Routine to get one string (no leading or trailing ' ' or '\t') then flush to '\n'<br>'\t' is the **TAB** character<br>IF you enter "Fred Joe Mary" it will just return "Fred". |
+
+## Before the setup Code - get_3_int_values
+[Back to Top](#notes "Back to Top")<br>
+Some later code does the following
+```C
+      int first, increment, beyond_maximum; // temp loop parameters
+          < ... >
+      Serial.println(F("Enter start degF, end degF, and stride degF\n"));
+      get_3_int_values(&first, &beyond_maximum, &increment);
+      Serial.print(F("You entered ")); Serial.print(first); Serial.print(F(", ")); Serial.print(beyond_maximum); Serial.print(F(", and "));
+```
+
+**Syntax** - the comma (**,**) in **int first, increment, beyond_maximum;** causes all of these variables to be defined as **int**.
+
+At the end of **get_3_int_values** we see the code
+```C
+void get_3_int_values(int * first, int * second, int * third) {
+          < ... >
+    *first = tmp_first;
+    *second = tmp_second;
+    *third = tmp_third;
+```
+
+**Syntax**
+- the ampersand **&** in the call to **get_3_int_values(&first, &beyond_maximum, &increment);** means to pass a pointer to (the address of) the variables first, etc.
+- the asterisk **\*** in routine **get_3_int_values(int * first, int * second, int * third)** tells the C compiler to treat the parameters being passed in as a pointer to (the address of) the three integers.
+- the parameters get substituted in order. For instance, &first in the call goes to "int * first" in the routine get_3_int_values, &beyond_maximum goes to "int * second", and &increment goes to "int * third".
+- to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as "dereferencing" the pointer.
+
+## Before the setup Code - get_ascii_string
+[Back to Top](#notes "Back to Top")<br>
+
+## The setup Code
+[Back to Top](#notes "Back to Top")<br>
+| What | Description |
+| --- | --- |
 | setup() | Initializes everything then does a forever loop with **while (TRUE) {}**.<br>Inside the while loop it asks "Enter T (Temp), J (Joke), C (ChooseJoke), or A (AllJoke)"<br>T (or t) asks for three integer parameters for a **for loop** converting degrees Fahrenheit to degrees Centigrade.<br>J gives you the next Dad Joke in its list.<br>C asks for three integer numbers to have the corresponding Dad Jokes printed.<br>A gives you all the Dad Jokes. |
 
 ### The setup Code - initialization
@@ -127,7 +163,7 @@ Once we have the address of the string in input_string, we check the first lette
 Then we execute different code blocks depending on what the first letter is.
 - Note the **if () {} else if () {} else {}** structure. If the first letter is not T, J, C or A we will complain and try again.
 
-### The setup Code - Temperature - for loop inside the parenthesis
+#### The setup Code - Temperature - for loop inside the parenthesis
 [Back to Top](#notes "Back to Top")<br>
 ```C
   int f, c; // fahrenheit and centigrade
@@ -198,17 +234,7 @@ The for loop behaves **somewhat** like the following:
 
 As the comment says, this doesn't take care of the case where (f < 130) is false, but you see the gist of it.
 
-### The setup Code - Temperature - where did those numbers come from
+#### The setup Code - Joke
 [Back to Top](#notes "Back to Top")<br>
-Now that we have seen how a for loop operates, where did we get those numbers first, beyond_maximum, and increment?
-
-The temperature section starts like this
-```C
-    if ('T' == input_string[0]) {
-      #define PRINT_MAX 30 // PRINT_MAX is the maximum number of temp loops to allow
-      Serial.println(F("Enter start degF, end degF, and stride degF\n"));
-      get_3_int_values(&first, &beyond_maximum, &increment);
-      Serial.print(F("You entered ")); Serial.print(first); Serial.print(F(", ")); Serial.print(beyond_maximum); Serial.print(F(", and ")); Serial.println(increment);
-```
 
 

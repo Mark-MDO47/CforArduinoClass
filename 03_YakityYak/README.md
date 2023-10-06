@@ -14,6 +14,7 @@ What will you want to pay attention to or return to when you have a need?
 - General useful C language:
   - [Before the setup Code](#before-the-setup-code "Before the setup Code")
   - [Before the setup Code - DAD_JOKES](#before-the-setup-code-\--dad_jokes "Before the setup Code - DAD_JOKES")
+  - [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
   - [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string") - the **Syntax** section.
 - Techniques to get numbers or strings from a serial port:
   - [Before the setup Code - get_3_int_values](#before-the-setup-code-\--get_3_int_values "Before the setup Code - get_3_int_values")
@@ -343,11 +344,11 @@ char * get_ascii_string() {
 REMEMBER that the **DEBUG_INPUT_PRINT** and **DEBUG_INPUT_PRINTLN** macros will turn into blank lines unless **DO_DEBUG_INPUT** is defined as TRUE or non-zero.
 - See [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging") for more info
 
-The user could type in a string of indefinite length and we have a place to store it with a fixed length **#define MAX_STRING_LENGTH 20**. If not handled properly, this could lead to a classic type of bug known as a **buffer overflow**, where data is written past the end of a buffer and therefore into areas that may be unrelated. get_ascii_string() has code to prevent a buffer overflow.
+The user could type in a string of indefinite length and we have a place to store it with a fixed length - **#define MAX_STRING_LENGTH 20**. If not handled properly, this could lead to a classic type of bug known as a **buffer overflow**, where data is written past the end of a buffer and therefore into areas that may be unrelated. get_ascii_string() has code to prevent a buffer overflow.
 - When getting the typing from the user, the typing goes into a C++ object of type **String** in the call **Serial.readStringUntil('\n');**. Assuming there is enough RAM available for dynamic allocation, this object will prevent buffer overflows. If there is not enough RAM, there is not much it can do but I assume it will be pretty robust.
 - get_ascii_string() then uses this <String> object to determine the start and end of the part of the string we want by means of methods <String>.trim() and <String>..indexOf(). We want a string without any blanks or tabs.
 - get_ascii_string() then range checks all the information and copies at most only as many characters as will fit into the ASCII char buffer. This code is the series of **tmp1 = min(tmp1,...)** statements. Note that the last of these checks against MAX_STRING_LENGTH.
-- To make the code easier to read, the ASCII char buffer is declared as **static char ascii_string[MAX_STRING_LENGTH+1];**. This is because we need a zero-terminated string so we need room for the zero. By having an extra buffer location for the zero-termination of a max-length string, the code doesn't have to be peppered with things like **MAX_STRING_LENGTH-1**; we can just use **MAX_STRING_LENGTH**.
+- To make the code easier to read, the ASCII char buffer is declared with **+1** as **static char ascii_string[MAX_STRING_LENGTH+1];**. This is because we need a zero-terminated string so we need room for the zero. By having an extra buffer location for the zero-termination of a max-length string, the code doesn't have to be peppered with things like **MAX_STRING_LENGTH-1**; we can just use **MAX_STRING_LENGTH**.
 
 **Syntax** - the **static** keyword makes ascii_string usable after get_ascii_string() returns. If we left "static" out, it would be a different classic type of bug **use after free**.
 - Any variable declared inside a curly-braces block or in a for-loop parenthesis without **static** will be returned to dynamically-allocatable free RAM when the block completes. Such variables should not be used after they are freed - they might have been dynamically allocated to some other use.

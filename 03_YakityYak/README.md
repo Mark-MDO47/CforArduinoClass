@@ -271,13 +271,13 @@ Now that there is some typing it will call **Serial.parseInt()** three times to 
 - Each time it is called, Serial.parseInt() will keep looking until it gets an integer. It skips characters that could not be an integer, using them as separators. It even skips over new lines.
 - Notice that if it sees something like all-ok, it will interpret the **-** minus sign as -0 and return zero. Same for **+** plus sign.
 
-Next it calls **Serial.read()** to get all the characters until we get the newline **'\n'**.
+Next it calls **Serial.read()** to get all the characters until we get the newline character **'\n'**.
 
 Finally it stores the three numbers where the caller told us to put them and returns.
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>
-Here is the code for 
+Here is the code for get_ascii_string():
 ```C
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // get_ascii_string() - get one string (no leading or trailing ' ' or '\t') then flush to '\n'
@@ -298,7 +298,7 @@ Here is the code for
 //    The second time you call it, it will overwrite the string buffer from
 //    the first call.
 //
-#define MAX_STRING_LENGTH 20
+#define MAX_STRING_LENGTH 120
 
 char * get_ascii_string() {
   static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
@@ -338,6 +338,10 @@ char * get_ascii_string() {
   return(ascii_string);
 } // end get_ascii_string() - STRING CLASS version
 ```
+
+REMEMBER that the **DEBUG_INPUT_PRINT** and **DEBUG_INPUT_PRINTLN** macros will turn into blank lines unless **DO_DEBUG_INPUT** is defined as TRUE or non-zero.
+- See [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging") for more info
+
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

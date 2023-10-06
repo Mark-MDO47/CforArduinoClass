@@ -342,10 +342,11 @@ char * get_ascii_string() {
 REMEMBER that the **DEBUG_INPUT_PRINT** and **DEBUG_INPUT_PRINTLN** macros will turn into blank lines unless **DO_DEBUG_INPUT** is defined as TRUE or non-zero.
 - See [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging") for more info
 
-The user could type in a string of indefinite length and we have a place to store it with a fixed length **#define MAX_STRING_LENGTH 20**. If not handled properly, this could lead to a classic type of bug known as a **buffer overflow**, where data is written past the end of a buffer and therefore into areas that may be unrelated. This routine has code to prevent this.
+The user could type in a string of indefinite length and we have a place to store it with a fixed length **#define MAX_STRING_LENGTH 20**. If not handled properly, this could lead to a classic type of bug known as a **buffer overflow**, where data is written past the end of a buffer and therefore into areas that may be unrelated. get_ascii_string() has code to prevent a buffer overflow.
 - When getting the typing from the user, the typing goes into a C++ object of type **String**. Assuming there is enough RAM available for dynamic allocation, this object will prevent buffer overflows. I haven't read and digested all the code is **String** but I assume it is pretty robust.
 - get_ascii_string() then uses this <String> object to determine the start and end of the string by means of methods <String>.trim() and <String>..indexOf().
-- get_ascii_string() then range checks all the information and copies at most only as many characters as will fit into the ASCII char buffer.
+- get_ascii_string() then range checks all the information and copies at most only as many characters as will fit into the ASCII char buffer. This code is the series of **tmp1 = min(tmp1,...)** statements.
+- To make the code easier to read, the buffer is declared as **static char ascii_string[MAX_STRING_LENGTH+1];**. This is because we need a zero-terminated string so we need room for the zero. By having an extra buffer location for the zero-termination of a max-length string, the code doesn't have to be peppered with things like **MAX_STRING_LENGTH-1**; we can just use **MAX_STRING_LENGTH**.
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

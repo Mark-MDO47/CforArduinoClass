@@ -18,8 +18,6 @@
 #define TRUE  1 // in a LOGICAL statement, anything non-zero is true
 #define FALSE 0 // in a LOGICAL statement, only zero is false
 
-#define USE_STRING_CLASS TRUE // TRUE=string class, FALSE=ASCII .read and .available
-
 #define DO_DEBUG FALSE // TRUE=debug, FALSE=no debug
 #if DO_DEBUG
   // NOTE: these are not complex enough to cover all the cases
@@ -41,9 +39,9 @@
 #endif // DO_DEBUG_INPUT
 
 // NOTE: the following will not warn you if you use it on something that is not an array
-#define NUMOF(x) (sizeof((x)) / sizeof((*x))) // calculates the size of an array
+#define NUMOF(x) (sizeof((x)) / sizeof((x[0]))) // calculates the size of an array
 
-char * DAD_JOKES[] = {
+const char * DAD_JOKES[] = {
   "What's a lawyer's favorite drink? Subpoena colada.",
   "I'm afraid for the calendar. Its days are numbered.",
   "I used to hate facial hair, but then it grew on me.",
@@ -95,10 +93,21 @@ int CURRENT_DAD_JOKE = 0;
 //
 //    parameters:
 //       int * first, int * second, int * third - place to store three integers
-//    returns: nothing
+//    returns: nothing; values are stored via parameter pointers
 //
 // Reads from Serial, gets three integers then flushes to '\n'.
+// Stores the three integers via the addresses from the three input parameters
 // Does not return until the flush is complete.
+//
+// Example input strings that will fill results with 1, 2, and 3:
+//     (one line) -> "1,2,3"
+//     (one line) -> "    1   2   3    this text is ignored"
+//     (6 lines)  -> "q ignores non integers but watch out for minus sign
+//                    a
+//                    k
+//                    1
+//                    2
+//                    3"
 //
 
 void get_3_int_values(int * first, int * second, int * third) {
@@ -106,119 +115,25 @@ void get_3_int_values(int * first, int * second, int * third) {
 
   while (0 == Serial.available()) ; // wait for some typing
 
-  // if there's any serial available, read it:
-  while (Serial.available() > 0) {
-    // look for the next valid integer in the incoming serial stream:
-    tmp_first = Serial.parseInt();
-    DEBUG_PRINT(F("DEBUG tmp_first=")); DEBUG_PRINT(tmp_first);
-    // do it again:
-    tmp_second = Serial.parseInt();
-    DEBUG_PRINT(F(" tmp_second=")); DEBUG_PRINT(tmp_second);
-    // do it again:
-    tmp_third = Serial.parseInt();
-    DEBUG_PRINT(F(" tmp_third=")); DEBUG_PRINT(tmp_third);
+  // now read the next three numbers. Serial.parseInt() will keep going until it has a number
+  // get the next valid integer in the incoming serial stream:
+  tmp_first = Serial.parseInt();
+  DEBUG_PRINT(F("DEBUG tmp_first=")); DEBUG_PRINT(tmp_first);
+  // do it again:
+  tmp_second = Serial.parseInt();
+  DEBUG_PRINT(F(" tmp_second=")); DEBUG_PRINT(tmp_second);
+  // do it again:
+  tmp_third = Serial.parseInt();
+  DEBUG_PRINT(F(" tmp_third=")); DEBUG_PRINT(tmp_third);
 
-    // look for the newline. That's the end of the "sentence":
-    while (!(Serial.read() == '\n')) ; // wait for the end of line
-    DEBUG_PRINTLN(F(" Got the newline"));
+  // look for the newline. That's the end of the "sentence":
+  while (!(Serial.read() == '\n')) ; // wait for the end of line
+  DEBUG_PRINTLN(F(" Got the newline"));
 
-    *first = tmp_first;
-    *second = tmp_second;
-    *third = tmp_third;
-  } // end while (Serial.available() > 0)
+  *first = tmp_first;
+  *second = tmp_second;
+  *third = tmp_third;
 } // end get_3_int_values()
-
-#if !USE_STRING_CLASS
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// get_ascii_string() - get one string (no leading or trailing ' ' or '\t') then flush to '\n'
-//
-// THIS IS THE ASCII VERSION - uses Serial.available() and Serial.read()
-//
-//    parameters: none
-//    returns:    char * pointer to the string
-//
-// Reads from Serial, gets one string then flushes to '\n'.
-// Does not return until the flush is complete.
-// Maximum string length is MAX_STRING_LENGTH
-//
-// Restriction: if you want to get two different strings, you need to copy
-//    them out of our string buffer when we return and store the strings in
-//    your own separate buffers.
-// Another way to say this is that this routine only has one string buffer.
-//    The second time you call it, it will overwrite the string buffer from
-//    the first call.
-//
-#define MAX_STRING_LENGTH 20
-
-char * get_ascii_string() {
-  uint16_t ascii_string_end = 0; // points to zero at end of current string
-  uint8_t str_start = FALSE;
-  uint8_t str_end = FALSE;
-  uint8_t str_done = FALSE;
-  char inchar;
-  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
-
-  memset((void *)ascii_string, 0, NUMOF(ascii_string)); // clear buffer; good idea for zero-terminated strings
-  while (TRUE) {
-    // if there's any serial available, read it:
-    if (Serial.available() > 0) {
-      DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-      inchar = (char) Serial.read();
-      if ( !str_start ) { // if waiting for start of string
-        if (' ' < inchar) {
-          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-          ascii_string[ascii_string_end++] = inchar;
-          str_start = TRUE;
-        }
-      } else if ( !str_end ) { // if waiting for string finish
-        if (' ' < inchar) {
-          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-          if (ascii_string_end < MAX_STRING_LENGTH) ascii_string[ascii_string_end++] = inchar;
-          else str_end = TRUE;
-        } else if ('\n' == inchar) {
-          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-          str_end = TRUE;
-          str_done = TRUE;
-        } else {
-          DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-          str_end = TRUE;
-        }
-      } else { // flush the remaining
-       DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-        if ('\n' != inchar)
-          while (!(Serial.read() == '\n')) ; // wait for the end of line
-        str_done = TRUE;
-      } // end if to process one character
-    } // end if Serial.available
-    if (str_done) break; // we got our string
-  } // end while (TRUE)
-  DEBUG_INPUT_PRINT(F("DBGIN ")); DEBUG_INPUT_PRINT(__func__);   DEBUG_INPUT_PRINT(F(" st=")); DEBUG_INPUT_PRINT(str_start);  DEBUG_INPUT_PRINT(F(" en=")); DEBUG_INPUT_PRINT(str_end); DEBUG_INPUT_PRINT(F(" dn=")); DEBUG_INPUT_PRINT(str_done); DEBUG_INPUT_PRINT(F(" line ")); DEBUG_INPUT_PRINTLN(__LINE__);
-  return(ascii_string);
-} // end get_ascii_string() - ASCII version
-#else // #if USE_STRING_CLASS
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// string2ascii_ncopy() - copy the ASCII chars from a string subset to a zero-terminated string
-//
-// strptr           - String object with the source chars
-// asciiptr         - pointer to a char buffer containing at least (1+maxout) locations
-// idxstart, idxend - int indices within *strptr for the first char and one past the last char to copy
-// maxout           - int one less than the size of the buffer at *asciiptr
-//
-// Will not copy more than maxout chars
-//
-// returns: pointer to start of asciiptr
-//
-// limitations: for simplicity does not do error checking such as
-//      strptr and asciiptr not NULL pointers
-//      idxend > idxstart
-//      idxend-idxstart <= maxout
-//
-char * string2ascii_ncopy(String strobj, char *asciiptr, int idxstart, int idxend, int maxout) {
-  for (int i = 0; i < min(min(idxend-idxstart,maxout),strobj.length()); i++) {
-    asciiptr[i] = strobj[i+idxstart];
-  }
-  return(asciiptr);
-} // end string2ascii_ncopy()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // get_ascii_string() - get one string (no leading or trailing ' ' or '\t') then flush to '\n'
@@ -278,7 +193,6 @@ char * get_ascii_string() {
 
   return(ascii_string);
 } // end get_ascii_string() - STRING CLASS version
-#endif // #if !USE_STRING_CLASS
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // setup() - the setup function runs once when you press reset or power the board

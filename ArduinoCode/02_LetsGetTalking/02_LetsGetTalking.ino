@@ -34,7 +34,7 @@ int loop_count = 0;
 //        Serial.println(str_ptr);
 //
 char  str_num[13] = { 72,  101,  108,  108,  111,  32,  87,  111,  114,  108,  100,  33,  0 };
-char *str_ptr = "Hello World!";
+const char *str_ptr = "Hello World!";
 
 // the setup function runs once when you press reset or power the board
 void setup() {

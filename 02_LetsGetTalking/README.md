@@ -179,11 +179,12 @@ We could define this string as follows:<br>
 //        Serial.println(str_ptr);
 //
 char  str_num[13] = { 72,  101,  108,  108,  111,  32,  87,  111,  114,  108,  100,  33,  0 };
-char *str_ptr = "Hello World!";
+const char *str_ptr = "Hello World!";
 ```
 The "char str_num[13] = { ... }" notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.<br>
-The 'char *str_ptr = "Hello World!"' creates a zero-terminated **array** of type **char** somewhere and stores the address in str_ptr.<br>
+The 'const char *str_ptr = "Hello World!"' creates a zero-terminated **array** of type **char** somewhere and stores the address in str_ptr.<br>
 Both str_num and str_ptr can **almost** always be used in code statements with exactly the same syntax.
+- The **const** part is a tricky syntax to avoid a C++ warning about turning a "pointer to a constant string ("Hello World!")" into a "pointer to a string that can be modified (char *str_ptr)". The rules for the placement of const can get very tricksy, but this one is simple.
 
 Below is how the array str_num is initialized:<br>
 | type | str_num[0] | str_num[1] | str_num[2] | str_num[3] | str_num[4] | str_num[5] | str_num[6] | str_num[7] | str_num[8] | str_num[9] | str_num[10] | str_num[11] | str_num[12] |

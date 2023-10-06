@@ -298,7 +298,7 @@ Here is the code for get_ascii_string():
 //    The second time you call it, it will overwrite the string buffer from
 //    the first call.
 //
-#define MAX_STRING_LENGTH 120
+#define MAX_STRING_LENGTH 20
 
 char * get_ascii_string() {
   static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
@@ -342,6 +342,10 @@ char * get_ascii_string() {
 REMEMBER that the **DEBUG_INPUT_PRINT** and **DEBUG_INPUT_PRINTLN** macros will turn into blank lines unless **DO_DEBUG_INPUT** is defined as TRUE or non-zero.
 - See [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging") for more info
 
+The user could type in a string of indefinite length and we have a place to store it with a fixed length **#define MAX_STRING_LENGTH 20**. If not handled properly, this could lead to a classic type of bug known as a **buffer overflow**, where data is written past the end of a buffer and therefore into areas that may be unrelated. This routine has code to prevent this.
+- When getting the typing from the user, the typing goes into a C++ object of type **String**. Assuming there is enough RAM available for dynamic allocation, this object will prevent buffer overflows. I haven't read and digested all the code is **String** but I assume it is pretty robust.
+- get_ascii_string() then uses this <String> object to determine the start and end of the string by means of methods <String>.trim() and <String>..indexOf().
+- get_ascii_string() then range checks all the information and copies at most only as many characters as will fit into the ASCII char buffer.
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

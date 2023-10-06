@@ -259,19 +259,21 @@ void get_3_int_values(int * first, int * second, int * third) {
 } // end get_3_int_values()
 ```
 
-The first thing we do is wait for some typing from the "Serial Monitor" - **while (0 == Serial.available()) ;**.
+REMEMBER that the **DEBUG_PRINT** and **DEBUG_PRINTLN** macros will turn into blank lines unless **DO_DEBUG** is defined as TRUE or non-zero.
+- See [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging") for more info
+
+The first thing get_3_int_values() does is wait for some typing from the "Serial Monitor" - **while (0 == Serial.available()) ;**.
 - The **while** loop executes the while block until the while condition inside the parenthesis is TRUE.
   - **(0 == Serial.available())** will be TRUE until typing starts, then FALSE.
-- The while block in this case is the null statement **;**. This causes us to continuously check the while condition is FALSE.
+- The while block in this case is the null statement **;**. This causes the code to continuously check the while condition is FALSE.
 
-Now that we see some typing we will call **Serial.parseInt()** three times to get our integers.
-- Serial.parseInt() will keep looking until it gets an integer, skipping characters that could not be an integer or else using them as separators. Notice that if it sees something like all-ok, it will interpret the **-** minus sign as -0 and return zero. Same for **+** plus sign.
+Now that there is some typing it will call **Serial.parseInt()** three times to get the three integers.
+- Each time it is called, Serial.parseInt() will keep looking until it gets an integer. It skips characters that could not be an integer, using them as separators. It even skips over new lines.
+- Notice that if it sees something like all-ok, it will interpret the **-** minus sign as -0 and return zero. Same for **+** plus sign.
 
-Next we call **Serial.read()** until we get the newline **'\n'**.
+Next it calls **Serial.read()** to get all the characters until we get the newline **'\n'**.
 
-Finally we store the three number where the caller told us to put them and return.
-
-NOTE that the **DEBUG_PRINT** and **DEBUG_PRINTLN** macros will turn into blank lines unless 
+Finally it stores the three numbers where the caller told us to put them and returns.
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>

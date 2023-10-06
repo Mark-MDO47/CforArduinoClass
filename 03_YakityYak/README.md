@@ -81,6 +81,53 @@ We have a few routines and definitions before the setup Code. Here is a little m
 | get_3_int_values() | Routine to get three integer values from the USB serial port then flush to '\n'<br>'\n' is end of line; called **newline**<br>When you call this routine it will not return until it gets three integers. You can enter them all on one line such as "1,2,3" or enter each number on a separate line without using commas. If you enter "1,2,3,fred" it will ignore everything after the "," following 3. |
 | get_ascii_string() | Routine to get one string (no leading or trailing ' ' or '\t') then flush to '\n'<br>'\t' is the **TAB** character<br>IF you enter "Fred Joe Mary" it will just return "Fred". |
 
+### Before the setup Code - Debugging
+[Back to Top](#notes "Back to Top")<br>
+Here are some **#define macros** that I use to print debug information until the code is working, and then turn it off (into blank lines). If I see more bugs I can turn it on again.
+```C
+#define TRUE  1 // in a LOGICAL statement, anything non-zero is true
+#define FALSE 0 // in a LOGICAL statement, only zero is false
+
+#define DO_DEBUG FALSE // TRUE=debug, FALSE=no debug
+#if DO_DEBUG
+  // NOTE: these are not complex enough to cover all the cases
+  #define DEBUG_PRINT(x) Serial.print((x))
+  #define DEBUG_PRINTLN(x) Serial.println((x))
+#else
+  #define DEBUG_PRINT(x) 
+  #define DEBUG_PRINTLN(x) 
+#endif // DO_DEBUG
+
+#define DO_DEBUG_INPUT FALSE // TRUE=debug, FALSE=no debug
+#if DO_DEBUG_INPUT
+  // NOTE: these are not complex enough to cover all the cases
+  #define DEBUG_INPUT_PRINT(x) Serial.print((x))
+  #define DEBUG_INPUT_PRINTLN(x) Serial.println((x))
+#else
+  #define DEBUG_INPUT_PRINT(x)
+  #define DEBUG_INPUT_PRINTLN(x)
+#endif // DO_DEBUG_INPUT
+```
+
+First we #define TRUE as 1 and FALSE as 2. Remember that this means wherever the C compiler sees TRUE it will replace it with 1, etc.
+
+Next we see **#define DO_DEBUG FALSE**. As we will see this "turns off" the DEBUG_PRINT and DEBUG_PRINTLN macros. If we said **#define DO_DEBUG TRUE** it would turn on those macros.
+
+Next we see **#if DO_DEBUG**, **#else** and **#endif**. There is another one we don't use here **#elif** for "else if".
+- Everything between **#if DO_DEBUG** and **#else** is only compiled if DO_DEBUG is TRUE or non-zero; otherwise it is not compiled.
+- Everything between **#else** and **#endif** is only compiled if DO_DEBUG is FALSE or zero; otherwise it is not compiled.
+- If **#define DEBUG_INPUT_PRINT(x) Serial.print((x))** is compiled, **DEBUG_PRINT("This is a string");** will turn into **Serial.print(("This is a string"));**
+- if **#define DEBUG_PRINT(x)** with no text after is compiled,  **DEBUG_PRINT("This is a string");** will turn into **;** (a null code statement)
+
+Similar statements apply to DO_DEBUG_INPUT and DEBUG_INPUT_PRINT, etc.
+- I left these DEBUG_ macros in the code since they can be pretty handy for debugging. When it seems to work you can turn them off. If later you experience another bug, you can turn them back on.
+
+**#define macros** can get pretty complex. I won't really describe how they work here in any more detail.
+- If you are interested you might start with https://en.wikibooks.org/wiki/C_Programming/Preprocessor_directives_and_macros and search for #define
+- Or **The C Programming Language** by Kernighan and Ritchie.
+- **Pro Tip** - there are some predefined things \_\_file\_\_, \_\_func\_\_, \_\_line\_\_, and others that can be helpful to print in debug statements.
+- **TLDR** - the code for 98_TLDR_LetsGetTalking has more complicated input functions and more complex use of these debugging methods.
+
 ### Before the setup Code - DAD_JOKES
 [Back to Top](#notes "Back to Top")<br>
 The definition of the DAD_JOKES array of pointers is shown below, with **< ... >** indicating some lines left out.
@@ -111,9 +158,13 @@ These strings take a lot of our RAM and our total usage of allocated RAM is almo
 - Global variables use 1522 bytes (74%) of dynamic memory, leaving 526 bytes for local variables. Maximum is 2048 bytes.
 
 Because we need to leave some RAM for dynamic allocation, I just commented out a bunch of dad jokes until we had about 25% of RAM left.
+- We could have done trickier code to put these strings into PROGMEM instead of RAM but that would make everything even trickier.
+- For a description of PROGMEM, see https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/README.md#progmem-and-f-macro-to-save-ram
 
-**Syntax** - we create the #define macro **#define NUMOF(x) (sizeof((x)) / sizeof((x[0])))**. Later in a code statement we use **NUMOF(DAD_JOKES)** to initialize an int variable named NUMOF_DAD_JOKES. If we look at **sizeof(DAD_JOKES)** we will see it is 38, but there are 19 strings that are not commented out. That is because each entry in DAD_JOKES is two bytes long which we can see by looking at the size of the first entry: **sizeof(DAD_JOKES[0])**. So by using NUMOF(DAD_JOKES) it is 38/2 or 19, the number of strings in DAD_JOKES.
-- The extra levels **()** helps to make the macro **NUMOF** work even on some odd ways of defining an array.
+**Syntax** - we create the #define macro **#define NUMOF(x) (sizeof((x)) / sizeof((x[0])))**. Later in a code statement we use **NUMOF(DAD_JOKES)** to initialize an int variable named NUMOF_DAD_JOKES.
+- If we look at **sizeof(DAD_JOKES)** we will see it is 38, but there are 19 strings that are not commented out. That is because each entry in DAD_JOKES is two bytes long which we can see by looking at the size of the first entry: **sizeof(DAD_JOKES[0])**.
+- So NUMOF(DAD_JOKES) does the division 38/2 to get 19, the number of strings in DAD_JOKES.
+- The extra levels **()** helps to make the macro **NUMOF** work even on some odd ways of defining an array or using NUMOF in expressions.
 
 By using this NUMOF macro, I don't have to count the strings by hand later on when I set up a loop to print all the DAD_JOKES.
 
@@ -168,7 +219,8 @@ Here is the code for get_3_int_values():
 // Example input strings that will fill results with 1, 2, and 3:
 //     (one line) -> "1,2,3"
 //     (one line) -> "    1   2   3    this text is ignored"
-//     (6 lines)  -> "q ignores non integers but watch out for minus sign
+//     (one line) -> "1x2y3"
+//     (6 lines)  -> "q ignores non integers but watch out for minus and plus sign
 //                    a
 //                    k
 //                    1
@@ -181,36 +233,40 @@ void get_3_int_values(int * first, int * second, int * third) {
 
   while (0 == Serial.available()) ; // wait for some typing
 
-  // if there's any serial available, read it:
-  while (Serial.available() > 0) {
-    // look for the next valid integer in the incoming serial stream:
-    tmp_first = Serial.parseInt();
-    DEBUG_PRINT(F("DEBUG tmp_first=")); DEBUG_PRINT(tmp_first);
-    // do it again:
-    tmp_second = Serial.parseInt();
-    DEBUG_PRINT(F(" tmp_second=")); DEBUG_PRINT(tmp_second);
-    // do it again:
-    tmp_third = Serial.parseInt();
-    DEBUG_PRINT(F(" tmp_third=")); DEBUG_PRINT(tmp_third);
+  // now read the next three numbers. Serial.parseInt() will keep going until it has a number
+  // get the next valid integer in the incoming serial stream:
+  tmp_first = Serial.parseInt();
+  DEBUG_PRINT(F("DEBUG tmp_first=")); DEBUG_PRINT(tmp_first);
+  // do it again:
+  tmp_second = Serial.parseInt();
+  DEBUG_PRINT(F(" tmp_second=")); DEBUG_PRINT(tmp_second);
+  // do it again:
+  tmp_third = Serial.parseInt();
+  DEBUG_PRINT(F(" tmp_third=")); DEBUG_PRINT(tmp_third);
 
-    // look for the newline. That's the end of the "sentence":
-    while (!(Serial.read() == '\n')) ; // wait for the end of line
-    DEBUG_PRINTLN(F(" Got the newline"));
+  // look for the newline. That's the end of the "sentence":
+  while (!(Serial.read() == '\n')) ; // wait for the end of line
+  DEBUG_PRINTLN(F(" Got the newline"));
 
-    *first = tmp_first;
-    *second = tmp_second;
-    *third = tmp_third;
-  } // end while (Serial.available() > 0)
+  *first = tmp_first;
+  *second = tmp_second;
+  *third = tmp_third;
 } // end get_3_int_values()
 ```
 
 The first thing we do is wait for some typing from the "Serial Monitor" - **while (0 == Serial.available()) ;**.
 - The **while** loop executes the while block until the while condition inside the parenthesis is TRUE.
-- **(0 == Serial.available())** will be TRUE until typing starts, then FALSE.
+  - **(0 == Serial.available())** will be TRUE until typing starts, then FALSE.
 - The while block in this case is the null statement **;**. This causes us to continuously check the while condition is FALSE.
 
-Once we see some typing we enter the next while loop **while (Serial.available() > 0) { ... }**.
-- **(Serial.available() > 0)** is TRUE as long as there are characters available
+Now that we see some typing we will call **Serial.parseInt()** three times to get our integers.
+- Serial.parseInt() will keep looking until it gets an integer, skipping characters that could not be an integer or else using them as separators. Notice that if it sees something like all-ok, it will interpret the **-** minus sign as -0 and return zero. Same for **+** plus sign.
+
+Next we call **Serial.read()** until we get the newline **'\n'**.
+
+Finally we store the three number where the caller told us to put them and return.
+
+NOTE that the **DEBUG_PRINT** and **DEBUG_PRINTLN** macros will turn into blank lines unless 
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>
@@ -248,15 +304,6 @@ We start to do the normal prints and then we get **Serial.println(F("CforArduino
 - Using PROGMEM usually requires some extra code, but replacing a double-quoted string in a function or method call is as simple as surrounding it with **F()**.
 - I did this trick throughout the code so there would be more room for Dad Jokes.
 - You can find more info about this in the Resources page from the Arduino Class: [PROGMEM and F macro to save RAM](https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/README.md#progmem-and-f-macro-to-save-ram "PROGMEM and F macro to save RAM")
-
-Then we see **DEBUG_PRINT(F("\nNUMOF_DAD_JOKES ")); DEBUG_PRINTLN(NUMOF_DAD_JOKES); DEBUG_PRINTLN(F(""));**. This is some debug code I put in to test my "#define NUMOF" macro.
-- #define macros can get pretty complex. I won't really describe how they work here.
-- If you are interested you might start with https://en.wikibooks.org/wiki/C_Programming/Preprocessor_directives_and_macros and search for #define
-- NUMOF() was a simple to moderately-complicated macro to return the number of array elements in its parameter.
-- I had an earlier statement **int NUMOF_DAD_JOKES = NUMOF(DAD_JOKES);** which initialized the variable NUMOF_DAD_JOKES with the number of elements in the array DAD_JOKES.
-- DEBUG_PRINT() and DEBUG_PRINTLN() are simple macros that either turn into Serial.print() or Serial.println(). They can be set to just return blanks so there is no print statement.
-- I left these DEBUG_ macros in the code since they can be pretty handy for debugging. When it seems to work you can turn them off. If later you experience another bug, you can turn them back on.
-- **Pro Tip** - there are some predefined things \_\_file\_\_, \_\_func\_\_, \_\_line\_\_, and others that can be helpful to print in debug statements. Try setting **#define DO_DEBUG 1** and **#define DO_DEBUG_INPUT 1** and see what sorts of printouts there are.
 
 ### The setup Code - while TRUE - forever loop
 [Back to Top](#notes "Back to Top")<br>

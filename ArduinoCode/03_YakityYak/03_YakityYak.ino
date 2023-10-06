@@ -102,7 +102,8 @@ int CURRENT_DAD_JOKE = 0;
 // Example input strings that will fill results with 1, 2, and 3:
 //     (one line) -> "1,2,3"
 //     (one line) -> "    1   2   3    this text is ignored"
-//     (6 lines)  -> "q ignores non integers but watch out for minus sign
+//     (one line) -> "1x2y3"
+//     (6 lines)  -> "q ignores non integers but watch out for minus and plus sign
 //                    a
 //                    k
 //                    1

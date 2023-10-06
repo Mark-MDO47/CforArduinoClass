@@ -6,9 +6,9 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 
 ## Introduction
 [Back to Top](#notes "Back to Top")<br>
-In this section we will investigate reading **input from the USB serial port** and using it to affect our code operation. We will also look at a few C-language **syntax**, some **for** and **while** loops (we won't look at **until** loops), and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
+In this section we will investigate reading **input from the USB serial port** and using it to affect our code operation. We will also look at a few C-language **syntax** items, some **for** and **while** loops (we won't look at **until** loops), and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
 
-Some of the code might get a little complicated. It might feel like drinking from a fire hose. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
+Some of the code might get a little complicated at this early stage in your learning to code. It might feel like drinking from a fire hose. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
 What will you want to pay attention to or return to when you have a need?
 - General useful C language:

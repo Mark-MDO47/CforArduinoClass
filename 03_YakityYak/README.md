@@ -277,6 +277,67 @@ Finally it stores the three numbers where the caller told us to put them and ret
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>
+Here is the code for 
+```C
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// get_ascii_string() - get one string (no leading or trailing ' ' or '\t') then flush to '\n'
+//
+// THIS IS THE STRING CLASS VERSION
+//
+//    parameters: none
+//    returns:    char * pointer to the string
+//
+// Reads from Serial, gets one string then flushes to '\n'.
+// Does not return until the flush is complete.
+// Maximum string length is MAX_STRING_LENGTH
+//
+// Restriction: if you want to get two different strings, you need to copy
+//    them out of our string buffer when we return and store the strings in
+//    your own separate buffers.
+// Another way to say this is that this routine only has one string buffer.
+//    The second time you call it, it will overwrite the string buffer from
+//    the first call.
+//
+#define MAX_STRING_LENGTH 20
+
+char * get_ascii_string() {
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  String my_string_instance = "Hello!";
+  int16_t tmp1 = 0;
+  int16_t tmp2 = 0;
+  uint8_t found = FALSE;
+
+  Serial.setTimeout(10000); // 10,000 milliseconds is 10 seconds
+  memset((void *)ascii_string, 0, NUMOF(ascii_string)); // clear buffer; good idea for zero-terminated strings
+
+  while (!found) {
+    while (!Serial.available()) ; // wait for typing to start
+    my_string_instance = Serial.readStringUntil('\n'); // get a line
+    DEBUG_INPUT_PRINT(F("DBGIN Entire String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
+    my_string_instance.trim(); // trim off spaces/tabs front and back
+    DEBUG_INPUT_PRINT(F("DBGIN trimmed String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
+    if (0 != my_string_instance.length()) {
+      found = TRUE;
+      tmp1 = my_string_instance.indexOf(' ');
+      tmp2 = my_string_instance.indexOf('\t');
+      DEBUG_INPUT_PRINT(F("DBGIN tmp1=")); DEBUG_INPUT_PRINT(tmp1); DEBUG_INPUT_PRINT(F(", tmp2=")); DEBUG_INPUT_PRINTLN(tmp2);
+      if (-1 == tmp1) tmp1 = 2*MAX_STRING_LENGTH; // make it big and positive
+      if (-1 == tmp2) tmp2 = 2*MAX_STRING_LENGTH;
+      // if no ' ' or '\t' found, will copy entire string
+      //string2ascii_ncopy(my_string_instance, ascii_string, 0, min(tmp1,tmp2), MAX_STRING_LENGTH);
+      tmp1 = min(tmp1,tmp2);
+      tmp1 = min(tmp1,my_string_instance.length());
+      tmp1 = min(tmp1,MAX_STRING_LENGTH);
+      for (int i = 0; i < tmp1; i++) {
+        ascii_string[i] = my_string_instance[i];
+      }
+      DEBUG_INPUT_PRINT(F("DBGIN Entire ASCII string result |")); DEBUG_INPUT_PRINT(ascii_string); DEBUG_INPUT_PRINTLN(F("|"));
+    } // end if my_string_instance has at least one character
+  } // end while (!found)
+
+  return(ascii_string);
+} // end get_ascii_string() - STRING CLASS version
+```
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

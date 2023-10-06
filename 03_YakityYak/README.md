@@ -6,7 +6,7 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 
 ## Introduction
 [Back to Top](#notes "Back to Top")<br>
-In this section we will investigate reading **input from the USB serial port** and using it to affect our code operation. We will also look at a few C-language **syntax**, **for** and **while** loops (we won't look at **until** loops), and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
+In this section we will investigate reading **input from the USB serial port** and using it to affect our code operation. We will also look at a few C-language **syntax**, some **for** and **while** loops (we won't look at **until** loops), and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
 
 Some of the code might get a little complicated. It might feel like drinking from a fire hose. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
@@ -41,6 +41,13 @@ What will you want to pay attention to or return to when you have a need?
   * [The setup Code - forever loop - Joke](#the-setup-code-\--forever-loop-\--joke "The setup Code - forever loop - Joke")
   * [The setup Code - forever loop - Choose Joke](#the-setup-code-\--forever-loop-\--choose-joke "The setup Code - forever loop - Choose Joke")
   * [The setup Code - forever loop - All Jokes for loop](#the-setup-code-\--forever-loop-\--all-jokes-for-loop "The setup Code - forever loop - All Jokes for loop")
+
+## All the Code
+[Back to Top](#notes "Back to Top")<br>
+The code for this exercise is at
+- https://github.com/Mark-MDO47/CforArduinoClass/blob/master/ArduinoCode/03_YakityYak/03_YakityYak.ino
+
+We will be examining and running this code.
 
 ## Calling the setup code
 [Back to Top](#notes "Back to Top")<br>
@@ -81,7 +88,7 @@ The definition of the DAD_JOKES array of pointers is shown below, with **< ... >
 // NOTE: the following will not warn you if you use it on something that is not an array
 #define NUMOF(x) (sizeof((x)) / sizeof((x[0]))) // calculates the size of an array
 
-char * DAD_JOKES[] = {
+const char * DAD_JOKES[] = {
   "What's a lawyer's favorite drink? Subpoena colada.",
   "I'm afraid for the calendar. Its days are numbered.",
           < ... >
@@ -98,7 +105,7 @@ int NUMOF_DAD_JOKES = NUMOF(DAD_JOKES);
 int CURRENT_DAD_JOKE = 0;
 ```
 
-As we saw in [02_LetsGetTalking section on characters and strings](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/02_LetsGetTalking/README.md#ascii-characters-and-strings "02_LetsGetTalking section on characters and strings"), the form using double-quoted text such as **"string"** creates in most instances a **pointer** to a place where the **zero-terminated ASCII string** is stored. The code **char * DAD_JOKES[] = {** creates an array of **char \*** (int this case, pointers to strings) and everything after the open-curly-brace **{** until the closing-curly-brace **}** creates initialization values for this array.
+As we saw in [02_LetsGetTalking section on characters and strings](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/02_LetsGetTalking/README.md#ascii-characters-and-strings "02_LetsGetTalking section on characters and strings"), the form using double-quoted text such as **"string"** creates in most instances a **pointer** to a place where the **zero-terminated ASCII string** is stored. The code **const char * DAD_JOKES[] = {** creates an array of **char \*** (int this case, pointers to strings) and everything after the open-curly-brace **{** until the closing-curly-brace **}** creates initialization values for this array. The **const** part is a tricky syntax to avoid a C++ warning about turning a pointer to a constant string into a pointer to a string that could be modified. The rules for the placement of **const** can get very tricksy, but this one is simple.
 
 These strings take a lot of our RAM and our total usage of allocated RAM is almost 75% as shown when we compile.
 - Global variables use 1522 bytes (74%) of dynamic memory, leaving 526 bytes for local variables. Maximum is 2048 bytes.
@@ -160,8 +167,11 @@ Here is the code for get_3_int_values():
 //
 // Example input strings that will fill results with 1, 2, and 3:
 //     (one line) -> "1,2,3"
-//     (one line) -> "    1   2   3    this is ignored"
-//     (3 lines)  -> "1
+//     (one line) -> "    1   2   3    this text is ignored"
+//     (6 lines)  -> "q ignores non integers but watch out for minus sign
+//                    a
+//                    k
+//                    1
 //                    2
 //                    3"
 //
@@ -194,6 +204,13 @@ void get_3_int_values(int * first, int * second, int * third) {
 } // end get_3_int_values()
 ```
 
+The first thing we do is wait for some typing from the "Serial Monitor" - **while (0 == Serial.available()) ;**.
+- The **while** loop executes the while block until the while condition inside the parenthesis is TRUE.
+- **(0 == Serial.available())** will be TRUE until typing starts, then FALSE.
+- The while block in this case is the null statement **;**. This causes us to continuously check the while condition is FALSE.
+
+Once we see some typing we enter the next while loop **while (Serial.available() > 0) { ... }**.
+- **(Serial.available() > 0)** is TRUE as long as there are characters available
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>

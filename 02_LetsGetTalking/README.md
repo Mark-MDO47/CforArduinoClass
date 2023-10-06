@@ -334,7 +334,7 @@ If any non-zero value is used for a logic calculation such as **&&**, **||** or 
 - Serial.print((-7) || (2 < 1)); will print 1
 
 **SemiPro Tip** - watch out for complicated expressions that do the operations in an order you didn't expect!
-- I tend to use too many parenthesis **()** in my expressions in order to force the compiler to do it the way I want.
+- I tend to use too many parenthesis **()** in my expressions in order to force the compiler to do it the way I want. I call this style "in loco parenthesis".
 - That way I don't need to memorize the tables of the order of operations - know as **precedence**.
 - Some people don't like this style - they think everyone should memorize the precedence tables and that expressions should have as few parenthesis as possible.
 - Neither way is "right", it is a matter of style and preference.

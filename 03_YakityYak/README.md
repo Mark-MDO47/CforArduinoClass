@@ -23,7 +23,7 @@ What will you want to pay attention to or return to when you have a need?
   - [The setup Code - forever loop - Temperature for loop](#the-setup-code-\--forever-loop-\--temperature-for-loop "The setup Code - forever loop - Temperature for loop")
   - [The setup Code - forever loop - All Jokes for loop](#the-setup-code-\--forever-loop-\--all-jokes-for-loop "The setup Code - forever loop - All Jokes for loop")
 - Debugging methods and #define macros:
-  - [Before the setup Code - DAD_JOKES](#before-the-setup-code-\--dad_jokes "Before the setup Code - DAD_JOKES")
+  - [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging")
   - [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
 
 **Table Of Contents**

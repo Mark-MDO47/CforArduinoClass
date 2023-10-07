@@ -286,10 +286,14 @@ Here is the start of the code for get_ascii_string():
 char * get_ascii_string() {
   static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
   String my_string_object = "Hello!";
+       < ... >
+  return(ascii_string);
+} // end get_ascii_string() - STRING CLASS version
 ```
 
-**Syntax** - by declaring **char * get_ascii_string() {**, we are telling the C compiler that get_ascii_string() will return a pointer to zero or more characters. In fact get_ascii_string() will return a pointer to one or more characters in a zero-terminated ASCII string.
-- The code that calls get_ascii_string() looks like this:
+**Syntax** - by declaring **char * get_ascii_string() {**, we are telling the C compiler that get_ascii_string() will return a pointer to zero or more characters. By design, get_ascii_string() will return a pointer to one or more characters in a zero-terminated ASCII string. It does this in the code statement **return(ascii_string);**.
+
+The code that calls get_ascii_string() looks like this:
 ```C
   char * input_string; // this variable will store a pointer to a zero-terminated ASCII string
        < ... >
@@ -297,17 +301,22 @@ char * get_ascii_string() {
     Serial.print(F("You entered ")); Serial.println(input_string); Serial.println(F(""));
 ```
 
-As you can see, the address of the string that is returned from get_ascii_string() goes into the variable input_string that is declared as **char \*** - a pointer to zero or more char, just like in the declaration of get_ascii_string(). We can print this string with **Serial.println(input_string);**.
+**Syntax** - As you can see, the address of the string that is returned from get_ascii_string() goes into the variable input_string that is declared as **char \*** - a pointer to zero or more char, just like in the declaration of get_ascii_string(). We can print this string with **Serial.println(input_string);**.
 
+**Syntax** - the **static** keyword in **static char ascii_string[MAX_STRING_LENGTH+1];** makes ascii_string usable after get_ascii_string() returns.
 ```C
 #define MAX_STRING_LENGTH 20
 
 char * get_ascii_string() {
   static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine knows the name, but we return a pointer to it
   String my_string_object = "Hello!";
+       < ... >
+  return(ascii_string);
+} // end get_ascii_string() - STRING CLASS version
 ```
-**Syntax** - the **static** keyword in **static char ascii_string[MAX_STRING_LENGTH+1];** makes ascii_string usable after get_ascii_string() returns. If we left "static" out, it would be a different classic type of bug **use after free**.
-- Any variable declared inside a curly-braces block or in a for-loop parenthesis without **static** will be allocated in **dynamically-allocatable free RAM** and returned to **free** usage when the block completes. Such variables should not be used after they are freed - they might have been dynamically allocated to some other use in the meantime.
+
+If we left "static" out but still returned the address of ascii_string, it would be a different classic type of bug: **use after free**.
+- Any variable declared inside a curly-braces block or in a for-loop parenthesis without **static** will be allocated in **dynamically-allocatable free RAM** - almost certainly on a **stack** - and returned to **free** usage when the block completes. Such variables should not be used after they are freed - they might have been dynamically allocated to some other use in the meantime.
 - As an example, the next declaration **String my_string_object = "Hello!";** is allocated in dynamically-allocatable free RAM and "freed" when get_ascii_string() returns. We say that the **scope** of the variable **my_string_object** is within get_ascii_string().
 
 A different way to have the ascii_string variable usable after get_ascii_string() returns would be to declare it outside of all the code blocks - perhaps near the start of the 03_YakityYak.ino file. This would give the variable the **scope** of the entire file, and would automatically make it have a persistent character such as that given by the static keyword.

@@ -443,8 +443,9 @@ void setup() {
 
 The serial initialization code looks pretty familiar with a **while (!Serial) { ; }** loop on three lines.
 
-Next there is a **while (Serial.available()) Serial.read();**. Where are the curly braces?
+**Syntax** - next there is a **while (Serial.available()) Serial.read();**. Where are the curly braces?
 - The answer is that in any block statement such as **if () {}** or **while () {}**, if there is only one code statement to be executed in the block you don't need the curly braces. If there is more than one code statement, you need the curly braces to show what is inside the block.
+- The purpose of that code is to flush out any garbage characters that were left in the input queue when we initialized **Serial**.
 
 We start to do the normal prints and then we get **Serial.println(F("CforArduinoClass init..."));**. What is the **F()** doing there?
 - The F() surrounding the string places the string into **PROGMEM** instead of **RAM**. The Arduino Nano has very little RAM but much more PROGMEM.
@@ -468,10 +469,10 @@ We start to do the normal prints and then we get **Serial.println(F("CforArduino
 
 We saw the concept of pointers to zero-terminated ASCII strings in the last exercise. This time we will call **get_ascii_string()**, which returns pointer to a zero-terminated ASCII string typed in on the "Serial Monitor" window across the USB serial port.
 - Once again we use routines from https://www.arduino.cc/reference/en/language/functions/communication/serial/
-- I made a version of **get_ascii_string()** using only the following two routines. I thought it would be simple but it was surprisingly complicated.
+- I made a version of **get_ascii_string()** using only the following two routines. I thought it would be simple but it was surprisingly complicated. Eventually I got rid of this version.
   - Serial.available() - returns TRUE if there is a character that can be read
   - Serial.read() - reads one character
-  - I thought I was avoiding the complexity of using something like Serial.readStringUntil() and having to explain the difference between a **String object** and a **char \*** pointer to a zero-terminated ASCII string.
+  - I thought I was avoiding the complexity of using something like Serial.readStringUntil() and having to explain the difference between a **String object** and a **char \*** pointer to a zero-terminated ASCII string. Unfortunately, the code was too complicated.
 - I gave up on that and rewrote it using the builtin **String object** capabilities and these routines:
   - Serial.setTimeout() - sets the timeout for routines like readStringUntil()
   - Serial.available() - returns TRUE if there is a character that can be read

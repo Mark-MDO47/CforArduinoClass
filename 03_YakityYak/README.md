@@ -40,6 +40,7 @@ What will you want to pay attention to or return to when you have a need?
     * [How to call get_3_int_values and get three values back](#how-to-call-get_3_int_values-and-get-three-values-back "How to call get_3_int_values and get three values back")
     * [How does get_3_int_values work](#how-does-get_3_int_values-work "How does get_3_int_values work")
   * [Before the setup Code - get_ascii_string](#before-the-setup-code-\--get_ascii_string "Before the setup Code - get_ascii_string")
+    * [How does get_ascii_string work](#how-does-get_ascii_string-work "How does get_ascii_string work")
 * [The setup Code](#the-setup-code "The setup Code")
   * [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
   * [The setup Code - while TRUE - forever loop](#the-setup-code-\--while-true-\--forever-loop "The setup Code - while TRUE - forever loop")

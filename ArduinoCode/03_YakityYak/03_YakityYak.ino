@@ -158,8 +158,8 @@ void get_3_int_values(int * first, int * second, int * third) {
 #define MAX_STRING_LENGTH 20
 
 char * get_ascii_string() {
-  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
-  String my_string_instance = "Hello!";
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine knows the name, but we return a pointer to it
+  String my_string_object = "Hello!";
   int16_t tmp1 = 0;
   int16_t tmp2 = 0;
   uint8_t found = FALSE;
@@ -169,27 +169,27 @@ char * get_ascii_string() {
 
   while (!found) {
     while (!Serial.available()) ; // wait for typing to start
-    my_string_instance = Serial.readStringUntil('\n'); // get a line
-    DEBUG_INPUT_PRINT(F("DBGIN Entire String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
-    my_string_instance.trim(); // trim off spaces/tabs front and back
-    DEBUG_INPUT_PRINT(F("DBGIN trimmed String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
-    if (0 != my_string_instance.length()) {
+    my_string_object = Serial.readStringUntil('\n'); // get a line
+    DEBUG_INPUT_PRINT(F("DBGIN Entire String object |")); DEBUG_INPUT_PRINT(my_string_object); DEBUG_INPUT_PRINTLN(F("|"));
+    my_string_object.trim(); // trim off spaces/tabs front and back
+    DEBUG_INPUT_PRINT(F("DBGIN trimmed String object |")); DEBUG_INPUT_PRINT(my_string_object); DEBUG_INPUT_PRINTLN(F("|"));
+    if (0 != my_string_object.length()) {
       found = TRUE;
-      tmp1 = my_string_instance.indexOf(' ');
-      tmp2 = my_string_instance.indexOf('\t');
+      tmp1 = my_string_object.indexOf(' ');
+      tmp2 = my_string_object.indexOf('\t');
       DEBUG_INPUT_PRINT(F("DBGIN tmp1=")); DEBUG_INPUT_PRINT(tmp1); DEBUG_INPUT_PRINT(F(", tmp2=")); DEBUG_INPUT_PRINTLN(tmp2);
       if (-1 == tmp1) tmp1 = 2*MAX_STRING_LENGTH; // make it big and positive
       if (-1 == tmp2) tmp2 = 2*MAX_STRING_LENGTH;
       // if no ' ' or '\t' found, will copy entire string
-      //string2ascii_ncopy(my_string_instance, ascii_string, 0, min(tmp1,tmp2), MAX_STRING_LENGTH);
+      //string2ascii_ncopy(my_string_object, ascii_string, 0, min(tmp1,tmp2), MAX_STRING_LENGTH);
       tmp1 = min(tmp1,tmp2);
-      tmp1 = min(tmp1,my_string_instance.length());
+      tmp1 = min(tmp1,my_string_object.length());
       tmp1 = min(tmp1,MAX_STRING_LENGTH);
       for (int i = 0; i < tmp1; i++) {
-        ascii_string[i] = my_string_instance[i];
+        ascii_string[i] = my_string_object[i];
       }
       DEBUG_INPUT_PRINT(F("DBGIN Entire ASCII string result |")); DEBUG_INPUT_PRINT(ascii_string); DEBUG_INPUT_PRINTLN(F("|"));
-    } // end if my_string_instance has at least one character
+    } // end if my_string_object has at least one character
   } // end while (!found)
 
   return(ascii_string);

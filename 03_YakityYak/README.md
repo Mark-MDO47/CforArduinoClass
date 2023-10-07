@@ -280,12 +280,16 @@ Finally it stores the three numbers where the caller told us to put them and ret
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>
+Once again, first we will discuss how to call the routine and get the data back. Then we will discuss how the routine works.
+
+#### How to call get_ascii_string and get a pointer to the string back
+[Back to Top](#notes "Back to Top")<br>
 Here is the start of the code for get_ascii_string():
 ```C
 #define MAX_STRING_LENGTH 20
 
 char * get_ascii_string() {
-  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine knows the name, but we return a pointer to it
   String my_string_object = "Hello!";
        < ... >
   return(ascii_string);
@@ -327,7 +331,7 @@ A different way to have the ascii_string variable usable after get_ascii_string(
 #define MAX_STRING_LENGTH 20
 
 char * get_ascii_string() {
-  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine knows the name, but we return a pointer to it
   String my_string_object = "Hello!";
 ```
 **Syntax** - the next declaration is **String my_string_object = "Hello!";**. The **String** type is an Arduino built-in C++ class. When we say **String my_string_object = "Hello!";**, we are declaring the variable and initializing it to contain the string **"Hello!"**. This initialization would typically include setting other aspects of this string object, perhaps including the length of the string. There are other ways to initialize our String object; if you are interested you can find more information here:
@@ -362,7 +366,7 @@ Here is the code for get_ascii_string():
 #define MAX_STRING_LENGTH 20
 
 char * get_ascii_string() {
-  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine knows the name, but we return a pointer to it
   String my_string_object = "Hello!";
   int16_t tmp1 = 0;
   int16_t tmp2 = 0;

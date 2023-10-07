@@ -279,6 +279,55 @@ Finally it stores the three numbers where the caller told us to put them and ret
 
 ### Before the setup Code - get_ascii_string
 [Back to Top](#notes "Back to Top")<br>
+Here is the start of the code for get_ascii_string():
+```C
+#define MAX_STRING_LENGTH 20
+
+char * get_ascii_string() {
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  String my_string_object = "Hello!";
+```
+
+**Syntax** - by declaring **char * get_ascii_string() {**, we are telling the C compiler that get_ascii_string() will return a pointer to zero or more characters. In fact get_ascii_string() will return a pointer to one or more characters in a zero-terminated ASCII string.
+- The code that calls get_ascii_string() looks like this:
+```C
+  char * input_string; // this variable will store a pointer to a zero-terminated ASCII string
+       < ... >
+    input_string = get_ascii_string(); 
+    Serial.print(F("You entered ")); Serial.println(input_string); Serial.println(F(""));
+```
+
+As you can see, the address of the string that is returned from get_ascii_string() goes into the variable input_string that is declared as **char \*** - a pointer to zero or more char, just like in the declaration of get_ascii_string(). We can print this string with **Serial.println(input_string);**.
+
+```C
+#define MAX_STRING_LENGTH 20
+
+char * get_ascii_string() {
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine knows the name, but we return a pointer to it
+  String my_string_object = "Hello!";
+```
+**Syntax** - the **static** keyword in **static char ascii_string[MAX_STRING_LENGTH+1];** makes ascii_string usable after get_ascii_string() returns. If we left "static" out, it would be a different classic type of bug **use after free**.
+- Any variable declared inside a curly-braces block or in a for-loop parenthesis without **static** will be allocated in **dynamically-allocatable free RAM** and returned to **free** usage when the block completes. Such variables should not be used after they are freed - they might have been dynamically allocated to some other use in the meantime.
+- As an example, the next declaration **String my_string_object = "Hello!";** is allocated in dynamically-allocatable free RAM and "freed" when get_ascii_string() returns. We say that the **scope** of the variable **my_string_object** is within get_ascii_string().
+
+A different way to have the ascii_string variable usable after get_ascii_string() returns would be to declare it outside of all the code blocks - perhaps near the start of the 03_YakityYak.ino file. This would give the variable the **scope** of the entire file, and would automatically make it have a persistent character such as that given by the static keyword.
+  - This is what was done with the declarations of DAD_JOKES, NUMOF_DAD_JOKES, and CURRENT_DAD_JOKE. Notice that all of these can be accessed inside of **loop()** even though they were not defined inside of **loop()**. They could also be accessed anywhere else in the file 03_YakityYak.ino that is after the declaration, such as **setup()** etc.
+
+```C
+#define MAX_STRING_LENGTH 20
+
+char * get_ascii_string() {
+  static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
+  String my_string_object = "Hello!";
+```
+**Syntax** - the next declaration is **String my_string_object = "Hello!";**. The **String** type is an Arduino built-in C++ class. When we say **String my_string_object = "Hello!";**, we are declaring the variable and initializing it to contain the string **"Hello!"**. This initialization would typically include setting other aspects of this string object, perhaps including the length of the string. There are other ways to initialize our String object; if you are interested you can find more information here:
+- https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/
+- https://docs.arduino.cc/built-in-examples/strings/StringConstructors
+
+**Syntax** - get_ascii_string() will use **methods** of this String object my_string_object
+
+#### How does get_ascii_string work
+[Back to Top](#notes "Back to Top")<br>
 Here is the code for get_ascii_string():
 ```C
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -304,7 +353,7 @@ Here is the code for get_ascii_string():
 
 char * get_ascii_string() {
   static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine can use it
-  String my_string_instance = "Hello!";
+  String my_string_object = "Hello!";
   int16_t tmp1 = 0;
   int16_t tmp2 = 0;
   uint8_t found = FALSE;
@@ -314,27 +363,27 @@ char * get_ascii_string() {
 
   while (!found) {
     while (!Serial.available()) ; // wait for typing to start
-    my_string_instance = Serial.readStringUntil('\n'); // get a line
-    DEBUG_INPUT_PRINT(F("DBGIN Entire String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
-    my_string_instance.trim(); // trim off spaces/tabs front and back
-    DEBUG_INPUT_PRINT(F("DBGIN trimmed String object |")); DEBUG_INPUT_PRINT(my_string_instance); DEBUG_INPUT_PRINTLN(F("|"));
-    if (0 != my_string_instance.length()) {
+    my_string_object = Serial.readStringUntil('\n'); // get a line
+    DEBUG_INPUT_PRINT(F("DBGIN Entire String object |")); DEBUG_INPUT_PRINT(my_string_object); DEBUG_INPUT_PRINTLN(F("|"));
+    my_string_object.trim(); // trim off spaces/tabs front and back
+    DEBUG_INPUT_PRINT(F("DBGIN trimmed String object |")); DEBUG_INPUT_PRINT(my_string_object); DEBUG_INPUT_PRINTLN(F("|"));
+    if (0 != my_string_object.length()) {
       found = TRUE;
-      tmp1 = my_string_instance.indexOf(' ');
-      tmp2 = my_string_instance.indexOf('\t');
+      tmp1 = my_string_object.indexOf(' ');
+      tmp2 = my_string_object.indexOf('\t');
       DEBUG_INPUT_PRINT(F("DBGIN tmp1=")); DEBUG_INPUT_PRINT(tmp1); DEBUG_INPUT_PRINT(F(", tmp2=")); DEBUG_INPUT_PRINTLN(tmp2);
       if (-1 == tmp1) tmp1 = 2*MAX_STRING_LENGTH; // make it big and positive
       if (-1 == tmp2) tmp2 = 2*MAX_STRING_LENGTH;
       // if no ' ' or '\t' found, will copy entire string
-      //string2ascii_ncopy(my_string_instance, ascii_string, 0, min(tmp1,tmp2), MAX_STRING_LENGTH);
+      //string2ascii_ncopy(my_string_object, ascii_string, 0, min(tmp1,tmp2), MAX_STRING_LENGTH);
       tmp1 = min(tmp1,tmp2);
-      tmp1 = min(tmp1,my_string_instance.length());
+      tmp1 = min(tmp1,my_string_object.length());
       tmp1 = min(tmp1,MAX_STRING_LENGTH);
       for (int i = 0; i < tmp1; i++) {
-        ascii_string[i] = my_string_instance[i];
+        ascii_string[i] = my_string_object[i];
       }
       DEBUG_INPUT_PRINT(F("DBGIN Entire ASCII string result |")); DEBUG_INPUT_PRINT(ascii_string); DEBUG_INPUT_PRINTLN(F("|"));
-    } // end if my_string_instance has at least one character
+    } // end if my_string_object has at least one character
   } // end while (!found)
 
   return(ascii_string);
@@ -349,11 +398,6 @@ The user could type in a string of indefinite length and we have a place to stor
 - get_ascii_string() then uses this <String> object to determine the start and end of the part of the string we want by means of methods <String>.trim() and <String>..indexOf(). We want a string without any blanks or tabs.
 - get_ascii_string() then range checks all the information and copies at most only as many characters as will fit into the ASCII char buffer. This code is the series of **tmp1 = min(tmp1,...)** statements. Note that the last of these checks against MAX_STRING_LENGTH.
 - To make the code easier to read, the ASCII char buffer is declared with **+1** as **static char ascii_string[MAX_STRING_LENGTH+1];**. This is because we need a zero-terminated string so we need room for the zero. By having an extra buffer location for the zero-termination of a max-length string, the code doesn't have to be peppered with things like **MAX_STRING_LENGTH-1**; we can just use **MAX_STRING_LENGTH**.
-
-**Syntax** - the **static** keyword makes ascii_string usable after get_ascii_string() returns. If we left "static" out, it would be a different classic type of bug **use after free**.
-- Any variable declared inside a curly-braces block or in a for-loop parenthesis without **static** will be returned to dynamically-allocatable free RAM when the block completes. Such variables should not be used after they are freed - they might have been dynamically allocated to some other use.
-- Another way to have ascii_string usable after get_ascii_string() returns would be to declare it outside of all the code blocks - perhaps near the start of the 03_YakityYak.ino file. This would give the variable the **scope** of the entire file, and would automatically make it have a persistent character such as that given by the static keyword.
-  - This is what was done with the declarations of DAD_JOKES, NUMOF_DAD_JOKES, and CURRENT_DAD_JOKE. Notice that all of these can be accessed inside of **loop()** even though they were not defined inside of **loop()**. They could also be accessed anywhere else in the file 03_YakityYak.ino that is after the declaration, such as **setup()** etc.
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>

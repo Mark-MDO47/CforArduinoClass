@@ -634,6 +634,7 @@ If the operator chooses to print All jokes by entering a string that starts with
 - The loop goes from **j1 = 0** to **j1 < NUMOF_DAD_JOKES** or 18 if 19 == NUMOF_DAD_JOKES. This form of the for loop is extremely common; we use the **<** check instead of the **<=** check and then we get to use **NUMOF_DAD_JOKES** instead of **NUMOF_DAD_JOKES-1**.
 
 ### the setup Code - input error detected
+[Back to Top](#notes "Back to Top")<br>
 ```C
     } else {
       Serial.print(F("ERROR - ")); Serial.print(input_string); Serial.println(F(" is not a valid choice"));
@@ -641,6 +642,23 @@ If the operator chooses to print All jokes by entering a string that starts with
 ```
 
 If the operator typed a string that started with a char that was not recognized, we get to the **else** clause (instead of the above **else if**). Here we just tell them we don't recognize the command and then loop around for the next operator command.
+
+## Running with DEBUG code enabled
+[Back to Top](#notes "Back to Top")<br>
+Set **TRUE** for DO_DEBUG but not DO_DEBUG_INPUT and run 03_YakityYak.ino. I typed in the following strings:
+- temp ignore rest of line
+-     2   42   10xyz
+-        t
+- 2
+- 2
+- 2
+- JOKE
+
+Set **TRUE** for DO_DEBUG_INPUT but not DO_DEBUG and run 03_YakityYak.ino. I typed in the following strings:
+-      the big red fox ran over the lazy brown dogs
+-  2,2,2
+-  joke ignore the rest of the line
+
 
 ## Congratulations - that is the end
 [Back to Top](#notes "Back to Top")<br>

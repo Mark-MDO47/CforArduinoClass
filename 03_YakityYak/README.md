@@ -657,10 +657,14 @@ Set **TRUE** for DO_DEBUG but not DO_DEBUG_INPUT and run 03_YakityYak.ino. I typ
 - 2
 - JOKE
 
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/03_SerMon_DO_DEBUG_run.png "03 YakityYak Serial Monitor from running Arduino program with DO_DEBUG")
+
 Set **TRUE** for DO_DEBUG_INPUT but not DO_DEBUG and run 03_YakityYak.ino. I typed in the following strings:
 -      the big red fox ran over the lazy brown dogs
 -  2,2,2
 -  joke ignore the rest of the line
+
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/03_SerMon_DO_DEBUG_INPUT_run.png "03 YakityYak Serial Monitor from running Arduino program with DO_DEBUG_INPUT")
 
 ## Running with DEBUG code disabled
 [Back to Top](#notes "Back to Top")<br>
@@ -672,7 +676,10 @@ Set **FALSE** for DO_DEBUG and DO_DEBUG_INPUT and run 03_YakityYak.ino. I typed 
 - 2,3,4
 - all
 
+![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/03_SerMon_run.png "03 YakityYak Serial Monitor from running entire Arduino program")
 
 ## Congratulations - that is the end
 [Back to Top](#notes "Back to Top")<br>
 **Congratulations!** - You have reached the end of the **C for Arduino Class** instruction!
+
+You should be able to take the [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class") and understand what the programs are doing.

@@ -240,9 +240,9 @@ void setup() {
         beyond_maximum = first + (PRINT_MAX*increment) + ((beyond_maximum-first)%increment);
         Serial.print(F("WARNING: PRINT_MAX exceeded, end degF adjusted to ")); Serial.println(beyond_maximum);
       } // end if
-      DEBUG_PRINT(F("DEBUG first=")); DEBUG_PRINT(first); DEBUG_PRINT(F(" increment=")); DEBUG_PRINT(increment); DEBUG_PRINT(F(" beyond_maximum=")); DEBUG_PRINTLN(beyond_maximum);
+      DEBUG_PRINT(F("DEBUG first=")); DEBUG_PRINT(first); DEBUG_PRINT(F(" beyond_maximum=")); DEBUG_PRINT(beyond_maximum);  DEBUG_PRINT(F(" increment=")); DEBUG_PRINTLN(increment);
       Serial.print(F("integer Fahrenheit and Centigrade computed \"for (degF = ")); Serial.print(first); Serial.print(F("; degF < ")); Serial.print(beyond_maximum); Serial.print(F("; degF += ")); Serial.print(increment); Serial.println(F(") {...}\""));
-      DEBUG_PRINT(F("DEBUG f=")); DEBUG_PRINT(f = first); DEBUG_PRINT(F(" f < beyond_maximum=")); DEBUG_PRINTLN(f < beyond_maximum); 
+      DEBUG_PRINT(F("DEBUG first time for loop: f=")); DEBUG_PRINT(f = first); DEBUG_PRINT(F(" (f < ")); DEBUG_PRINT(beyond_maximum); DEBUG_PRINT(F(")=")); DEBUG_PRINTLN(f < beyond_maximum); 
       for (f = first; f < beyond_maximum; f += increment) {
         c = ((f - 32) * 5) / 9;
         Serial.print(F(" degF, degC: ")); Serial.print(f); Serial.print(", "); Serial.println(c);
@@ -263,7 +263,7 @@ void setup() {
       }
     } else {
       Serial.print(F("ERROR - ")); Serial.print(input_string); Serial.println(F(" is not a valid choice"));
-    } // end if which command
+    } // end if <which command>
 
   } // end while loop
 

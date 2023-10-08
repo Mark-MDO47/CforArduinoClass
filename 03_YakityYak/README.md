@@ -332,7 +332,38 @@ If we left "static" out but still returned the address of ascii_string, it would
 
 A different way to have the ascii_string variable usable after get_ascii_string() returns would be to declare it outside of all the code blocks - perhaps near the start of the 03_YakityYak.ino file. This would give the variable the **scope** of the entire file, and would automatically make it have a persistent character such as that given by the static keyword.
   - This is what was done with the declarations of DAD_JOKES, NUMOF_DAD_JOKES, and CURRENT_DAD_JOKE. Notice that all of these can be accessed inside of **loop()** even though they were not defined inside of **loop()**. They could also be accessed anywhere else in the file 03_YakityYak.ino that is after the declaration, such as **setup()** etc.
+  - For instance **int CURRENT_DAD_JOKE = 0;** is placed early in the file before the first executable routine. It could but doesn't need to say **static** in order to have the **scope** of the rest of the file. Much later in the file, inside **setup()**, we have the code that uses CURRENT_DAD_JOKE. All of the other routines (get_3_int_values, get_ascii_string, loop) could access and/or change CURRENT_DAD_JOKE since they come after the declaration. However, only setup() accesses and changes it.
+    - That actually means that it would be better to have placed a **static int CURRENT_DAD_JOKE = 0;** inside setup(). I would have done this except I wanted to show the different ways to affect storage (static or dynamic) and scope (within a block or within a file).
+```C
+int CURRENT_DAD_JOKE = 0;
+        < ... >
+void setup() {
+        < ... >
+      Serial.print(CURRENT_DAD_JOKE+1); Serial.print(": "); Serial.println(DAD_JOKES[CURRENT_DAD_JOKE++]);
+      if ((NUMOF_DAD_JOKES-1) < CURRENT_DAD_JOKE) CURRENT_DAD_JOKE = 0;
+        < ... >
+} // end setup()
+```
 
+**TLDR** **Syntax** - You will not need this in the introductory [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class").
+- There is another level to **scope** in addition to within a block or within a file - this would be **global** and accessible within multiple files. 
+- Sometimes code gets so complicated that it gets split into multiple files. In the Arduino world, this means having one *.ino file with at least setup() and loop() and other files (usually *.c or *.cpp for executable code and *.h for definitions to be shared among multiple files).
+- To make something have global scope to two or more files, we use the **extern** keyword.
+- Typically a *.h file is created to contain (in our example) **extern int CURRENT_DAD_JOKE;**. This tells the C Compiler/Linker that there is something called CURRENT_DAD_JOKE that is an int and that is used in more than one file. Let us say that this file is named **current_dad_joke.h** and placed in the same directory as all the other *.ino, *.h, *.c and/or *.cpp files for that project. 
+- All *.ino, *.c and/or *.cpp files that need to use CURRENT_DAD_JOKE will have the line **#include "current_dad_joke.h"**, typically early in the file.
+- Within **one and only one** of the *.ino, *.c and/or *.cpp files that have this include line, there will be the line **int CURRENT_DAD_JOKE = 0;** which declares the variable, allocates static memory for an int, and initializes it to zero.
+- All of the *.ino, *.c and/or *.cpp files that have that **#include "current_dad_joke.h"** line will be free to access and/or change CURRENT_DAD_JOKE in any code **after the include statement** in that file.
+- This sort of arrangement with lots of **global scope** or **file scope** variables is considered to be bad form and to be avoided.
+  - The reasoning is that if there is a bug, the code that accesses the variable is spread all over the place so the bug is harder to find. As time goes on and changes and additions are made, the number of places that the variable is used are likely to proliferate.
+  - The other side of the coin is that it makes the lines of the code shorter and perhaps clearer to use the global variables that "everyone" knows about.
+- Of course there are other variations and even different uses for extern that are possible, especially for accessing executable routines.
+- As Paul Harvey used to say, "Now you know ... the rest of the story". Or at least some more of the story.
+
+**Syntax** - the next declaration is **String my_string_object = "Hello!";**. The **String** type is an Arduino built-in C++ class. When we say **String my_string_object = "Hello!";**, we are declaring the variable and initializing it to contain the string **"Hello!"**. This initialization would typically include setting other aspects of this string object, perhaps including the length of the string. There are other ways to initialize our String object; if you are interested you can find more information here:
+- https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/
+- https://docs.arduino.cc/built-in-examples/strings/StringConstructors
+
+**Syntax** - get_ascii_string() will use **methods** of this String object my_string_object
 ```C
 #define MAX_STRING_LENGTH 20
 
@@ -340,11 +371,6 @@ char * get_ascii_string() {
   static char ascii_string[MAX_STRING_LENGTH+1]; // only this routine knows the name, but we return a pointer to it
   String my_string_object = "Hello!";
 ```
-**Syntax** - the next declaration is **String my_string_object = "Hello!";**. The **String** type is an Arduino built-in C++ class. When we say **String my_string_object = "Hello!";**, we are declaring the variable and initializing it to contain the string **"Hello!"**. This initialization would typically include setting other aspects of this string object, perhaps including the length of the string. There are other ways to initialize our String object; if you are interested you can find more information here:
-- https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/
-- https://docs.arduino.cc/built-in-examples/strings/StringConstructors
-
-**Syntax** - get_ascii_string() will use **methods** of this String object my_string_object
 
 #### How does get_ascii_string work
 [Back to Top](#notes "Back to Top")<br>

@@ -50,6 +50,7 @@ What will you want to pay attention to or return to when you have a need?
   * [The setup Code - forever loop - Choose Joke](#the-setup-code-\--forever-loop-\--choose-joke "The setup Code - forever loop - Choose Joke")
   * [The setup Code - forever loop - All Jokes for loop](#the-setup-code-\--forever-loop-\--all-jokes-for-loop "The setup Code - forever loop - All Jokes for loop")
   * [the setup Code - input error detected](#the-setup-code-\--input-error-detected "the setup Code - input error detected")
+* [Running with DEBUG code enabled](#running-with-debug-code-enabled "Running with DEBUG code enabled")
 * [Congratulations - that is the end](#congratulations-\--that-is-the-end "Congratulations - that is the end")
 
 ## All the Code

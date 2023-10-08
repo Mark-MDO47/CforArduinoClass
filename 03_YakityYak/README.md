@@ -26,6 +26,7 @@ What will you want to pay attention to or return to when you have a need?
 - Debugging methods and #define macros:
   - [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging")
   - [The setup Code - initialization](#the-setup-code-\--initialization "The setup Code - initialization")
+  - [Running with DEBUG code enabled](#running-with-debug-code-enabled "Running with DEBUG code enabled")
 
 **Table Of Contents**
 * [Top](#notes "Top")

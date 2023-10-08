@@ -523,6 +523,7 @@ Then we execute different code blocks depending on what the first letter is.
 ```C
   int f, c; // fahrenheit and centigrade
           < ... >
+    if ('T' == input_string[0]) {
       for (f = first; f < beyond_maximum; f += increment) {
         c = ((f - 32) * 5) / 9;
         Serial.print(F(" degF, degC: ")); Serial.print(f); Serial.print(", "); Serial.println(c);
@@ -589,11 +590,56 @@ As the comment says, this doesn't take care of the case where (f < 130) is false
 
 ### The setup Code - forever loop - Joke
 [Back to Top](#notes "Back to Top")<br>
+```C
+    } else if ('J' == input_string[0]) {
+      Serial.print(CURRENT_DAD_JOKE+1); Serial.print(": "); Serial.println(DAD_JOKES[CURRENT_DAD_JOKE++]);
+      if ((NUMOF_DAD_JOKES-1) < CURRENT_DAD_JOKE) CURRENT_DAD_JOKE = 0;
+```
+
+If the operator chooses to print a Joke by entering a string that starts with J or j, we print the joke from DAD_JOKES[CURRENT_DAD_JOKE].
+- Because people tend to think of things starting at 1 instead of 0 but the C compiler starts array indexing at zero, we use **CURRENT_DAD_JOKE+1** when printing the joke number.
+- When printing the entry from DAD_JOKES we use **[CURRENT_DAD_JOKE++]**. This form uses CURRENT_DAD_JOKE to index into the array, and afterwards it adds one to CURRENT_DAD_JOKE.
+- The last line shown above checks to see if CURRENT_DAD_JOKE has gone past the end; if so it sets it back to zero.
+  - Because the last valid array index for **19** jokes is **[18]** (C starts with zero not one), this means that the last valid array index for **NUMOF_DAD_JOKES** is **[NUMOF_DAD_JOKES-1]**.
 
 ### The setup Code - forever loop - Choose Joke
 [Back to Top](#notes "Back to Top")<br>
+```C
+    } else if ('C' == input_string[0]) {
+      Serial.print(F("Choose 3 Dad Joke nums separated by commas; max num = ")); Serial.println(NUMOF_DAD_JOKES);
+      get_3_int_values(&j1, &j2, &j3);
+      Serial.print(F("You entered ")); Serial.print(j1); Serial.print(F(", ")); Serial.print(j2); Serial.print(F(", and ")); Serial.println(j3);
+      Serial.print(j1); Serial.print(": "); Serial.println(DAD_JOKES[max(min(j1,NUMOF_DAD_JOKES),1)-1]);
+      Serial.print(j2); Serial.print(": "); Serial.println(DAD_JOKES[max(min(j2,NUMOF_DAD_JOKES),1)-1]);
+      Serial.print(j3); Serial.print(": "); Serial.println(DAD_JOKES[max(min(j3,NUMOF_DAD_JOKES),1)-1]);
+```
+
+If the operator chooses to Choose which jokes to print by entering a string that starts with C or c, we get three joke numbers and then print those jokes from DAD_JOKES[CURRENT_DAD_JOKE].
+- We want to make sure we don't try to print **DAD_JOKES[-1000]** or **DAD_JOKES[+1000]**
+  - The **max(min(j1,NUMOF_DAD_JOKES),1)** makes sure that j1 is at least 1 and at most NUMOF_DAD_JOKES, currently 19.
+- As usual, we almost always have to either add or subtract 1 to get the correct number. the **-1** after the above converts it to a range of 0 through 18.
 
 ### The setup Code - forever loop - All Jokes for loop
 [Back to Top](#notes "Back to Top")<br>
+```C
+    } else if ('A' == input_string[0]) {
+      for (j1 = 0; j1 < NUMOF_DAD_JOKES; j1 += 1) {
+        Serial.print(j1+1); Serial.print(": "); Serial.println(DAD_JOKES[j1]);
+      }
+```
 
+If the operator chooses to print All jokes by entering a string that starts with A or a, we use another **for loop**.
+- The loop goes from **j1 = 0** to **j1 < NUMOF_DAD_JOKES** or 18 if 19 == NUMOF_DAD_JOKES. This form of the for loop is extremely common; we use the **<** check instead of the **<=** check and then we get to use **NUMOF_DAD_JOKES** instead of **NUMOF_DAD_JOKES-1**.
 
+### the setup Code - input error detected
+```C
+    } else {
+      Serial.print(F("ERROR - ")); Serial.print(input_string); Serial.println(F(" is not a valid choice"));
+    } // end if <which command>
+```
+
+If the operator typed a string that started with a char that was not recognized, we get to the **else** clause (instead of the above **else if**). Here we just tell them we don't recognize the command and then loop around for the next operator command.
+
+## Congratulations - that is the end
+[Back to Top](#notes "Back to Top")<br>
+**Congratulations!** - You have reached the end of the **C for Arduino Class** instruction!

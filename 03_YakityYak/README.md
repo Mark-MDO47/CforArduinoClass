@@ -408,6 +408,16 @@ char * get_ascii_string() {
 REMEMBER that the **DEBUG_INPUT_PRINT** and **DEBUG_INPUT_PRINTLN** macros will turn into blank lines unless **DO_DEBUG_INPUT** is defined as TRUE or non-zero.
 - See [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging") for more info
 
+get_ascii_string() uses the builtin **String object** capabilities and these routines/methods:
+- Serial.setTimeout() - sets the timeout for routines like readStringUntil()
+- Serial.available() - returns TRUE if there is a character that can be read
+- Serial.readStringUntil() - reads typing until either timeout or the character specified
+- <string-object>.trim() - removes leading or trailing blanks and/or TABs (' ' or '\t') from String object
+- <string-object>.length() - returns length in characters of the ASCII string within String object
+- <string-object>.indexOf() - returns -1 or first character position of specified character within String object
+- <string-object>.[] - returns the ASCII character at the specified position of the ASCII string within String object
+  - Yes this is a "method" of an "object" in C++ - too complicated for an introductory class to cover
+
 We start by increasing the **Serial** timeout value and zeroing out **ascii_string**.
 - If we call a string routine and nothing happens for the timeout, it will return without getting all the typing. There doesn't seem to be a way to get the current timeout value so it could restore that value after. I didn't see a problem with just setting it longer.
 - Once ascii_string is zero, if we copy a string into it that is at least one char shorter than ascii_string then it will automatically be zero-terminated.
@@ -484,24 +494,29 @@ We start to do the normal prints and then we get **Serial.println(F("CforArduino
 ```
 
 We saw the concept of pointers to zero-terminated ASCII strings in the last exercise. This time we will call **get_ascii_string()**, which returns pointer to a zero-terminated ASCII string typed in on the "Serial Monitor" window across the USB serial port.
-- Once again we use routines from https://www.arduino.cc/reference/en/language/functions/communication/serial/
-- I made a version of **get_ascii_string()** using only the following two routines: Serial.available() and Serial.read(). I thought it would be simple but it was surprisingly complicated. Eventually I got rid of this version.
-- I rewrote it using the builtin **String object** capabilities and these routines:
-  - Serial.setTimeout() - sets the timeout for routines like readStringUntil()
-  - Serial.available() - returns TRUE if there is a character that can be read
-  - Serial.readStringUntil() - reads typing until either timeout or the character specified
-  - <string-object>.trim() - removes leading or trailing blanks and/or TABs (' ' or '\t') from String object
-  - <string-object>.length() - returns length in characters of the ASCII string within String object
-  - <string-object>.indexOf() - returns -1 or first character position of specified character within String object
-  - <string-object>.[] - returns the ASCII character at the specified position of the ASCII string within String object
-    - Yes this is a "method" of an "object" in C++ - too complicated for an introductory class to cover
 
 Once we have the address of the string in input_string, we check the first letter of the string to see if it is lower-case between 'a' and 'z'.
 - If so we convert to upper-case by subtracting the difference betwee ASCII 'a' and ASCII 'A'.
 - Look again at https://www.asciitable.com/ if you want to see how this works.
+```C
+    if (('a' <= input_string[0]) && ('z' >= input_string[0])) input_string[0] -= 'a' - 'A';
+```
 
 Then we execute different code blocks depending on what the first letter is.
 - Note the **if () {} else if () {} else {}** structure. If the first letter is not T, J, C or A we will complain and try again.
+```C
+    if ('T' == input_string[0]) {
+        < ... >
+    } else if ('J' == input_string[0]) {
+        < ... >
+    } else if ('C' == input_string[0]) {
+        < ... >
+    } else if ('A' == input_string[0]) {
+        < ... >
+    } else {
+      Serial.print(F("ERROR - ")); Serial.print(input_string); Serial.println(F(" is not a valid choice"));
+    } // end if which command
+```
 
 ### The setup Code - forever loop - Temperature for loop
 [Back to Top](#notes "Back to Top")<br>
@@ -516,12 +531,12 @@ Then we execute different code blocks depending on what the first letter is.
 
 Early in setup there is a statement **int f, c; // fahrenheit and centigrade** followed about 20 lines later by **for (f = first; f < beyond_maximum; f += increment)**. What do these do?
 
-First the **int** statement with a comma: this just means that both variables **f** and **c** are integers; the **int** applies to both of them. There can be tricky applications like what would happen if we said **int f, c = 5;**? Would both **f** and **c** be initialized to 5? This is an introductory class so I won't go into those type of detailed questions here. If you want to initialize both of them, you already know how to do that with two statements and no comma:<br>
+**Syntax*** - first the **int** statement with a comma: this just means that both variables **f** and **c** are integers; the **int** applies to both of them. There can be tricky applications like what would happen if we said **int f, c = 5;**? Would both **f** and **c** be initialized to 5? This is an introductory class so I won't go into those type of detailed questions here. If you want to initialize both of them, you already know how to do that with two statements and no comma:<br>
 ```C
   int f = 5; int c = 5;
 ```
 
-The **for** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons. In our case, the three sections are as follows:
+**Syntax** - the **for ( ; ; )** statement (and the for loop that it generates) is an extremely useful and common happening in C/C++. it is divided into three parts by semicolons. In our case, the three sections are as follows:
 - **f = first** - this is the initialization section, where you can initialize any variable before the "for loop" starts
   - If needed you can initialize more than one variable by separating with commas. Example: **f = first, c = 1**
   - You can even define and initialize new variables in the initialization section that only affect the for loop. Example: **int new_variable = 7, f = first, c = 1**
@@ -529,8 +544,6 @@ The **for** statement (and the for loop that it generates) is an extremely usefu
   - **Pro Tip** - it is checked BEFORE THE FIRST EXECUTION of the for loop. If it is false, the loop never executes.
 - **f += increment** - this is the action taken AFTER each loop and BEFORE checking the **condition**.
   - Again, multiple actions could be taken. Example: **f += increment, Serial.println("Made f bigger")**
-
-This for loop is seen below:
 ```C
   for (f = first; f < beyond_maximum; f += increment) {
     c = ((f - 32) * 5) / 9;

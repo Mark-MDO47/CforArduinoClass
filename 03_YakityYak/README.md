@@ -661,6 +661,16 @@ Set **TRUE** for DO_DEBUG_INPUT but not DO_DEBUG and run 03_YakityYak.ino. I typ
 -  2,2,2
 -  joke ignore the rest of the line
 
+## Running with DEBUG code disabled
+[Back to Top](#notes "Back to Top")<br>
+Set **FALSE** for DO_DEBUG and DO_DEBUG_INPUT and run 03_YakityYak.ino. I typed in the following strings:
+- temperature
+- 2,42,10
+- joke
+- choose
+- 2,3,4
+- all
+
 
 ## Congratulations - that is the end
 [Back to Top](#notes "Back to Top")<br>

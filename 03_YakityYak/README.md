@@ -408,15 +408,31 @@ char * get_ascii_string() {
 REMEMBER that the **DEBUG_INPUT_PRINT** and **DEBUG_INPUT_PRINTLN** macros will turn into blank lines unless **DO_DEBUG_INPUT** is defined as TRUE or non-zero.
 - See [Before the setup Code - Debugging](#before-the-setup-code-\--debugging "Before the setup Code - Debugging") for more info
 
+We start by increasing the **Serial** timeout value and zeroing out **ascii_string**.
+- If we call a string routine and nothing happens for the timeout, it will return without getting all the typing. There doesn't seem to be a way to get the current timeout value so it could restore that value after. I didn't see a problem with just setting it longer.
+- Once ascii_string is zero, if we copy a string into it that is at least one char shorter than ascii_string then it will automatically be zero-terminated.
+```C
+  Serial.setTimeout(10000); // 10,000 milliseconds is 10 seconds
+  memset((void *)ascii_string, 0, NUMOF(ascii_string)); // clear buffer; good idea for zero-terminated strings
+```
+
 The user could type in a string of indefinite length and we have a place to store it with a fixed length - **#define MAX_STRING_LENGTH 20**. If not handled properly, this could lead to a classic type of bug known as a **buffer overflow**, where data is written past the end of a buffer and therefore into areas that may be unrelated. get_ascii_string() has code to prevent a buffer overflow.
 - When getting the typing from the user, the typing goes into a C++ object of type **String** in the call **Serial.readStringUntil('\n');**. Assuming there is enough RAM available for dynamic allocation, this object will prevent buffer overflows. If there is not enough RAM, there is not much it can do but I assume it will be pretty robust.
 - get_ascii_string() then uses this <String> object to determine the start and end of the part of the string we want by means of methods <String>.trim() and <String>..indexOf(). We want a string without any blanks or tabs.
   - **my_string_object.trim();** removes all spaces or tabs either before the first non-blank or after the last non-blank
   - **if (0 != my_string_object.length()) {** is used to see if there is anything left after removing leading or trailing spaces or tabs
-  - if there are still some characters, **tmp1 = my_string_object.indexOf(' ');** and **tmp2 = my_string_object.indexOf('\t');** get the locations of the first blank and tab.
-  - statements like **if (-1 == tmp1) tmp1 = 2*MAX_STRING_LENGTH;** will change **-1** values to something bigger than MAX_STRING_LENGTH, causing those numbers to be ignored later
+  - if there are still some characters, **tmp1 = my_string_object.indexOf(' ');** and **tmp2 = my_string_object.indexOf('\t');** get the locations of the first blank and tab. **.indexOf()** returns -1 if it doesn't find anything.
+  - statements like **if (-1 == tmp1) tmp1 = 2*MAX_STRING_LENGTH;** will change **-1** values to something bigger than MAX_STRING_LENGTH, causing those numbers to be ignored later. 
 - get_ascii_string() then range checks all the information and copies at most only as many non-blank non-tab characters as will fit into the ASCII char buffer. This code is the series of **tmp1 = min(tmp1,...)** statements. Note that the last of these checks against MAX_STRING_LENGTH.
-- To make the code easier to read, the ASCII char buffer is declared with **+1** as **static char ascii_string[MAX_STRING_LENGTH+1];**. This is because we need a zero-terminated string so we need room for the zero. By having an extra buffer location for the zero-termination of a max-length string, the code doesn't have to be peppered with things like **MAX_STRING_LENGTH-1**; we can just use **MAX_STRING_LENGTH**.
+
+At this point, tmp1 is the minimum of all the **.indexOf()**, **.length()**, and MAX_STRING_LENGTH. The following **for loop** copies the ASCII characters from **my_string_object** to **ascii_string**. The **[]** notation is an array index for ascii_string but it is a String object method for my_string_object.
+```C
+      for (int i = 0; i < tmp1; i++) {
+        ascii_string[i] = my_string_object[i];
+      }
+```
+
+To make the code easier to read, the ASCII char buffer is declared with **+1** as **static char ascii_string[MAX_STRING_LENGTH+1];**. This is because we need a zero-terminated string so we need room for the zero. By having an extra buffer location for the zero-termination of a max-length string, the code doesn't have to be peppered with things like **MAX_STRING_LENGTH-1**; we can just use **MAX_STRING_LENGTH**.
 
 ## The setup Code
 [Back to Top](#notes "Back to Top")<br>
@@ -469,11 +485,8 @@ We start to do the normal prints and then we get **Serial.println(F("CforArduino
 
 We saw the concept of pointers to zero-terminated ASCII strings in the last exercise. This time we will call **get_ascii_string()**, which returns pointer to a zero-terminated ASCII string typed in on the "Serial Monitor" window across the USB serial port.
 - Once again we use routines from https://www.arduino.cc/reference/en/language/functions/communication/serial/
-- I made a version of **get_ascii_string()** using only the following two routines. I thought it would be simple but it was surprisingly complicated. Eventually I got rid of this version.
-  - Serial.available() - returns TRUE if there is a character that can be read
-  - Serial.read() - reads one character
-  - I thought I was avoiding the complexity of using something like Serial.readStringUntil() and having to explain the difference between a **String object** and a **char \*** pointer to a zero-terminated ASCII string. Unfortunately, the code was too complicated.
-- I gave up on that and rewrote it using the builtin **String object** capabilities and these routines:
+- I made a version of **get_ascii_string()** using only the following two routines: Serial.available() and Serial.read(). I thought it would be simple but it was surprisingly complicated. Eventually I got rid of this version.
+- I rewrote it using the builtin **String object** capabilities and these routines:
   - Serial.setTimeout() - sets the timeout for routines like readStringUntil()
   - Serial.available() - returns TRUE if there is a character that can be read
   - Serial.readStringUntil() - reads typing until either timeout or the character specified

@@ -6,4 +6,4 @@ Click this link to back to go back to the root of the C for Arduino class
 
 
 ## Introduction
-Blink.ino is code for https://github.com/Mark-MDO47/CforArduinoClass/tree/master/02_LetsGetTalking
+02_LetsGetTalking.ino is code for https://github.com/Mark-MDO47/CforArduinoClass/tree/master/02_LetsGetTalking

@@ -66,9 +66,9 @@ The following book is how I learned the C language, back when dinosaurs ruled th
 If you search you might find the "mass-market paperback" at around $20 or maybe a used copy for even less.<br>
 If you are going to get a copy, I suggest you try to get the latest edition. Since you will be investing the time, you might as well be close to up-to-date (2nd edition is Copyright 2012).
 
-As an aside: some of the projects will use **binary** arithmetic and **Boolean** logic to implement simple data compression. We will do a quick discussion on how this code works when the time comes. This is another one of those topics that is important but could be skimmed if you just want to enjoy the project and study it later.
+As an aside: some of the projects in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") will use **binary** arithmetic and **Boolean** logic to implement simple data compression, and this class will just barely touch on these topics. In the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") we will do a quick discussion on how this code works. This is another one of those **TLDR** topics that is important but could be skimmed if you just want to enjoy the project and study it later.
 
-There is a quick discussion of binary and other numbering systems in the resources page:
+There is a quick discussion of binary and other numbering systems in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") resources page:
 - https://github.com/Mark-MDO47/ArduinoClass/tree/master/99_Resources#tldr-decimal-and-binary-and-hexadecimal
 
 Binary and Boolean are discussed more fully in Wikipedia:

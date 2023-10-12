@@ -7,7 +7,7 @@ Author: Mark Olson
 **Table Of Contents**
 * [Top](#c-for-arduino-class "Top")
 * [Why a C for Arduino Class](#why-a-c-for-arduino-class "Why a C for Arduino Class")
-* [Lesson Plan C for Arduino Class](#lesson-plan-c-for-arduino-class "Lesson Plan C for Arduino Class")
+* [C for Arduino Class Lesson Plan](#c-for-arduino-class-lesson-plan "C for Arduino Class Lesson Plan")
 * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
 ## Why a C for Arduino Class

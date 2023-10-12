@@ -67,7 +67,7 @@ void loop() {
 
 ## Run the example Blink program
 [Back to Top](#notes "Back to Top")<br>
-In the Arduino IDE, choose menu **File** -> **Examples** -> **01.Basics** -> **Blink**. This will bring up the starting point for our Blink exercise.
+In the Arduino IDE, choose menu **File** -> **Examples** -> **01.Basics** -> **Blink**. This will bring up the starting point for our Blink exercise. Save this somewhere as 01_Blink.ino.
 
 ![alt text](https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/IDE_LoadBlink.png "Arduino IDE loading Blink example program")
 

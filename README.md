@@ -7,8 +7,8 @@ Author: Mark Olson<br>
 **Table Of Contents**
 * [Top](#c-for-arduino-class "Top")
 * [Learning C and Cplusplus](#learning-c-and-cplusplus "Learning C and Cplusplus")
-  * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
-  * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
+* [Lesson Plan C for Arduino Class](#lesson-plan-c-for-arduino-class "Lesson Plan C for Arduino Class")
+* [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
 ## Learning C and Cplusplus
 [Top](#c-for-arduino-class "Top")<br>
@@ -33,7 +33,7 @@ For this class we will take the more slimmed down approach: we will learn in the
 * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
 * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
-### Start C for Arduino Class
+## Lesson Plan C for Arduino Class
 [Top](#c-for-arduino-class "Top")<br>
 I will bring some Arduino Nanos for the class, along with a few USB cables to connect them to laptops or PCs or Macs. Please bring your personal or work laptop to the class if possible. If you have a USB cable that can connect your laptop to a USB Mini-B, please bring that. You will find some pointers to USB Mini-B in the 00_InstallArduinoIDE section below.
 
@@ -44,7 +44,7 @@ I will bring some Arduino Nanos for the class, along with a few USB cables to co
 | [02_LetsGetTalking](https://github.com/Mark-MDO47/CforArduinoClass/tree/master/02_LetsGetTalking "02_LetsGetTalking") | Shows how to print to the Serial Monitor<br>Looks at ASCII strings, arrays, and indexing.<br>Also explores **setup()** and **loop()** and some branching and looping C-statements | <img src="https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/02_SerMon_run.png" width="142" alt="Serial Monitor showing debug print output"> |
 | [03_YakityYak](https://github.com/Mark-MDO47/CforArduinoClass/tree/master/03_YakityYak "03_YakityYak") | Shows how to read strings and integers from typing on Serial Monitor<br>Goes deeper on branching and looping, some #define macro trickery to help debugging<br>Begins to explore variable declaration, initialization, scope and storage, and dynamic variable deletion upon return from routine | <img src="https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/03_SerMon_run.png" width="142" alt="Serial Monitor showing typed input and responses"> |
 
-### Some resources on the Web
+## Some resources on the Web
 [Top](#c-for-arduino-class "Top")<br>
 Here are some web resources for learning the C language:
 - https://www.java67.com/2020/07/5-free-courses-to-learn-c-programming.html

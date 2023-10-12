@@ -6,11 +6,11 @@ Author: Mark Olson
 
 **Table Of Contents**
 * [Top](#c-for-arduino-class "Top")
-* [Learning C and Cplusplus](#learning-c-and-cplusplus "Learning C and Cplusplus")
+* [Why a C for Arduino Class](#learning-c-and-cplusplus "Why a C for Arduino Class")
 * [Lesson Plan C for Arduino Class](#lesson-plan-c-for-arduino-class "Lesson Plan C for Arduino Class")
 * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
-## Learning C and Cplusplus
+## Why a C for Arduino Class
 [Top](#c-for-arduino-class "Top")<br>
 One thing I learned when teaching the first [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") is that things will move much faster if everyone has some basic experience with a text-based programming language.
 

@@ -1,8 +1,8 @@
 # C for Arduino Class
-Enough C/C++ to start the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class")
-
 This is the [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass/tree/master "C for Arduino Class") 2023; FabLab will be first<br>
-Author: Mark Olson<br>
+- Enough C/C++ to start the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class")
+
+Author: Mark Olson
 
 **Table Of Contents**
 * [Top](#c-for-arduino-class "Top")

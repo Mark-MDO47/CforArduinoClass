@@ -33,7 +33,7 @@ For this class we will take the more slimmed down approach: we will learn in the
 * [Start C for Arduino Class](#start-c-for-arduino-class "Start C for Arduino Class")
 * [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web")
 
-## Lesson Plan C for Arduino Class
+## C for Arduino Class Lesson Plan
 [Top](#c-for-arduino-class "Top")<br>
 I will bring some Arduino Nanos for the class, along with a few USB cables to connect them to laptops or PCs or Macs. Please bring your personal or work laptop to the class if possible. If you have a USB cable that can connect your laptop to a USB Mini-B, please bring that. You will find some pointers to USB Mini-B in the 00_InstallArduinoIDE section below.
 

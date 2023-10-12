@@ -68,6 +68,8 @@ If you are going to get a copy, I suggest you try to get the latest edition. Sin
 
 As an aside: some of the projects in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") will use **binary** arithmetic and **Boolean** logic to implement simple data compression, and this class will just barely touch on these topics. In the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") we will do a quick discussion on how this code works. This is another one of those **TLDR** topics that is important but could be skimmed if you just want to enjoy the project and study it later.
 
+On the other hand, if you truly want to understand how computers work, including the Arduino, then you will want to eventually grasp the topics of **binary** arithmetic and **Boolean** logic.
+
 There is a quick discussion of binary and other numbering systems in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") resources page:
 - https://github.com/Mark-MDO47/ArduinoClass/tree/master/99_Resources#tldr-decimal-and-binary-and-hexadecimal
 

@@ -16,9 +16,10 @@ Author: Mark Olson
 One thing I learned when teaching the first [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") is that things will move much faster if everyone has some basic experience with a text-based programming language.
 
 The Arduino IDE uses C and C++ languages for general programming.
-- If you have experience in any text-based general programming language - Python, Java, or other programming languages - you will probably be able to catch on to the parts of C and C++ used in this class quickly.
-- If you have never programmed in a text-based general programming language before, I suggest you learn the basics of C before attending the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class"). You can easily pick up on the few parts of C++ used in this class if you have some knowledge of C (or even Python or Java or other languages). 
-- This [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass/tree/master "C for Arduino Class") is intended to provide enough experience with the C and C++ programming languages in the Arduino environment to bring a non-programmer to the stage that they can start the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") and enjoy that class on the way.
+- If you have experience in any text-based general programming language - Python, Java, or other programming languages - you will probably be able to catch on to the parts of C and C++ used in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") quickly.
+- If you have never programmed in a text-based general programming language before, I suggest you learn the basics of C before attending the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class").
+  - This [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass/tree/master "C for Arduino Class") is intended to provide enough experience with the C and C++ programming languages in the Arduino environment to bring a non-programmer to the stage that they can start the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") and enjoy that class on the way.
+  - There are also [Some resources on the Web](#some-resources-on-the-web "Some resources on the Web") if you want to learn C/C++ on you own or want to supplement this introductory [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass/tree/master "C for Arduino Class").
 
 ## About this C for Arduino Class
 

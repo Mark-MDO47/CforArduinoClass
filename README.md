@@ -20,6 +20,8 @@ The Arduino IDE uses C and C++ languages for general programming.
 - This [C for Arduino Class](https://github.com/Mark-MDO47/CforArduinoClass/tree/master "C for Arduino Class") is intended to provide enough experience with the C and C++ programming languages in the Arduino environment to bring a non-programmer to the stage that they can start the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class") and then learn the enough to enjoy that class on the way.
 - https://github.com/Mark-MDO47/ArduinoClass/blob/master/README.md
 
+## About this C for Arduino Class
+
 In this class there will be sections marked as **Syntax**, as **Pro Tip**, and as **TLDR**.
 - **Syntax** indicates a section that discusses how to write code statements to achieve a particular purpose. These are sections that you might want to look at again when you are doing a project and want to remember how to write a section of code that does that.
 - **Pro Tip** indicates a detail that is a good technique or a common source of error - or sometimes an obscure source of error. Learning these may save some debugging time later.

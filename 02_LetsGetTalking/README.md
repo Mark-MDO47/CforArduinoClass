@@ -36,9 +36,9 @@ For a more thorough exploration of the C/C++ language, I am sure you can find so
 
 ## The Arduino USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>
-Now we will start using the USB serial port for input from the keyboard and output to the screen - a fantastically useful diagnostic tool.
+Now we will start using the USB serial port for output to the screen - a fantastically useful diagnostic tool. In (https://github.com/Mark-MDO47/CforArduinoClass/tree/master/03_YakityYak "03_YakityYak") we will use the USB serial port for typing input from the keyboard.
 
-For our USB Serial communications we will use some **Serial.*()** routines such as Serial.begin(), Serial.print(), and Serial.println(). These are documented starting in this area:
+For our USB Serial output we will use some **Serial.*()** routines such as Serial.begin(), Serial.print(), and Serial.println(). These are documented starting in this area:
 - https://www.arduino.cc/reference/en/language/functions/communication/serial/
 
 For instance, the various ways to use Serial.print() are documented here

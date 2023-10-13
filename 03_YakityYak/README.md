@@ -8,7 +8,7 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 [Back to Top](#notes "Back to Top")<br>
 In this section we will investigate reading **input from the USB serial port** and using it to direct the execution  of the program. We will also look at a few C-language **syntax** items, some **for** and **while** loops (we won't look at **until** loops), and **#define** macros for debugging. I left some debugging code in so you can see a couple of debugging techniques.
 
-Some of the code might get a little complicated at this early stage in your learning to code. It might feel like drinking from a fire hose. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [https://github.com/Mark-MDO47/ArduinoClass](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
+Some of the code might get a little complicated at this early stage in your learning to code. It might feel like drinking from a fire hose. Don't worry, this is a first introduction so just try to follow the flow and get used to what code does. We will cover many of these topics again in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
 What will you want to pay attention to or return to when you have a need?
 - General useful C language:
@@ -80,13 +80,13 @@ void main() {
 
 This code would call **setup()** once and then loop forever calling **loop()**. This is because the **while () {}** statement will repeat the code inside the **{}** block as long as the condition inside the **()** is non-zero. Because we did **#define TRUE 1**, that will always be the case.
 
-One way to break out of any loop is with the **break** statement. This would quit executing the loop **{}** block and continue on the next code statement after the loop **{}** block. The **break** statement works for exiting all types of loops.
-
 In fact the code calling **setup()** and **loop()** is more complicated than my code above, but you can **almost** always do your code as if it was being called from the above.
+
+**TLDR** - a **while (1) {}** loop doesn't have to loop forever if you don't want it to. One way to break out of any loop is with the **break** statement. This would quit executing the loop **{}** block and continue on the next code statement after the loop **{}** block. The **break** statement works for exiting all types of loops.
 
 ## Before the setup Code
 [Back to Top](#notes "Back to Top")<br>
-We have a few routines and definitions before the setup Code. Here is a little map:
+We have a few routines and definitions before the setup Code. Here is a little road map to this earlier code:
 | What | Description |
 | --- | --- |
 | #define's | We #define TRUE, FALSE, DO_DEBUG, and DO_DEBUG_INPUT.<br>The DEBUG #defines control macro definitions for things such as DEBUG_PRINT and DEBUG_PRINTLN. These statements can be sprinkled around to help debugging. After debugging is complete, DO_DEBUG and DO_DEBUG_INPUT can be #defined as 0 and the statements won't compile. |
@@ -126,16 +126,24 @@ First we #define TRUE as 1 and FALSE as 2. Remember that this means wherever the
 
 Next we see **#define DO_DEBUG FALSE**. As we will see this "turns off" the DEBUG_PRINT and DEBUG_PRINTLN macros. If we said **#define DO_DEBUG TRUE** it would turn on those macros.
 
-Next we see **#if DO_DEBUG**, **#else** and **#endif**. There is another one we don't use here **#elif** for "else if".
+Next we see **#if DO_DEBUG**, **#else** and **#endif**. The are conditional compilation directives.
 - Everything between **#if DO_DEBUG** and **#else** is only compiled if DO_DEBUG is TRUE or non-zero; otherwise it is not compiled.
 - Everything between **#else** and **#endif** is only compiled if DO_DEBUG is FALSE or zero; otherwise it is not compiled.
 - If **#define DEBUG_INPUT_PRINT(x) Serial.print((x))** is compiled, **DEBUG_PRINT("This is a string");** will turn into **Serial.print(("This is a string"));**
-- if **#define DEBUG_PRINT(x)** with no text after is compiled,  **DEBUG_PRINT("This is a string");** will turn into **;** (a null code statement)
+- If **#define DEBUG_PRINT(x)** with no text after is compiled,  **DEBUG_PRINT("This is a string");** will turn into **;** (a null code statement)
+- This is a **#define** macro with a parameter. The **(x)** is the parameter.
+  - A **#define** macro could have more than one parameter, separated by commas. The DEBUG_PRINT (and later NUMOF) macro use just one parameter.
+  - IMHO the open parenthesis should be adjacent to the name of the macro both when defined and when used.
+
+**TLDR** - there is another variant for "#if" we don't use here: **#elif** for "else if". Useful but not used in this code nor in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class").
+- **TLDR** - there are even more conditional compilation directives: **#ifdef**, **#ifndef**. These test if a #define has been done for a symbol. There is also **#undef** to "un-define" a symbol.
+- **TLDR** - continuing on the tests for being "#define"d, there is a **#if defined(SYMBOL)** that is precisely equivalent to #ifdef SYMBOL.
+  - **TLDR** - this allows tests of multiple symbols - example **#if defined(SYMBOL_1) && defined(SYMBOL_2)**
 
 Similar statements apply to DO_DEBUG_INPUT and DEBUG_INPUT_PRINT, etc.
 - I left these DEBUG_ macros in the code since they can be pretty handy for debugging. When it seems to work you can turn them off. If later you experience another bug, you can turn them back on.
 
-**#define macros** can get pretty complex. I won't really describe how they work here in any more detail.
+**#define macros** can get pretty complex. I will give more discussion of parameter substitution in the **#define NUMOF(x)** macro below, but I won't go much deeper than that.
 - If you are interested you might start with https://en.wikibooks.org/wiki/C_Programming/Preprocessor_directives_and_macros and search for #define
 - Or **The C Programming Language** by Kernighan and Ritchie.
 - **Pro Tip** - there are some predefined things \_\_file\_\_, \_\_func\_\_, \_\_line\_\_, and others that can be helpful to print in debug statements.
@@ -176,8 +184,11 @@ Because we need to leave some RAM for dynamic allocation, I just commented out a
 - For a description of PROGMEM, see https://github.com/Mark-MDO47/ArduinoClass/blob/master/99_Resources/README.md#progmem-and-f-macro-to-save-ram
 
 **Syntax** - we create the #define macro **#define NUMOF(x) (sizeof((x)) / sizeof((x[0])))**. Later in a code statement we use **NUMOF(DAD_JOKES)** to initialize an int variable named NUMOF_DAD_JOKES.
-- If we look at **sizeof(DAD_JOKES)** we will see it is 38, but there are 19 strings that are not commented out. That is because each entry in DAD_JOKES is two bytes long which we can see by looking at the size of the first entry: **sizeof(DAD_JOKES[0])**.
-- So NUMOF(DAD_JOKES) does the division 38/2 to get 19, the number of strings in DAD_JOKES.
+- This #define macro is a little more complex than DEBUG_PRINT or its variations. 
+- If we look at **sizeof(DAD_JOKES)** we will see it is 38, but there are 19 strings that are not commented out.
+  - That is because each entry in DAD_JOKES is two bytes long which we can see by looking at the size of the first entry: **sizeof(DAD_JOKES[0])**.
+- Replacing each **x** in the macro with **DAD_JOKES**, we get **(sizeof((DAD_JOKES)) / sizeof((DAD_JOKES[0])))** or **(38 / 2)**
+- So NUMOF(DAD_JOKES) does the division (38/2) to get 19, the number of strings in DAD_JOKES.
 - The extra levels **()** helps to make the macro **NUMOF** work even on some odd ways of defining an array or using NUMOF in expressions.
 
 By using this NUMOF macro, I don't have to count the strings by hand later on when I set up a loop to print all the DAD_JOKES.
@@ -213,7 +224,7 @@ void get_3_int_values(int * first, int * second, int * third) {
 - the ampersand **&** in the call to **get_3_int_values(&first, &beyond_maximum, &increment);** means to pass a pointer to (the address of) the variables first, etc.
 - the asterisk **\*** in routine **get_3_int_values(int * first, int * second, int * third)** tells the C compiler to treat the parameters being passed in as a pointer to (the address of) the three integers.
 - the parameters get substituted in order. For instance, &first in the call goes to "int * first" in the routine get_3_int_values, &beyond_maximum goes to "int * second", and &increment goes to "int * third".
-- to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as "dereferencing" the pointer.
+- to store into beyond_maximum from the routine get_3_int_values, we use the asterisk **\*** again in the code statement "*second = tmp_second;". This is known as **dereferencing the pointer**.
 
 #### How does get_3_int_values work
 [Back to Top](#notes "Back to Top")<br>

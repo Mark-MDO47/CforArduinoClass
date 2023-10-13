@@ -50,6 +50,7 @@ void setup() {
   Serial.println("CforArduinoClass init...");
 
   Serial.println("");
+  Serial.println("In setup(): show some zero-terminated ASCII strings");
   Serial.print("Serial.println(str_num): ");
   Serial.println(str_num);
   Serial.print("Serial.println(str_ptr): "); Serial.println(str_ptr);

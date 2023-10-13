@@ -79,15 +79,21 @@ void loop() {
     Serial.print("loop_count: "); Serial.println(loop_count);
   } // end if (loop_count...)
 
+  // some logical expressions
   if (1 == loop_count) { // first time loop() is called
+    Serial.println("");
+    Serial.println("**** SOME LOGICAL EXPRESSIONS ****");
     Serial.print(" TRUE && 1: "); Serial.println(TRUE && 1);
-    Serial.print(" TRUE && 2: "); Serial.println(1 && 2);
+    Serial.print(" 1 && 2: "); Serial.println(1 && 2);
     Serial.print(" FALSE || TRUE: "); Serial.println(FALSE || TRUE);
     Serial.print(" !(FALSE || TRUE): "); Serial.println(!(FALSE || TRUE));
     Serial.println("");
   } // end if (1 == loop_count)
 
-  if (2 == loop_count) {
+  // some arithmetic expressions
+  if (3 == loop_count) {
+    Serial.println("");
+    Serial.println("**** SOME ARITHMETIC EXPRESSIONS ****");
     int i = 0; int j = 0;
     i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
     Serial.print(" i = 17 * 17: "); Serial.println(i);

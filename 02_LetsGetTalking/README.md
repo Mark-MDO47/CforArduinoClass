@@ -5,7 +5,7 @@ Click this link to back to go back to the root of the [C for Arduino Class](http
 - [https://github.com/Mark-MDO47/CforArduinoClass](https://github.com/Mark-MDO47/CforArduinoClass "Link to C for Arduino Class")
 
 ## Introduction
-In this exercise we will use the USB-serial interface to print strings from our program. In the next exercise we will enter strings to our program use that to change the execution of the program.
+In this exercise we will use the USB-serial interface to print strings from our program. In the next exercise [03_YakityYak](https://github.com/Mark-MDO47/CforArduinoClass/tree/master/03_YakityYak "03_YakityYak") we will enter strings and numbers to our program; those strings and numbers will be used to direct the execution of the program.
 
 We will do some printing from **setup()** and from **loop()** and do some if and loop statements and some expressions.
 - The goal is to show a few examples of common ways to do things.
@@ -36,7 +36,7 @@ For a more thorough exploration of the C/C++ language, I am sure you can find so
 
 ## The Arduino USB Serial Interface
 [Back to Top](#notes "Back to Top")<br>
-Now we will start using the USB serial port for output to the screen - a fantastically useful diagnostic tool. In (https://github.com/Mark-MDO47/CforArduinoClass/tree/master/03_YakityYak "03_YakityYak") we will use the USB serial port for typing input from the keyboard.
+Now we will start using the USB serial port for output to the screen - a fantastically useful diagnostic tool. In [03_YakityYak](https://github.com/Mark-MDO47/CforArduinoClass/tree/master/03_YakityYak "03_YakityYak") we will use the USB serial port for typing input from the keyboard.
 
 For our USB Serial output we will use some **Serial.*()** routines such as Serial.begin(), Serial.print(), and Serial.println(). These are documented starting in this area:
 - https://www.arduino.cc/reference/en/language/functions/communication/serial/
@@ -56,7 +56,7 @@ You may need to set the serial monitor to 115,200 baud to match what our **setup
 
 ## The Code
 [Back to Top](#notes "Back to Top")<br>
-This will be a gentle introduction; we won't get to far into details.
+This will be a gentle introduction; we won't get too far into details.
 
 ### Comments and Code Statements
 [Back to Top](#notes "Back to Top")<br>
@@ -118,16 +118,14 @@ int loop_count = 0; int my_state = 1;
 
 So what does that statement **int loop_count = 0;** mean?
 
-It creates an **int** **variable** named **loop_count**, which means **memory** location in the Arduino RAM (Random Access Memory) in which an integer value (**int**) is stored; the **= 0;** part means that it is initially set to zero. In general, if you do not initialize your variables they could have any value, even a ridiculous value.
-
-The compiler will assign some memory at a particular address. We usually don't care what the address is; when we say **loop_count** the compiler will use the memory address that is assigned for that purpose.
+It creates an **int** **variable** named **loop_count**. This means the C compiler allocates **memory** locations in the Arduino RAM (Random Access Memory) in which an integer value (**int**) is stored; the **= 0;** part means that it is initially set to zero. In general, if you do not initialize your variables they could have any value, even a ridiculous or invalid value.
+- The compiler will assign some memory at a particular address. We usually don't care what the address is; when we say **loop_count** the compiler will use the memory address that is assigned for that purpose.
 
 There are different types and sizes of integers.
 - A signed integer, such as we just created for loop_count, can be zero, positive, or negative - for example, 0 or +1 or -1.
 - An unsigned integer can only be zero or positive.
   - If a negative number is assigned to an unsigned integer, it will probably give results that were not wanted. However, there can be reasons to do this if you know exactly what you are doing.
-
-**NOTE: I will discuss the different sizes available for integers because the Arduino Nano has very little storage available for variables.**
+- **NOTE: I will discuss the different sizes available for integers because the Arduino Nano has very little storage available for variables.**
 
 A common practice in C and C++ is to specify the size when defining integers. The size of **int** can vary depending on what computer processor the code is running. To get consistent results it is best to specify a size that handles anything that will be stored in it. However, the Arduino Nano is very constrained for its RAM memory, so we want to make each variable big enough but not too big.
 
@@ -149,14 +147,14 @@ The following type definitions show the pattern of a common methodology for doin
 What if you want to print "Hello World!" to the terminal? Computers only understand bits and bytes; how do we specify text strings?
 - Printing "Hello World!" is a common exercise ever since the first publication of **The C Programming Language** by Kernighan and Ritchie.
 
-One of the oldest and still commonly used methods of specifying strings is in **zero-terminated** **ASCII**.
+One of the oldest and still commonly used methods of specifying strings is in **zero-terminated** **ASCII**. This assigns a number to each character in the table.
 - ASCII stands for American Standard Code for Information Interchange.
 - https://www.asciitable.com/ shows a table with the ASCII code for each character. Note that there are **printable**, **non-printable**, and **extended** character codes in ASCII. Here are some examples:
 - An example printable code is "A" represented by the number 65 (decimal).
-- An example non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound to come out of the system.
+- An example non-printable code is "BEL" represented by the number 7 (decimal). In some systems, displaying "BEL" will cause some sort of sound (beep or bell) to come out of the system.
 - An example extended code is the character "PI" (from the Greek alphabet) represented by the number 227 (decimal). Extended codes are often displayed as shown in the ASCII table, but some systems may not display them as expected.
 
-NOTE: There are other systems such as **UniCode** which will not be used in our [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
+NOTE: There are other character representation systems such as **UniCode** which will not be used in our [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class").
 
 The type of a variable that is an ASCII code is **char**. On the Arduino and on most systems **char** the same as a **uint8_t**.
 
@@ -181,10 +179,11 @@ We could define this string as follows:<br>
 char  str_num[13] = { 72,  101,  108,  108,  111,  32,  87,  111,  114,  108,  100,  33,  0 };
 const char *str_ptr = "Hello World!";
 ```
+
 The "char str_num[13] = { ... }" notation defines an **array** of type **char** of length **13** and then initializes them with the numbers shown.<br>
 The 'const char *str_ptr = "Hello World!"' creates a zero-terminated **array** of type **char** somewhere and stores the address in str_ptr.<br>
 Both str_num and str_ptr can **almost** always be used in code statements with exactly the same syntax.
-- The **const** part is a tricky syntax to avoid a C++ warning about turning a "pointer to a constant string ("Hello World!")" into a "pointer to a string that can be modified (char *str_ptr)". The rules for the placement of const can get very tricksy, but this one is simple.
+- **TLDR** - the **const** part is a tricky syntax to avoid a C++ warning about turning a "pointer to a constant string ("Hello World!")" into a "pointer to a string that can be modified (char *str_ptr)". The rules for the placement of const can get very tricksy, but this one is simple.
 
 Below is how the array str_num is initialized:<br>
 | type | str_num[0] | str_num[1] | str_num[2] | str_num[3] | str_num[4] | str_num[5] | str_num[6] | str_num[7] | str_num[8] | str_num[9] | str_num[10] | str_num[11] | str_num[12] |
@@ -193,15 +192,16 @@ Below is how the array str_num is initialized:<br>
 | decimal | 72 | 101 | 108 | 108 | 111 | 32 | 87 | 111 | 114 | 108 | 100 | 33 | 0 |
 
 Note these things about the C/C++ language and our str_num/str_ptr definition:
-- putting a character inside of single quotes produces the ASCII character value
+- putting a character inside of single quotes produces the ASCII character **value**. Just one char, NOT a zero-terminated ASCII string
   - char tmp = 'H'; // 'H' has value decimal 72
-- putting zero or more characters inside of double quotes produces the address of a zero-terminated ASCII string
+- putting zero or more characters inside of double quotes produces the **address** of a zero-terminated ASCII string
   - Serial.println("CforArduinoClass init...");
 - an array is indexed with a number inside square brackets **[]** starting at zero.
-  - str_num[1] contains 'e' which has the value 101
-- our ASCII string str_num contains 13 elements, the last of which is the zero for zero-termination
+  - This is true of ASCII strings which can be accessed as arrays of char and also of arrays of other types such as uint32_t.
+  - In our example, str_num[1] contains 'e' which has the value 101 while str_num[0] contains "H" (decimal 72)
+- our ASCII string str_num contains 13 elements, the last of which is the NULL (decimal 0) for zero-termination
   - str_num[12] contains ASCII NUL which has the value 0
-- the **str_num** example is just to make the point clear; nobody initializes strings as arrays of numbers
+- the **str_num** example is just to make the point clear; nobody initializes strings as arrays of numbers (except me for this example)
 
 Now let's look at the code inside the **setup()** block. Remember, **setup()** will be called first and only once. After that, **loop()** will be called over and over.<br>
 ```C
@@ -233,22 +233,23 @@ void setup() {
 } // end setup()
 ```
 
-For now, just think of the **Serial.begin(115200);** and the block inside **while (!Serial)** as a way to initialize the **Serial** object. For now, it is enough if you accept thatthis is just how we get it working.
-- If you are interested in learning more, see https://www.arduino.cc/reference/en/language/functions/communication/serial/ifserial/
+For now, just think of the **Serial.begin(115200);** and the block inside **while (!Serial)** as a way to initialize the **Serial** object. For now, it is enough if you accept that this is just how we get it working.
+- **TLDR** - if you are interested in learning more, see https://www.arduino.cc/reference/en/language/functions/communication/serial/ifserial/
 
 The next thing we see is **Serial.println("");**.
 - The "" is a double-quoted string of zero characters, so it creates an address that points to a zero-terminated ASCII string. Since there are no characters inside the "", the zero-terminated ASCII string starts with the ASCII NUL (zero) character and then ends; it is of length one.
-- Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Serial.print**ln** then creates a new line. If we used Serial.print("") instead of Serial.print**ln**(""), it would not create a new line.
+- Serial.println("") takes this pointer to a string with just the NUL character and prints or displays it, stopping before printing the NUL. Because it is Serial.print**ln** it then creates a new line. If we used Serial.print("") instead of Serial.print**ln**(""), it would not create a new line.
 - You can think of it as if the Arduino program was typing in a text editor:
   - Serial.print("aa"); Serial.print("bb"); Serial.println("cc"); - types aabbcc then (because the last one is print**ln**) presses enter
 - The ; at the end terminates the code statement; the // means to ignore the rest of the line.
 - The result is that we print/display a blank line.
+  - **TLDR** - different operating systems (Windows:tm:, Linux, etc.) will use different ASCII characters or even sequences of ASCII characters to indicate a new line, usually one or more of **LF** and **CR**. Serial.println() will do something that works on the Arduino Serial Monitor. C/C++ compilers that support many operating systems will use some method of **localization** to generate the correct sequence for a new line on that operating system.
 
 The rest of the Serial.print and Serial.println statements follow the above pattern. Notice that we can use one (or more) lines for a code statement or we can put more than one code statement on one line. The compiler does not care.
 
 Here are a few other capabilities we use in the **setup()** code:
-- strlen() (see #include "string.h" above) counts the number of ASCII bytes NOT including the zero termination. This works the same in all three usages.
-- sizeof() counts the number of bytes in the actual thing within the parentheses **()**:
+- **Syntax** - strlen() (see #include "string.h" above) counts the number of ASCII bytes NOT including the zero termination. This works the same in all three usages.
+- **Syntax** - sizeof() counts the number of bytes in the actual thing within the parentheses **()**:
   - str_num is an array of 13 bytes so sizeof(str_num) returns 13
   - str_ptr is a pointer to an array of 13 bytes, but the pointer is two bytes so it returns 2
   - "Hello World!" (at least in this C compiler's mind) is an array of 13 bytes
@@ -278,15 +279,21 @@ void loop() {
     Serial.print("loop_count: "); Serial.println(loop_count);
   } // end if (loop_count...)
 
+  // some logical expressions
   if (1 == loop_count) { // first time loop() is called
+    Serial.println("");
+    Serial.println("**** SOME LOGICAL EXPRESSIONS ****");
     Serial.print(" TRUE && 1: "); Serial.println(TRUE && 1);
-    Serial.print(" TRUE && 2: "); Serial.println(1 && 2);
+    Serial.print(" 1 && 2: "); Serial.println(1 && 2);
     Serial.print(" FALSE || TRUE: "); Serial.println(FALSE || TRUE);
     Serial.print(" !(FALSE || TRUE): "); Serial.println(!(FALSE || TRUE));
     Serial.println("");
   } // end if (1 == loop_count)
 
-  if (2 == loop_count) {
+  // some arithmetic expressions
+  if (3 == loop_count) {
+    Serial.println("");
+    Serial.println("**** SOME ARITHMETIC EXPRESSIONS ****");
     int i = 0; int j = 0;
     i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
     Serial.print(" i = 17 * 17: "); Serial.println(i);

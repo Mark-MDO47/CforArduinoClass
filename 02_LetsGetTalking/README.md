@@ -215,11 +215,11 @@ void setup() {
     ; // note that ";" is a null code statement. Wait for serial port to connect.
   }
   
-  Serial.println("");
-  Serial.println("In setup(): show some zero-terminated ASCII strings");
   Serial.println(""); // print a blank line in case there is some junk from power-on
   Serial.println("CforArduinoClass init...");
 
+  Serial.println("");
+  Serial.println("In setup(): show some zero-terminated ASCII strings");
   Serial.println("");
   Serial.print("str_num: ");
   Serial.println(str_num);

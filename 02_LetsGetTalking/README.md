@@ -264,7 +264,7 @@ Below shows the results on the Serial Monitor from running the **setup()** code:
 ### The loop code
 [Back to Top](#notes "Back to Top")<br>
 
-Here is the loop code (plus a little extra I put in front of it):
+Here is the loop code (plus a little extra function "squared" I put in front of it):<br>
 ```C
 #define TRUE  1 // in a LOGICAL statement, anything non-zero is true
 #define FALSE 0 // in a LOGICAL statement, only zero is false
@@ -328,7 +328,7 @@ There is a lot of capability in the **#define** statement but we will only touch
 If we wanted we could do **#define TRUE  EGG** but the compiler doesn't know a definition for EGG so it would give an error.<br>
 Note that the comments (// and after) are ignored as usual.
 
-**TLDR** - there is another common way to equate a string to a number - the **enum**. We won't go into this nor into the cases where you might prefer to use **enum** or prefer to use **#define**. For the purposes of the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class") we can always use **#define**.
+NOTE - there is another common way to equate a string to a number - the **enum**. We won't go into this nor into the cases where you might prefer to use **enum** or prefer to use **#define**. For the purposes of the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Link to Arduino Class") we can always use **#define**.
 
 In C/C++, an expression is something that returns a value. The reason we might want to define TRUE as 1 and FALSE as 0 is for logical comparisons, especially in **if** statements. The result of a logical expression is always 0 or 1. For example:
 - Serial.print(1 < 2); will print 1
@@ -337,21 +337,24 @@ In C/C++, an expression is something that returns a value. The reason we might w
   - **Pro Tip** - a common mistake is to use one equal sign **=** where you want two **==**, or vice versa.
 - Serial.print((TRUE) && (2 < 1)); will print 0
 - Serial.print((TRUE) || (2 < 1)); will print 1
-- Serial.print( !((TRUE) || (2 < 1)) ); will print 0 - **!** is the logical **NOT** operator, true if the expression is not true.
+- Serial.print( !((TRUE) || (2 < 1)) ); will print 0 - the exclamation mark **!** is the logical **NOT** operator, true if the expression is not true.
 
 If any non-zero value is used for a logic calculation such as **&&**, **||** or **!**, it will be treated as 1. For example:
 - Serial.print((7) || (2 < 1)); will print 1
 - Serial.print((-7) || (2 < 1)); will print 1
 
+**Pro Tip** - A common mistake is to use **&&** instead of **&** or use **||** instead of **|**, or vice versa.
+- Pay attention to the use of doubled ampersand **&&** and doubled vertical lines or "pipes" **||** - these are the **logical** "and" and "or" operators that operate on the entire value only paying attention to zero or not-zero.
+- Using a single symbol such as **&** or **|** are the **bitwise** "and" and "or" operators; these operate bit by bit and in general can produce different results than the **logical** operators.
+
 **SemiPro Tip** - watch out for complicated expressions that do the operations in an order you didn't expect!
 - I tend to use too many parenthesis **()** in my expressions in order to force the compiler to do it the way I want. I call this style "in loco parenthesis".
-- That way I don't need to memorize the tables of the order of operations - know as **precedence**.
+- That way I don't need to memorize the tables of the order of operations - known as **operator precedence**.
 - Some people don't like this style - they think everyone should memorize the precedence tables and that expressions should have as few parenthesis as possible.
-- Neither way is "right", it is a matter of style and preference.
+- IMHO neither way is "right", it is a matter of style and preference.
 
 #### The Loop Code - Arithmetic Expressions
 [Back to Top](#notes "Back to Top")<br>
-
 This is not a complete list but here are some example arithmetic expressions, using i and j as integer variables:
 * i = 17 * 17; // 17 * 17 is an expression for 17 times 17 = 289
 * i = squared(17); // squared my be a function that returns the value of the parameter squared
@@ -405,7 +408,11 @@ The result: we only print the lines from the code blocks inside each **if () {}*
 
 Finally we reach the delay(1000); code statement. This waits for about one second (1000 milliseconds) each time loop() is called because it is not inside any control block such as **if** or **while**, etc.
 
-**Pro Tip** - delay(1000); waits for at least 999 (1000-1) milliseconds and then continues. This delay of 999+ doesn't bother us here; we are not doing precise timing. This could be troublesome if we were trying to do a small delay such as 1 millisecond.
+**Pro Tip** - delay(1000); waits for at least 999 (1000-1) milliseconds and then continues.
+- This is different than sleep(1000) in almost every language - that will return after at least 1000 milliseconds.
+- This delay of 999+ doesn't bother us here; we are not doing precise timing.
+- This could be troublesome if we were trying to do a small delay such as 1 millisecond.
+- We run into this issue in the [Arduino Class](https://github.com/Mark-MDO47/ArduinoClass "Arduino Class"), so you are forewarned.
 
 #### The Loop Code - Run It
 [Back to Top](#notes "Back to Top")<br>
@@ -418,14 +425,14 @@ The **if** statements above work well for a while, but if you leave this running
 - If we used int8_t loop_count, it would range from -128 through 127. After it reached 127 it would go to -128 then -127 etc.
 - If we used uint8_t loop_count, it would range from 0 through 255. After it reached 255 it would go to 0 then 1 etc.
 - This can happen for truly enormous counts too; see the [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem "link to article Year 2038 problem on Wikipedia").
-- How many bytes are there in loop_count, which is declared as an **int**? What is the range for **int**? How long (approximately) will it take to overflow?
 
-If we want the **if** statements in the code to execute exactly once, will the following methods work?
-- Change if statements that are of the form ** <= n ** to also require ** >= 0 **
-  - example: change **if (loop_count <= 5)** to **if ((loop_count <= 5) && (loop_count >= 0))**
-- Put the if statements and blocks for **if (1 == loop_count) {}** and **if (2 == loop_count) {}** inside the if statement block for **if (loop_count <= 5) {}** and then add these statements after that block: **else { while (TRUE) delay(1000); }**
-- Add something near the end of **loop()** that prevents loop_count from getting too big
-  - example: add line **if (loop_count >= 123) loop_count = 122;**
+1. How many bytes are there in loop_count, which is declared as an **int**? What is the range for **int**? How long (approximately) will it take to overflow? (hint - you can use sizeof() to find how big an int is).
+1. If we want the **if** statements in the code to execute exactly once, will the following methods work?
+  - Change if statements that are of the form ** <= n ** to also require ** >= 0 **
+    - example: change **if (loop_count <= 5)** to **if ((loop_count <= 5) && (loop_count >= 0))**
+  - Put the if statements and blocks for **if (1 == loop_count) {}** and **if (2 == loop_count) {}** inside the if statement block for **if (loop_count <= 5) {}** and then add these statements after that block: **else { while (TRUE) delay(1000); }**
+  - Add something near the end of **loop()** that prevents loop_count from getting too big
+    - example: add line **if (loop_count >= 123) loop_count = 122;**
   
 
 ## TLDR Float your Boat
@@ -444,10 +451,14 @@ There are a few operators used when doing binary or boolean operations. We will 
 
 There are some comparison operators **==**, **<**, **<=**, **>**, **>=**, and **!=**, for equal to, less than, less than or equal to, greater than, greater than or equal to, and not equal to.
 
-Logical operators return a 1 (often thought of as TRUE) or 0 (often thought of as FALSE). The comparison operators are logical operators. In addition there is **&&**, **||**, and **!** for logical AND, logical OR, and logical NOT.
-* Note that during calculations, anything that is not zero is treated as 1. For instance
+**Logical** operators return a 1 (often thought of as TRUE) or 0 (often thought of as FALSE). The comparison operators are logical operators. In addition there is **&&**, **||**, and **!** for logical AND, logical OR, and logical NOT.
+* Note that during logical calculations, anything that is not zero is treated as 1. For instance
   * 1 && 1 is TRUE
   * 1 && 2 is TRUE
   * -1 && 999 is TRUE
   * 0 || 2 is TRUE
   * !(0 || 2) is FALSE
+
+Remember that **bitwise** operators operate on each bit position independently and can produce different results than **logical** operators.
+- 1 && 2 results in 1
+- 1 & 2 results in 0

@@ -291,7 +291,7 @@ Now that there is some typing it will call **Serial.parseInt()** three times to 
 - Each time it is called, Serial.parseInt() will keep looking until it gets an integer. It skips characters that could not be an integer, using them as separators. It even skips over new lines.
 - Notice that if it sees something like all-ok, it will interpret the **-** minus sign as -0 and return zero. Same for **+** plus sign.
 
-Next it calls **Serial.read()** to get all the characters until we get the newline character **'\n'**.
+Next it calls **Serial.read()** to get all the characters one at a time until we get the newline character **'\n'**.
 
 Finally it stores the three numbers where the caller told us to put them and returns.
 
@@ -301,7 +301,7 @@ Once again, first we will discuss how to call the routine and get the data back.
 
 #### How to call get_ascii_string and get a pointer to the string back
 [Back to Top](#notes "Back to Top")<br>
-Here is the start of the code for get_ascii_string():
+Here is the start and end of the code for get_ascii_string():
 ```C
 #define MAX_STRING_LENGTH 20
 
@@ -337,7 +337,7 @@ char * get_ascii_string() {
 } // end get_ascii_string() - STRING CLASS version
 ```
 
-If we left "static" out but still returned the address of ascii_string, it would be a different classic type of bug: **use after free**.
+If we left "static" out but still returned the address of ascii_string, it would be a classic type of bug: **use after free**.
 - Any variable declared inside a curly-braces block or in a for-loop parenthesis without **static** will be allocated in **dynamically-allocatable free RAM** - almost certainly on a **stack** - and returned to **free** usage when the block completes. Such variables should not be used after they are freed - they might have been dynamically allocated to some other use in the meantime.
 - As an example, the next declaration **String my_string_object = "Hello!";** is allocated in dynamically-allocatable free RAM and "freed" when get_ascii_string() returns. We say that the **scope** of the variable **my_string_object** is within get_ascii_string().
 
@@ -360,7 +360,8 @@ void setup() {
 - There is another level to **scope** in addition to within a block or within a file - this would be **global** and accessible within multiple files. 
 - Sometimes code gets so complicated that it gets split into multiple files. In the Arduino world, this means having one *.ino file with at least setup() and loop() and other files (usually *.c or *.cpp for executable code and *.h for definitions to be shared among multiple files).
 - To make something have global scope to two or more files, we use the **extern** keyword.
-- Typically a *.h file is created to contain (in our example) **extern int CURRENT_DAD_JOKE;**. This tells the C Compiler/Linker that there is something called CURRENT_DAD_JOKE that is an int and that is used in more than one file. Let us say that this file is named **current_dad_joke.h** and placed in the same directory as all the other *.ino, *.h, *.c and/or *.cpp files for that project. 
+- Typically a *.h file is created to contain (in our example) **extern int CURRENT_DAD_JOKE;**. This tells the C Compiler/Linker that there is something called CURRENT_DAD_JOKE that is an int and that could be used in more than one file.
+  - Let us say that this file is named **current_dad_joke.h** and placed in the same directory as all the other *.ino, *.h, *.c and/or *.cpp files for that project. 
 - All *.ino, *.c and/or *.cpp files that need to use CURRENT_DAD_JOKE will have the line **#include "current_dad_joke.h"**, typically early in the file.
 - Within **one and only one** of the *.ino, *.c and/or *.cpp files that have this include line, there will be the line **int CURRENT_DAD_JOKE = 0;** which declares the variable, allocates static memory for an int, and initializes it to zero.
 - All of the *.ino, *.c and/or *.cpp files that have that **#include "current_dad_joke.h"** line will be free to access and/or change CURRENT_DAD_JOKE in any code **after the include statement** in that file.
@@ -368,7 +369,8 @@ void setup() {
   - The reasoning is that if there is a bug, the code that accesses the variable is spread all over the place so the bug is harder to find. As time goes on and changes and additions are made, the number of places that the variable is used are likely to proliferate.
   - The other side of the coin is that it makes the lines of the code shorter and perhaps clearer to use the global variables that "everyone" knows about.
 - Of course there are other variations and even different uses for extern that are possible, especially for accessing executable routines.
-- As Paul Harvey used to say, "Now you know ... the rest of the story". Or at least some more of the story.
+- As Paul Harvey used to say, "Now you know ... the rest of the story".
+  - Or at least some more of the story. We didn't (and won't) talk about **C++ namespaces**, but be aware they exist and make it so you can have multiple libraries with a variable named DEBUG and they don't have to collide.
 
 **Syntax** - the next declaration is **String my_string_object = "Hello!";**. The **String** type is an Arduino built-in C++ class. When we say **String my_string_object = "Hello!";**, we are declaring the variable and initializing it to contain the string **"Hello!"**. This initialization would typically include setting other aspects of this string object, perhaps including the length of the string. There are other ways to initialize our String object; if you are interested you can find more information here:
 - https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/

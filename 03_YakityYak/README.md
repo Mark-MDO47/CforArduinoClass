@@ -163,9 +163,9 @@ const char * DAD_JOKES[] = {
   "My wife said I should do lunges to stay in shape. That would be a big step forward.",
   "I used to run a dating service for chickens. But I was struggling to make hens meet."
 /*
-  "My hotel tried to charge me ten dollars extra for air conditioning. That wasn’t cool.",
+  "My hotel tried to charge me ten dollars extra for air conditioning. That wasn't cool.",
           < ... >
-  "A man walks into a magic forest and tries to cut down a talking tree. \"You can't cut me down,\" the tree complains. \"I’m a talking tree!\" The man responds, \"You may be a talking tree, but you will dialogue.\"",
+  "A man walks into a magic forest and tries to cut down a talking tree. \"You can't cut me down,\" the tree complains. \"I'm a talking tree!\" The man responds, \"You may be a talking tree, but you will dialogue.\"",
  */
 }; // end DAD_JOKES[]
 

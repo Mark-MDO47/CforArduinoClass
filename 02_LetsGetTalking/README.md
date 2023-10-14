@@ -245,7 +245,7 @@ The next thing we see is **Serial.println("");**.
   - Serial.print("aa"); Serial.print("bb"); Serial.println("cc"); - types aabbcc then (because the last one is print**ln**) presses enter
 - The ; at the end terminates the code statement; the // means to ignore the rest of the line.
 - The result is that we print/display a blank line.
-  - **TLDR** - different operating systems (Windows&#8482;, Linux, etc.) will use different ASCII characters or even sequences of ASCII characters to indicate a new line, usually one or more of **LF** and **CR**. Serial.println() will do something that works on the Arduino Serial Monitor. C/C++ compilers that support many operating systems will use some method of **localization** to generate the correct sequence for a new line on that operating system.
+  - **TLDR** - different operating systems (Windows&#8482;, Linux&#174;, etc.) will use different ASCII characters or even sequences of ASCII characters to indicate a new line, usually one or more of **LF** and **CR**. Serial.println() will do something that works on the Arduino Serial Monitor. C/C++ compilers that support many operating systems will use some method of **localization** to generate the correct sequence for a new line on that operating system.
 
 The rest of the Serial.print and Serial.println statements follow the above pattern. Notice that we can use one (or more) lines for a code statement or we can put more than one code statement on one line. The compiler does not care.
 

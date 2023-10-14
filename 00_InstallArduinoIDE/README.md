@@ -13,7 +13,7 @@ Click this link to back to go back to the root of the **C for Arduino Class**
 
 ## Arduino IDE
 [Top](#notes "Top")<br>
-**It will be helpful to install the Arduino IDE on your laptop before the start of the class if you are planning to use your laptop to connect to the test systems during the class.**<br>At this time the latest version is 2.04 and can be installed on Windows&#8482;, Macintosh&#8482;, and Linux&#174;.<br>
+**It will be helpful to install the Arduino IDE on your laptop before the start of the class if you are planning to use your laptop to connect to the test systems during the class.**<br>At this time the latest version is 2.04 and can be installed on Windows&#174;, Macintosh&#174;, and Linux&#174;.<br>
 Arduino IDE 1.8.19 (App Store 1.8.57) will also work for this class and may be a bit more compatible with certain ESP32 Arduinos but either will work with the Arduino Nanos used in this class.
 - https://www.arduino.cc/en/software
 

@@ -13,7 +13,7 @@ Click this link to back to go back to the root of the **C for Arduino Class**
 
 ## Arduino IDE
 [Top](#notes "Top")<br>
-**It will be helpful to install the Arduino IDE on your laptop before the start of the class if you are planning to use your laptop to connect to the test systems during the class.**<br>At this time the latest version is 2.04 and can be installed on Windows, Macintosh, and Linux.
+**It will be helpful to install the Arduino IDE on your laptop before the start of the class if you are planning to use your laptop to connect to the test systems during the class.**<br>At this time the latest version is 2.04 and can be installed on Windows&#8482;, Macintosh&#8482;, and Linux&#174;.
 - https://www.arduino.cc/en/software
 
 If you have a Chromebook I have not found a way to install the latest version, but the older version 1.8.19 can be installed on modern Chromebooks and will work fine for this class. Search for "Legacy IDE (1.8.X)" in the above link. The following YouTube video describes this installation. NOTE: to play youtube and keep this tab open you must right-click the link and select to play in a new tab.

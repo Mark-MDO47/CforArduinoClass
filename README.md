@@ -64,6 +64,8 @@ There are many books on learning the C language. I have no experience with most 
 The following book is how I learned the C language, back when dinosaurs ruled the earth. I really like its approach of building up knowledge in blocks such that you can use them immediately and they all fit together.<br>
 - **The C Programming Language** by Brian W. Kernighan and Dennis M. Ritchie
 
+<img src="https://github.com/Mark-MDO47/CforArduinoClass/blob/master/99_Resources/Images/CProgramming_K_R.jpg" width="142" alt="The famous book C Programming Language by Brian W. Kernighan and Dennis M. Ritchie">
+
 If you search you might find the "mass-market paperback" at around $20 or maybe a used copy for even less.<br>
 If you are going to get a copy, I suggest you try to get the latest edition. Since you will be investing the time, you might as well be close to up-to-date (2nd edition is Copyright 2012).
 
